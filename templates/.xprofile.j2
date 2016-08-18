@@ -2,9 +2,12 @@ export WALLPAPER1=~/Pictures/wallpaper1
 export WALLPAPER2=~/Pictures/wallpaper2
 export TERMINAL=gnome-terminal
 
-xrandr --newmode "1680x1050_60.00"  146.25  1680 1784 1960 2240  1050 1053  1059 1089 -hsync +vsync
-xrandr --addmode eDP1 "1680x1050_60.00"
-xrandr --output eDP1 --mode 1680x1050_60.00
+{% if xrandr.initial.new %}
+xrandr --newmode {{xrandr.initial.mode}} {{xrandr.initial.opts}} -hsync +vsync
+xrandr --addmode {{xrandr.main_output}} {{xrandr.initial.mode}}
+{% endif %}
+
+xrandr --output {{xrandr.main_output}} --mode {{xrandr.initial.mode}}
 
 . ~/.xrandr-home
 setxkbmap -model pc104 -option ctrl:ralt_rctrl
