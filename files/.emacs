@@ -13,7 +13,7 @@
   ido flx-ido ido-vertical-mode smex w3 json-reformat pkgbuild-mode flycheck
   flycheck-rust rust-mode buffer-move google-this flymake-sass sass-mode
   multiple-cursors expand-region restclient nix-mode erlang yaml-mode
-  super-save jinja2-mode))
+  super-save jinja2-mode smartparens))
 
 (unless package-archive-contents
   (package-refresh-contents))

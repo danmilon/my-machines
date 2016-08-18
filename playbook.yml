@@ -11,4 +11,7 @@
         - { src: 'hangman_r.jpg', dest: '/home/danmilon/Pictures/wallpaper1'}
         - { src: 'podilato_r.jpg', dest: '/home/danmilon/Pictures/wallpaper2'}
     - name: do templates
-      template: src=templates/.xrandr-home.j2 dest=/home/danmilon/.xrandr-home mode=0755
+      template: src=templates/{{ item.path }}.j2 dest=/home/danmilon/{{ item.path }} mode={{ item.mode|default('0633') }}
+      with_items:
+        - { path: '.xrandr-home', mode: '0755' }
+        - { path: '.xprofile' }
