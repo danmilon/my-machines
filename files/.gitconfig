@@ -1,0 +1,19 @@
+[user]
+	name = Dan Milon	
+	email = i@danmilon.me
+[core]
+	excludesfile = /home/danmilon/.gitignore_global
+
+[color]
+	diff = auto
+	ui = true
+[push]
+	default = simple
+[pager]
+	status = true
+[branch]
+	autosetuprebase = always
+[github]
+	user = danmilon
+[ghi]
+	token = c5a616e0c82d0b26a415bc772d1f7be2f67deda8

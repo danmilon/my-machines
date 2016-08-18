@@ -1,0 +1,7 @@
+# it is no longer necessary to hit Tab twice to produce a list of all possible
+# completions, as a single key-press will suffice.
+set show-all-if-ambiguous on
+"\e[A":history-search-backward
+"\e[B":history-search-forward
+set echo-control-characters off
+"\es":"\C-a sudo '\C-e'\C-m"

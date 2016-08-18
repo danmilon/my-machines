@@ -1,0 +1,25 @@
+(load-file ".emacs-mu4e-common")
+
+(setq
+  user-mail-address "i@danmilon.me"
+  mu4e-user-mail-address-list '("i@danmilon.me")
+  user-full-name "Dan Milon")
+     
+(setq
+  mu4e-maildir "~/.maildir/i@danmilon.me"
+  mu4e-mu-home "~/.mu/i@danmilon.me")
+
+(setq
+  smtpmail-stream-type 'starttls
+  smtpmail-smtp-server "mail.danmilon.me"
+  smtpmail-smtp-service 587)
+
+(add-to-list 'mu4e-bookmarks
+  '("maildir:\"/INBOX\" OR maildir:\"/GTD\" OR flag:unread AND NOT flag:trashed"  "Inbox or GTD or Unread" ?i))
+
+(setq mu4e-headers-fields
+  '( (:human-date  . 12)
+     (:flags . 6)
+     (:maildir . 10)
+     (:from . 22)
+     (:subject . nil)))

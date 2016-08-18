@@ -1,0 +1,37 @@
+[general]
+accounts = i@danmilon.me, mylonak@csd.uoc.gr
+maxsyncaccounts = 2
+
+[Account i@danmilon.me]
+localrepository = i@danmilon.me-local
+remoterepository = i@danmilon.me-remote
+
+[Account mylonak@csd.uoc.gr]
+localrepository = mylonak@csd.uoc.gr-local
+remoterepository = mylonak@csd.uoc.gr-remote
+
+[Repository i@danmilon.me-local]
+type = Maildir
+localfolders = ~/.maildir/i@danmilon.me
+
+[Repository i@danmilon.me-remote]
+type = IMAP
+maxconnections = 3
+ssl = true
+cert_fingerprint = fd12dd96cfeac42e6a4a6f08af1a1ecc6546abe6
+remotehost = mail.danmilon.me
+remotepass = dan719&!(
+remoteuser = i
+
+[Repository mylonak@csd.uoc.gr-local]
+type = Maildir
+localfolders = ~/.maildir/mylonak@csd.uoc.gr
+
+[Repository mylonak@csd.uoc.gr-remote]
+type = IMAP
+maxconnections = 3
+ssl = true
+cert_fingerprint = c7195a72518ee9180f20d4a8f11adae2ad260690
+remotehost = mailhost.csd.uoc.gr
+remotepass = Dan458719
+remoteuser = mylonak

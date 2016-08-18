@@ -1,0 +1,5 @@
+st*background:  #353535
+st*foreground:  #FBFFFF
+xterm*faceName:    Monospace:size=10
+xterm*dynamicColors: true
+xterm*termName:    xterm-256color

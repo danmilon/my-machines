@@ -1,0 +1,4 @@
+xrandr:
+  xrandr_home:
+    output: HDMI1
+    left_of: eDP1

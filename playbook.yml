@@ -1,0 +1,14 @@
+---
+- hosts: antonis, makis
+  tasks:
+    - name: copy stuff
+      copy: src=files/ dest=/home/danmilon
+    - name: link stuff
+      file: src={{ item.src }} dest={{ item.dest }} state=link force=yes
+      with_items:
+        - { src: '/home/danmilon/Documents/Dropbox/crutial/gpg/card/pubring.gpg', dest: '/home/danmilon/.gnupg/pubring.gpg' }
+        - { src: '/home/danmilon/Documents/Dropbox/crutial/gpg/card/secring.gpg', dest: '/home/danmilon/.gnupg/secring.gpg' }
+        - { src: 'hangman_r.jpg', dest: '/home/danmilon/Pictures/wallpaper1'}
+        - { src: 'podilato_r.jpg', dest: '/home/danmilon/Pictures/wallpaper2'}
+    - name: do templates
+      template: src=templates/.xrandr-home.j2 dest=/home/danmilon/.xrandr-home mode=0755

@@ -1,0 +1,37 @@
+export WALLPAPER1=~/Pictures/wallpaper1
+export WALLPAPER2=~/Pictures/wallpaper2
+export TERMINAL=gnome-terminal
+
+xrandr --newmode "1680x1050_60.00"  146.25  1680 1784 1960 2240  1050 1053  1059 1089 -hsync +vsync
+xrandr --addmode eDP1 "1680x1050_60.00"
+xrandr --output eDP1 --mode 1680x1050_60.00
+
+. ~/.xrandr-home
+setxkbmap -model pc104 -option ctrl:ralt_rctrl
+# disable need of FN for F3
+xmodmap -e "keycode 128 = F3"
+emacs_mu4e () {
+  for account in "$@"
+  do
+    emacs -q -l .emacs-mu4e-$account -T mu4e-$account -f mu4e &
+  done
+}
+
+# startup programs
+redshift-gtk &
+VDPAU_DRIVER=va_gl firefox &
+clementine &
+# emacs_mu4e i@danmilon.me
+thunderbird &
+emacs --daemon &
+nm-applet &
+gpaste-client &
+skype &
+blueman-applet &
+WEEKDAY=$(date +%u)
+HOUR=$(date +%H)
+if [[ "$WEEKDAY" -le 5 && "$HOUR" -le 19 && "$HOUR" -ge 9 ]]; then
+   slack &
+fi
+
+# dropbox &
