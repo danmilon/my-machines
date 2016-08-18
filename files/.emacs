@@ -7,9 +7,9 @@
 
 ;; set required packages
 (setq package-list '(
-  gnuplot-mode go-mode jedi auto-complete epc ctable concurrent deferred
-  lorem-ipsum lua-mode magit markdown-mode popup projectile pkg-info epl
-  scad-mode virtualenvwrapper s dash rainbow-delimiters autopair ido flx-ido
+  git-commit gnuplot-mode go-mode jedi auto-complete epc ctable concurrent
+  deferred lorem-ipsum lua-mode magit markdown-mode popup projectile pkg-info
+  epl scad-mode virtualenvwrapper s dash rainbow-delimiters autopair ido flx-ido
   ido-vertical-mode smex w3 json-reformat pkgbuild-mode flycheck flycheck-rust
   rust-mode buffer-move google-this flymake-sass sass-mode multiple-cursors
   expand-region restclient nix-mode erlang yaml-mode super-save jinja2-mode))
