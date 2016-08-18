@@ -2,7 +2,7 @@ export WALLPAPER1=~/Pictures/wallpaper1
 export WALLPAPER2=~/Pictures/wallpaper2
 export TERMINAL=gnome-terminal
 
-{% if xrandr.initial.new %}
+{% if xrandr.initial.new|default(False) %}
 xrandr --newmode {{xrandr.initial.mode}} {{xrandr.initial.opts}} -hsync +vsync
 xrandr --addmode {{xrandr.main_output}} {{xrandr.initial.mode}}
 {% endif %}
