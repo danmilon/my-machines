@@ -1,12 +1,34 @@
 ---
 - hosts: antonis, makis
   tasks:
+    - name: copy pacman.conf
+      synchronize: src=files_root/etc/pacman.conf dest=/etc/pacman.conf
+      become: true
+      register: pacman
+    - name: add infinality key
+      shell: pacman-key -r 962DDE58
+      become: true
+    - name: sign infinality key
+      shell: pacman-key --lsign-key 962DDE58
+      when: pacman.changed
+    - name: sync pacman dbs
+      pacman: update_cache=yes
+      become: true
+      when: pacman.changed
     - name: install packages
-      pacman: name={{ item }} state=present
+      pacman: name={{ item }} state=present force=yes
+      become: true
       with_items:
         - rfkill
-        # - dropbox aur
         - pass
+        - time
+        - ipython
+        - python-pyflakes
+        - freetype2-infinality-ultimate
+        - fontconfig-infinality-ultimate
+        - cairo-infinality-ultimate
+        - jdk8-openjdk-infinality
+        - dropbox
     - name: put me in user groups
       user: name=danmilon groups=wheel,uucp,rfkill,users
     - name: copy stuff
