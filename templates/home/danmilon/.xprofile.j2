@@ -16,6 +16,7 @@ emacs_mu4e () {
 }
 
 # startup programs
+$(gpg-agent --daemon)
 redshift-gtk &
 VDPAU_DRIVER=va_gl firefox &
 clementine &
