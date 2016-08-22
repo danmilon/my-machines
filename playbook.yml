@@ -6,8 +6,7 @@
       with_items:
         - rfkill
         # - dropbox aur
-        - keepass
-        # - kpcli aur
+        - pass
     - name: put me in user groups
       user: name=danmilon groups=wheel,uucp,rfkill,users
     - name: copy stuff
