@@ -1,4 +1,3 @@
 
 install:
-	ansible-playbook -e "ansible_python_interpreter=/usr/bin/python2" \
-		-i hosts --limit $(MACHINE) -c local playbook.yml
+	ansible-playbook -K -i hosts --limit $(MACHINE) -c local playbook.yml

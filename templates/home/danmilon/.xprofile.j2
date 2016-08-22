@@ -2,12 +2,7 @@ export WALLPAPER1=~/Pictures/wallpaper1
 export WALLPAPER2=~/Pictures/wallpaper2
 export TERMINAL=gnome-terminal
 
-{% if xrandr.initial.new|default(False) %}
-xrandr --newmode {{xrandr.initial.mode}} {{xrandr.initial.opts}} -hsync +vsync
-xrandr --addmode {{xrandr.main_output}} {{xrandr.initial.mode}}
-{% endif %}
-
-xrandr --output {{xrandr.main_output}} --mode {{xrandr.initial.mode}}
+set-initial-monitor-mode
 
 . ~/.xrandr-home
 setxkbmap -model pc104 -option ctrl:ralt_rctrl

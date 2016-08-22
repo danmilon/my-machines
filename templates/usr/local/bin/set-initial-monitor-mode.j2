@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+{% if xrandr.initial.new|default(False) %}
+xrandr --newmode {{xrandr.initial.mode}} {{xrandr.initial.opts}} -hsync +vsync
+xrandr --addmode {{xrandr.main_output}} {{xrandr.initial.mode}}
+{% endif %}
+
+xrandr --output {{xrandr.main_output}} --mode {{xrandr.initial.mode}}

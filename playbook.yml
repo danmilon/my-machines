@@ -2,7 +2,10 @@
 - hosts: antonis, makis
   tasks:
     - name: copy stuff
-      copy: src=files/ dest=/home/danmilon
+      synchronize: src=files/ dest=/home/danmilon
+    - name: copy root stuff
+      become: true
+      copy: src=files_root/ dest=/ owner=root group=root
     - name: link stuff
       file: src={{ item.src }} dest={{ item.dest }} state=link force=yes
       with_items:
@@ -11,7 +14,9 @@
         - { src: 'hangman_r.jpg', dest: '/home/danmilon/Pictures/wallpaper1'}
         - { src: 'podilato_r.jpg', dest: '/home/danmilon/Pictures/wallpaper2'}
     - name: do templates
-      template: src=templates/{{ item.path }}.j2 dest=/home/danmilon/{{ item.path }} mode={{ item.mode|default('0633') }}
+      template: src=templates/{{ item.path }}.j2 dest=/{{ item.path }} mode={{ item.mode|default('0644') }}
+      become: true
       with_items:
-        - { path: '.xrandr-home', mode: '0755' }
-        - { path: '.xprofile' }
+        - { path: 'home/danmilon/.xrandr-home', mode: '0755' }
+        - { path: 'home/danmilon/.xprofile' }
+        - { path: 'usr/local/bin/set-initial-monitor-mode', mode: '0755' }
