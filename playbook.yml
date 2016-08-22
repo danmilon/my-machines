@@ -1,6 +1,15 @@
 ---
 - hosts: antonis, makis
   tasks:
+    - name: install packages
+      pacman: name={{ item }} state=present
+      with_items:
+        - rfkill
+        # - dropbox aur
+        - keepass
+        # - kpcli aur
+    - name: put me in user groups
+      user: name=danmilon groups=wheel,uucp,rfkill,users
     - name: copy stuff
       synchronize: src=files/ dest=/home/danmilon
     - name: copy root stuff
