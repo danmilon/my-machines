@@ -21,14 +21,16 @@
       with_items:
         - rfkill
         - pass
-        - time
+        - time # for platform.sh sdk/git
         - ipython
-        - python-pyflakes
+        - python-pyflakes # for emacs python flycheck
         - freetype2-infinality-ultimate
         - fontconfig-infinality-ultimate
         - cairo-infinality-ultimate
         - jdk8-openjdk-infinality
         - dropbox
+        - alsa-utils # for amixer
+        - chromium
     - name: put me in user groups
       user: name=danmilon groups=wheel,uucp,rfkill,users
     - name: copy stuff
@@ -49,4 +51,5 @@
       with_items:
         - { path: 'home/danmilon/.xrandr-home', mode: '0755' }
         - { path: 'home/danmilon/.xprofile' }
+        - { path: 'home/danmilon/.config/qtile/config.py' }
         - { path: 'usr/local/bin/set-initial-monitor-mode', mode: '0755' }

@@ -291,18 +291,14 @@ widget_defaults = {
 }
 
 groups = [
-    Group('❂'),
-    Group('☭'),
-    Group('垈',
+    Group('MAIN'),
+    Group('WORK'),
+    Group('COMMS',
           matches=[
-              Match(wm_class=['Skype', 'Slack'])
+              Match(wm_class=['Skype', 'Slack', 'Thunderbird'])
           ]),
-    Group('✉',
-          matches=[
-              Match(wm_class=['Thunderbird'])
-          ]),
-    Group('☂'),
-    Group('♫',
+    Group('OTHER'),
+    Group('MUSIC',
           matches=[
               Match(wm_class=['Clementine'])
           ])
