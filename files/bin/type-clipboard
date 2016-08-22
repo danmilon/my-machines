@@ -1,0 +1,16 @@
+#!/usr/bin/env python
+
+import subprocess
+import time
+
+# read clipboard
+clipboard = subprocess.check_output([
+    'xclip', '-o', '-selection', 'clipboard'
+])
+
+clipboard = clipboard.decode()
+
+time.sleep(3)
+for c in clipboard:
+    subprocess.call(['xdotool', 'type', c])
+    time.sleep(0.2)

@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+
+import argparse
+import os
+import subprocess
+import shlex
+import shutil
+import concurrent.futures
+
+parser = argparse.ArgumentParser(description='x264/x265 encode files')
+parser.add_argument('files', nargs='+')
+parser.add_argument('--type', choices=['image', 'video'], required=True)
+parser.add_argument('--crf', type=int, default=27)
+parser.add_argument('--video-codec', choices=['x264', 'x265'], default='x265')
+parser.add_argument('--jpeg-quality', type=int, default=90)
+parser.add_argument('--parallel', type=int)
+args = parser.parse_args()
+
+FFMPEG_CMD = '''
+ffmpeg -y -i '{input}' -vf scale=-2:720 -c:v libx264 -refs 6 -mixed-refs 1 -bf 6
+-weightb 1 -b-pyramid normal -me_method umh -me_range 64 -subq 9 -8x8dct 1
+-trellis 2 -fast-pskip 0 -movflags +faststart -c:a libfdk_aac -vbr 4 '{output}'
+'''
+
+FFMPEG_2_CMD = '''
+ffmpeg -y -i '{input}' -vf scale=-2:720 -c:v lib{video_codec} -crf {crf} -level 3.1 -preset
+slow -movflags +faststart -c:a libfdk_aac -vbr 4 '{output}'
+'''
+
+IMAGE_CONVERT_CMD = '''
+convert '{input}' -resize 2560 -quality {jpeg_quality} -
+'''
+
+IMAGE_OPTIMIZE_CMD = '''
+jpegtran -copy all -optimize -progressive -outfile '{output}'
+'''
+
+if args.parallel is None:
+    args.parallel = os.cpu_count()
+
+
+def action(path):
+    path_excl_ext, _ = os.path.splitext(path)
+    if path_excl_ext[-2:] == '_r':
+        return
+
+    print('reencoding {path}'.format(path=path))
+    if args.type == 'video':
+        out_path = path_excl_ext + '_r.mp4'
+        subprocess.check_call(shlex.split(FFMPEG_2_CMD.format(
+            input=path,
+            output=out_path,
+            crf=args.crf,
+            video_codec=args.video_codec)))
+    elif args.type == 'image':
+        out_path = path_excl_ext + '_r.jpg'
+        convert = subprocess.Popen(shlex.split(IMAGE_CONVERT_CMD.format(
+            input=path,
+            jpeg_quality=args.jpeg_quality)),
+                                   stdout=subprocess.PIPE)
+        jpegtran = subprocess.Popen(shlex.split(IMAGE_OPTIMIZE_CMD.format(output=out_path)),
+                                    stdin=convert.stdout)
+        jpegtran_code = jpegtran.wait()
+        if jpegtran_code != 0:
+            raise Exception('jpegtran returned non-zero')
+        # compare final size
+        out_stat = os.stat(out_path)
+        in_stat = os.stat(path)
+        if out_stat.st_size > in_stat.st_size:
+            print('its bigger. replacing')
+            shutil.move(path, out_path)
+            return
+    else:
+        raise Exception()
+    print('removing original')
+    os.unlink(path)
+
+with concurrent.futures.ThreadPoolExecutor(max_workers=args.parallel) as executor:
+    foo = list(executor.map(action, args.files))

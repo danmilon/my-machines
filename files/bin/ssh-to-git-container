@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+ssh -tA root@52.31.157.193 "platform ssh $1"
+
+# cp -R /usr/lib/python2.7/dist-packages/platform_git /tmp
+# vi /run/runit/platform_git/run # add 'export PYTHONPATH=/tmp' at some point
+# # hack away in /tmp/platform_git, e.g. patch -p1 < some.diff
+# sv restart platform_git
+# HOME=/mnt/data PYTHONPATH=/tmp chpst -u platform:root /usr/bin/platform-git --config /run/gitconfig.json

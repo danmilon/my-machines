@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+import sys
+import re
+import argparse
+
+long_text = """
+My name is Dan, and I'm a software engineer with a BSc degree in Computer
+Science. I enjoy solving highly non-trivial problems and this is why I'd like to
+work at {company}. I believe this job position offers a high challenge, isn't
+tedious web development, allows creative thinking and covers a broad set of
+responsibilities allowing me to propose ideas and improve the product along with
+co workers. For example at my previous work at Lexiful (which I loved!), we
+built a fully distributed smart web platform for translators which included
+machine learning algorithms to split work and efficiently distribute it to
+multiple translators of different skills.
+
+
+I live in Greece and I'm interested in remote work, but I can adapt to your
+schedule, or have many overlapping hours. If you see a possible fit, Id be glad
+to talk together :)
+
+
+Thank you very much for your time!
+
+Dan.
+
+
+PS: Check out the web version of my CV at http://cv.danmilon.me
+"""
+
+short_text = """
+I'd like to work at {company} because I believe the position offers a high
+challenge, isn't tedious web development, allows creative thinking and covers a
+broad set of responsibilities allowing me to propose ideas and improve the
+product along with coworkers. For ex. at Lexiful we built a fully distributed
+web translation platform including machine learning algorithms to split work and
+efficiently distribute it to multiple translators of different skills. I'd be glad to talk together :)"""
+
+links = {
+    'GitHub': 'https://github.com/danmilon',
+    'Twitter': 'https://twitter.com/danmilon',
+    'LinkedIn': 'https://linkedin.com/in/danmilon'
+}
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--company', required=True)
+parser.add_argument('--recipient')
+parser.add_argument('--short', action='store_true')
+parser.add_argument('--links', action='store_true')
+args = parser.parse_args()
+
+greeting = None
+if args.short:
+    text = short_text
+else:
+    text = long_text
+
+regex_new_lines = re.compile(r'\n(?!\n)')
+text = regex_new_lines.sub(' ', text)
+
+if args.recipient:
+    greeting = 'Hey %s!' % (args.recipient)
+else:
+    greeting = 'Hey!'
+
+print(greeting, end='')
+if not args.short:
+    print('\n\n')
+
+text = text.format(company=args.company)
+print(text)
+
+if args.links:
+    print()
+    for link_name, link_target in links.items():
+        print('%s: %s' % (link_name, link_target))

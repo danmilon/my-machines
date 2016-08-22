@@ -1,0 +1,11 @@
+
+cd ~/.gnupg
+mv secring.gpg secring.gpg.clean
+ln -s ~/Documents/Dropbox/crutial/gpg/clean/secring.gpg .
+
+gpg --sign-key "$1"
+gpg --update-trustdb
+gpg --sign-key $1
+
+rm secring.gpg
+mv secring.gpg.clean secring.gpg
