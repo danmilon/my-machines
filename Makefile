@@ -1,3 +1,3 @@
 
 install:
-	ansible-playbook -K -i hosts --limit $(MACHINE) -c local playbook.yml
+	ansible-playbook -K -i hosts --limit $(MACHINE) -c local $(ANSIBLE_ARGS) playbook.yml
