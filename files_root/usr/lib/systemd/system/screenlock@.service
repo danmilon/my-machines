@@ -1,0 +1,11 @@
+[Unit]
+Description=Lock X session
+Before=sleep.target
+
+[Service]
+User=%I
+Type=forking
+ExecStart=/usr/bin/physlock -ds
+
+[Install]
+WantedBy=sleep.target

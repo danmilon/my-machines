@@ -31,6 +31,14 @@
         - dropbox
         - alsa-utils # for amixer
         - chromium
+    - name: install aur packages
+      pacman: name={{ item }} state=present
+      become: true
+      with_items:
+        - physlock-git
+    - name: enable screenlock for me
+      systemd: name="screenlock@danmilon" enabled=yes
+      become: true
     - name: put me in user groups
       user: name=danmilon groups=wheel,uucp,rfkill,users
     - name: copy stuff
