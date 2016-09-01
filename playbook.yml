@@ -28,6 +28,8 @@
         - rfkill
         - pass
         - time # for platform.sh sdk/git
+        - python
+        - python-pip # python3 builtin pip stripped?
         - ipython
         - python-pyflakes # for emacs python flycheck
         - freetype2-infinality-ultimate
@@ -38,14 +40,12 @@
         - alsa-utils # for amixer
         - chromium
         - bind-tools # for dig
+        - yaourt
     - name: install aur packages
-      pacman: name={{ item }} state=present
+      yaourt: name={{ item }} state=present
       become: true
       with_items:
         - physlock
-    - name: enable screenlock for me
-      systemd: name="screenlock@danmilon" enabled=yes
-      become: true
     - name: put me in user groups
       user: name=danmilon groups=wheel,uucp,rfkill,users
     - name: copy stuff
@@ -69,6 +69,9 @@
         - { path: 'home/danmilon/.config/qtile/config.py' }
         - { path: 'usr/local/bin/monitor-set-initial-mode', mode: '0755' }
         - { path: 'usr/local/bin/monitor-only-external', mode: '0755'}
+    - name: enable screenlock for me
+      systemd: name="screenlock@danmilon" enabled=yes
+      become: true
     - name: enable ntp
       command: timedatectl set-ntp true
 
