@@ -44,7 +44,7 @@
         - tk
         - ack
         - aspell-en
-        - aspell-us
+        - aspell-el
     - name: install aur packages
       yaourt: name={{ item }} state=present
       become: true
