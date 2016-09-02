@@ -1,7 +1,6 @@
 (setq package-archives '(
   ("gnu"       . "http://elpa.gnu.org/packages/")
-  ("melpa"     . "http://melpa.milkbox.net/packages/")
-  ("marmelade" . "http://marmalade-repo.org/packages/")))
+  ("melpa"     . "http://melpa.milkbox.net/packages/")))
 
 (package-initialize)
 
@@ -13,7 +12,7 @@
   ido flx-ido ido-vertical-mode smex w3 json-reformat pkgbuild-mode flycheck
   flycheck-rust rust-mode buffer-move google-this flymake-sass sass-mode
   multiple-cursors expand-region restclient nix-mode erlang yaml-mode
-  super-save jinja2-mode smartparens))
+  super-save jinja2-mode smartparens multi-term zenburn-theme))
 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -105,7 +104,7 @@
 (global-set-key (kbd "M-g") 'goto-line)
 
 ;; load theme
-(load-theme 'wombat t)
+(load-theme 'zenburn t)
 
 ;; projectile
 (projectile-global-mode)
@@ -219,50 +218,3 @@ a sound to be played"
 ;; load  .emacs.d/*.el
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ecb-excluded-directories-regexps (quote ("^\\(CVS\\|\\.[^xX]*\\)\\|\\(__pycache__\\)$")))
- '(ecb-options-version "2.40")
- '(ecb-primary-secondary-mouse-buttons (quote mouse-1--C-mouse-1))
- '(ecb-source-file-regexps
-   (quote
-    ((".*"
-      ("\\(^\\(\\.\\|#\\)\\|\\(__pycache__\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|aux\\|dvi\\)$\\)\\)")
-      ("^\\.\\(emacs\\|gnus\\)$")))))
- '(ecb-source-path
-   (quote
-    (("/home/danmilon/Documents/thesis/thesis" "thesis")
-     ("/home/danmilon/Documents/dev/lexis-backend" "lexis-backend"))))
- '(safe-local-variable-values
-   (quote
-    ((project-root . "/home/danmilon/Documents/dev/platform.sh/sdk/git")
-     (project-venv-name . "platform.sh-sdk-git")
-     (project-root . "/home/danmilon/Documents/dev/lexis-backend")
-     (eval setq project-root
-	   (substring
-	    (dir-locals-find-file ".")
-	    0 -15))
-     (eval setq project-root
-	   (substr
-	    (dir-locals-find-file ".")
-	    0 -15))
-     (eval setq project-root
-	   (file-name-sans-extension
-	    (dir-locals-find-file ".")))
-     (project-venv-name . "lexis")
-     (project-venv-name . "lexis-backend")
-     (setq venv-location "/home/danmilon/Documents/dev/lexis-backend")
-     (project-venv-name . "venv")
-     (virtualenv-default-directory . "/home/danmilon/Documents/dev/lexis-backend")
-     (virtualenv-workon . "venv")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-(put 'narrow-to-region 'disabled nil)

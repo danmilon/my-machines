@@ -41,6 +41,10 @@
         - chromium
         - bind-tools # for dig
         - yaourt
+        - tk
+        - ack
+        - aspell-en
+        - aspell-us
     - name: install aur packages
       yaourt: name={{ item }} state=present
       become: true
