@@ -1,6 +1,7 @@
 export WALLPAPER1=~/Pictures/wallpaper1
 export WALLPAPER2=~/Pictures/wallpaper2
 export TERMINAL=gnome-terminal
+export VDPAU_DRIVER=va_gl
 
 monitor-set-initial-mode
 
@@ -18,7 +19,7 @@ emacs_mu4e () {
 # startup programs
 eval $(gpg-agent --daemon)
 redshift-gtk &
-VDPAU_DRIVER=va_gl firefox &
+firefox &
 clementine &
 # emacs_mu4e i@danmilon.me
 thunderbird &
