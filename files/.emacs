@@ -202,9 +202,6 @@ a sound to be played"
   (flyspell-prog-mode)
   (rainbow-delimiters-mode)))
 
-(setq load-files-list '(
-  "python" "scala" "org" "smartparens"))
-
 ;; ansi-colors
 (require 'ansi-color)
 (defun display-ansi-colors ()
@@ -216,5 +213,8 @@ a sound to be played"
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
 
 ;; load  .emacs.d/*.el
+(setq load-files-list '(
+  "python" "scala" "org" "smartparens" "multi-term"))
+
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))

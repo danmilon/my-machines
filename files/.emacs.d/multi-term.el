@@ -1,0 +1,7 @@
+(global-set-key (kbd "C-c C-t t") 'multi-term)
+(global-set-key (kbd "C-c C-t n") 'multi-term-next)
+(global-set-key (kbd "C-c C-t p") 'multi-term-prev)
+(global-set-key (kbd "C-c C-t d o") 'multi-term-dedicated-open)
+(global-set-key (kbd "C-c C-t d c") 'multi-term-dedicated-close)
+(global-set-key (kbd "C-c C-t d t") 'multi-term-dedicated-toggle)
+(global-set-key (kbd "C-c C-t d s") 'multi-term-dedicated-select)
