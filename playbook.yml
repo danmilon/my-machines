@@ -45,13 +45,17 @@
         - ack
         - aspell-en
         - aspell-el
+        - chromium
+        - dnsmasq
+        - unrar
+        - unzip
     - name: install aur packages
       yaourt: name={{ item }} state=present
       become: true
       with_items:
         - physlock
     - name: put me in user groups
-      user: name=danmilon groups=wheel,uucp,rfkill,users
+      user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker,sixad
     - name: copy stuff
       synchronize: src=files/ dest=/home/danmilon
     - name: copy root stuff
