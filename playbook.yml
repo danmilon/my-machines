@@ -54,6 +54,12 @@
       become: true
       with_items:
         - physlock
+        - chromium-pepper-flash
+        - gcolor3
+        - thunderbird-enigmail
+        - tor-browser-en
+        - z-dir-jump-git
+        - virtualbox-ext-oracle
     - name: put me in user groups
       user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker,sixad
     - name: copy stuff
