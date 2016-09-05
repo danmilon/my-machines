@@ -57,6 +57,8 @@
         - xterm
         - xorg-xprop
         - xorg-server-xephyr
+        - vagrant
+        - docker
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
