@@ -27,6 +27,7 @@
       with_items:
         - automake
         - pkg-config
+        - mtr
         - rfkill
         - pass
         - time # for platform.sh sdk/git
