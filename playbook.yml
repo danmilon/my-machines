@@ -67,8 +67,6 @@
         - tor-browser-en
         - z-dir-jump-git
         - virtualbox-ext-oracle
-    - name: put me in user groups
-      user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker
     - name: copy stuff
       synchronize: src=files/ dest=/home/danmilon
     - name: copy root stuff
@@ -98,5 +96,7 @@
         - sshd
     - name: enable ntp
       command: timedatectl set-ntp true
+    - name: put me in user groups
+      user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker
 
 # TODO: mkinitcpio.conf
