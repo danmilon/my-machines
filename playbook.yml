@@ -52,6 +52,8 @@
         - dnsmasq
         - unrar
         - unzip
+        - qemu
+        - wireshark-qt
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
