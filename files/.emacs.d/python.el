@@ -16,3 +16,6 @@
      (replace-regexp-in-string
       "/" "." (substring (buffer-file-name) (+ (length project-root) 1))))))
     (pdb (concat "nosetests -s --pdb --pdb-failures " test-module))))
+
+;; j2 is a common jinja 2 extension
+(add-to-list 'auto-mode-alist '("\\.j2\\'" . jinja2-mode))
