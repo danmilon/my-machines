@@ -1,5 +1,5 @@
 ---
-- hosts: antonis, makis
+- hosts: delirio, makis
   tasks:
     - name: copy pacman.conf
       file: src=files_root/etc/pacman.conf dest=/etc/pacman.conf
