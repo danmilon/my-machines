@@ -62,6 +62,8 @@
         - virtualbox-host-modules-arch
         - dkms
         - gtk-recordmydesktop
+        - smplayer
+        - youtube-dl
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
