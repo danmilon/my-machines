@@ -61,6 +61,7 @@
         - docker
         - virtualbox-host-modules-arch
         - dkms
+        - gtk-recordmydesktop
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
