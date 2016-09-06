@@ -1,10 +1,12 @@
+(jedi:setup)
+
 (add-hook 'python-mode-hook (lambda ()
   (hack-local-variables)
   (venv-workon project-venv-name)
   (setq mode-line-format (cons '(:exec venv-current-name) mode-line-format))
   (setq jedi:complete-on-dot t)
   (setq jedi:get-in-function-call-delay 100)
-  (jedi:setup)
+  (jedi-mode)
   (electric-indent-mode -1)
   (local-set-key (kbd "RET") 'newline-and-indent)))
 
@@ -18,4 +20,5 @@
     (pdb (concat "nosetests -s --pdb --pdb-failures " test-module))))
 
 ;; j2 is a common jinja 2 extension
-(add-to-list 'auto-mode-alist '("\\.j2\\'" . jinja2-mode))
+;; it might be followed by further extensions
+(add-to-list 'auto-mode-alist '("\\.j2.*\\'" . jinja2-mode))
