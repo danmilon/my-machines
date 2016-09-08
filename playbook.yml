@@ -1,6 +1,11 @@
 ---
 - hosts: delirio, makis
   tasks:
+    - name: delete folders we dont like
+      file: path=/home/danmilon/{{ item }} state=absent
+      with_items:
+        - Templates
+        - Public
     - name: copy pacman.conf
       file: src=files_root/etc/pacman.conf dest=/etc/pacman.conf
       become: true
