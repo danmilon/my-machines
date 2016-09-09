@@ -1,3 +1,7 @@
+xkbmap:
+  options:
+    - ctrl:swapcaps
+    - ctrl:ralt_rctrl
 xrandr:
   main_output: eDP1
   initial:
