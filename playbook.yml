@@ -82,6 +82,7 @@
         - tor-browser-en
         - z-dir-jump-git
         - virtualbox-ext-oracle
+        - freshplayerplugin
     - name: copy stuff
       synchronize: src=files/ dest=/home/danmilon
     - name: copy root stuff
