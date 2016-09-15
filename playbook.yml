@@ -72,6 +72,12 @@
         - flake8
         - strace
         - file-roller
+        - lib32-alsa-plugins
+        - mesa-vdpau
+        - lib32-sdl
+        - lib32-libtheora
+        - lib32-openal
+        - wireless_tools
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
@@ -83,6 +89,9 @@
         - z-dir-jump-git
         - virtualbox-ext-oracle
         - freshplayerplugin
+    - name: install host specific pacman packages
+      pacman: name={{ item }} state=present
+      with_items: "{{ packages }}"
     - name: copy stuff
       synchronize: src=files/ dest=/home/danmilon
     - name: copy root stuff

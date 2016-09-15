@@ -1,16 +1,16 @@
 export WALLPAPER1=~/Pictures/wallpaper1
 export WALLPAPER2=~/Pictures/wallpaper2
 export TERMINAL=gnome-terminal
-export VDPAU_DRIVER=va_gl
 
 monitor-set-initial-mode
 
 . ~/.xrandr-home
 
-setxkbmap -model pc104{% for option in xkbmap.options %} -option {{ option }}{% endfor %}
-
 # disable need of FN for F3
 xmodmap -e "keycode 128 = F3"
+
+setxkbmap -model pc104{% for option in xkbmap.options %} -option {{ option }}{% endfor %}
+
 emacs_mu4e () {
   for account in "$@"
   do
