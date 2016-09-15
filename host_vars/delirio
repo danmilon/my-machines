@@ -1,5 +1,4 @@
 packages:
-  - xf86-video-nouveau
 xkbmap:
   options:
     - ctrl:nocaps
