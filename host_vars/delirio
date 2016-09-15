@@ -1,4 +1,9 @@
 packages:
+  - nvidia
+  - bumblebee
+  - lib32-nvidia-utils
+  - libvdpau
+  - nvidia-utils
 xkbmap:
   options:
     - ctrl:nocaps
