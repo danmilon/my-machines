@@ -78,6 +78,7 @@
         - lib32-libtheora
         - lib32-openal
         - wireless_tools
+        - squashfs-tools
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
