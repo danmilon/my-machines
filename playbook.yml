@@ -92,7 +92,7 @@
         - freshplayerplugin
     - name: install host specific pacman packages
       pacman: name={{ item }} state=present
-      with_items: "{{ packages }}"
+      with_items: "{{ packages|default([]) }}"
     - name: copy stuff
       synchronize: src=files/ dest=/home/danmilon
     - name: copy root stuff
@@ -122,6 +122,7 @@
         - sshd
     - name: enable ntp
       command: timedatectl set-ntp true
+      become: true
     - name: put me in user groups
       user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker
 
