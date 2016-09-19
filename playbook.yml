@@ -79,6 +79,7 @@
         - lib32-openal
         - wireless_tools
         - squashfs-tools
+        - dhclient
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
@@ -90,6 +91,7 @@
         - z-dir-jump-git
         - virtualbox-ext-oracle
         - freshplayerplugin
+        - google-talkplugin
     - name: install host specific pacman packages
       pacman: name={{ item }} state=present
       with_items: "{{ packages|default([]) }}"
