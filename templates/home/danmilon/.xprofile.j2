@@ -22,7 +22,7 @@ emacs_mu4e () {
 eval $(gpg-agent --daemon)
 redshift-gtk &
 firefox &
-emacs &
+qtile-run -G WORK emacs &
 clementine &
 # emacs_mu4e i@danmilon.me
 thunderbird &
