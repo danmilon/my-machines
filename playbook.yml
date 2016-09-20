@@ -80,6 +80,9 @@
         - wireless_tools
         - squashfs-tools
         - dhclient
+        - scrot
+        - ethtool
+        - cpupower
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
