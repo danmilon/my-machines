@@ -83,6 +83,7 @@
         - scrot
         - ethtool
         - cpupower
+        - tlp
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
@@ -119,12 +120,14 @@
         - { path: 'home/danmilon/.config/qtile/config.py' }
         - { path: 'usr/local/bin/monitor-set-initial-mode', mode: '0755' }
         - { path: 'usr/local/bin/monitor-only-external', mode: '0755'}
+        - { path: 'etc/default/tlp' }
     - name: enable systemd services
       systemd: name={{ item }} enabled=yes
       become: true
       with_items:
         - screenlock@danmilon
         - sshd
+        - tlp
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true

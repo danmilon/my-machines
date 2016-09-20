@@ -1,3 +1,5 @@
+disk_devices:
+  - nvme0n1p1
 packages:
   - nvidia
   - bumblebee

@@ -1,3 +1,5 @@
+disk_devices:
+  - sda
 xkbmap:
   options:
     - ctrl:nocaps
