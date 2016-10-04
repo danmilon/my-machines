@@ -2,12 +2,12 @@
 
 (add-hook 'python-mode-hook (lambda ()
   (hack-local-variables)
-  (venv-workon project-venv-name)
-  (setq mode-line-format (cons '(:exec venv-current-name) mode-line-format))
+  (ignore-errors
+    (venv-workon project-venv-name)
+    (setq mode-line-format (cons '(:exec venv-current-name) mode-line-format)))
+  (jedi-mode)
   (setq jedi:complete-on-dot t)
   (setq jedi:get-in-function-call-delay 100)
-  (jedi-mode)
-  (local-set-key (kbd "C-.") 'jedi:goto-definition)
   (local-set-key (kbd "C-TAB") 'jedi:complete)
   (electric-indent-mode -1)
   (local-set-key (kbd "RET") 'newline-and-indent)))
