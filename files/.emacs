@@ -200,6 +200,7 @@ a sound to be played"
   (linum-mode)
   (column-number-mode)
   (flyspell-prog-mode)
+  (auto-complete-mode 1)
   (rainbow-delimiters-mode)))
 
 ;; ansi-colors
