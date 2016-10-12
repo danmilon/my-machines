@@ -89,6 +89,9 @@
         - ipcalc
         - tcpdump
         - whois
+        - cups
+        - nss-mdns
+        - aws-cli
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
@@ -133,6 +136,8 @@
         - screenlock@danmilon
         - sshd
         - tlp
+        - avahi-daemon
+        - org.cups.cupsd
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true
