@@ -104,6 +104,7 @@
         - virtualbox-ext-oracle
         - freshplayerplugin
         - google-talkplugin
+        - screen
     - name: install host specific pacman packages
       pacman: name={{ item }} state=present
       with_items: "{{ packages|default([]) }}"
