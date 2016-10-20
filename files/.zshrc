@@ -24,6 +24,7 @@ alias less='less -R'
 alias updateall='sudo yaourt --noconfirm -Syu'
 # hide emacs tmp files
 alias ls='ls --color -F --hide="*~" --hide="#*#"'
+alias cp='cp -i'
 alias here='nautilus ./ > /dev/null 2>&1 &'
 alias heret='gnome-terminal . > /dev/null 2>&1 &'
 
