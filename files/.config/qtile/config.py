@@ -1,3 +1,4 @@
+import itertools
 from libqtile.config import (
     Group, Match, Screen, EzKey as Key, EzDrag as Drag, EzClick as
     Click)
@@ -10,6 +11,7 @@ import subprocess
 import shlex
 import pyudev
 import gi
+from pulsectl import Pulse
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, Gdk
 
@@ -324,6 +326,51 @@ def switch_kbd_layout(qtile):
     widget = qtile.widgetMap['keyboardlayout']
     widget.next_keyboard()
 
+
+def switch_pulse_default(prop):
+    pulse = Pulse('qtile')
+    current_default = getattr(
+        pulse.server_info(),
+        'default_{}_name'.format(prop))
+
+    set_next = False
+    things = getattr(pulse, '{}_list'.format(prop))()
+    for thing in itertools.chain(things, things):
+        if set_next:
+            print('setting default {} to {}'.format(prop, thing.name))
+            pulse.default_set(thing)
+            break
+        elif thing.name == current_default:
+            set_next = True
+
+    if prop == 'sink':
+        list_cmd = 'list-sink-inputs'
+        move_cmd = 'move-sink-input'
+    else:
+        list_cmd = 'list-source-outputs'
+        move_cmd = 'move-source-output'
+
+    streams = subprocess.getoutput(
+        "pacmd {} | grep index | awk '{{ print $2 }}'".format(list_cmd))
+    streams = [int(idx.strip()) for idx in streams.splitlines()]
+
+    for stream in streams:
+        cmd = "pacmd {cmd} {stream_id} {thing_id}".format(
+            cmd=move_cmd,
+            stream_id=stream,
+            thing_id=thing.index)
+        print(cmd)
+        subprocess.check_call(shlex.split(cmd))
+
+
+def switch_pulse_default_sink(qtile):
+    return switch_pulse_default('sink')
+
+
+def switch_pulse_default_source(qtile):
+    return switch_pulse_default('source')
+
+
 keys = [
     Key('M-p', lazy.layout.up()),
     Key('M-f', lazy.layout.right()),
@@ -354,6 +401,8 @@ keys = [
     Key('A-<XF86AudioRaiseVolume>', lazy.spawn('amixer -q sset Master 100%')),
     Key('A-<XF86AudioLowerVolume>', lazy.spawn('amixer -q sset Master 0%')),
     Key('<XF86AudioMute>', lazy.spawn('amixer -q sset Master toggle')),
+    Key('M-<bracketleft>', lazy.function(switch_pulse_default_sink)),
+    Key('M-<bracketright>', lazy.function(switch_pulse_default_source)),
     Key('<XF86MonBrightnessUp>', lazy.spawn('xbacklight -inc 15')),
     Key('<XF86MonBrightnessDown>', lazy.spawn('xbacklight -dec 15')),
     Key('<XF86KbdBrightnessUp>', lazy.spawn('kbdlight up')),

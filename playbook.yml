@@ -107,6 +107,11 @@
         - freshplayerplugin
         - google-talkplugin
         - screen
+    - name: install pip packages not available via packages
+      pip: name={{ item }}
+      become: true
+      with_items:
+        - pulsectl
     - name: install host specific pacman packages
       pacman: name={{ item }} state=present
       with_items: "{{ packages|default([]) }}"
@@ -128,7 +133,6 @@
       with_items:
         - { path: 'home/danmilon/.xrandr-home', mode: '0755' }
         - { path: 'home/danmilon/.xprofile' }
-        - { path: 'home/danmilon/.config/qtile/config.py' }
         - { path: 'usr/local/bin/monitor-set-initial-mode', mode: '0755' }
         - { path: 'usr/local/bin/monitor-only-external', mode: '0755'}
         - { path: 'etc/default/tlp' }
