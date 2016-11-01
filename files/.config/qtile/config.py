@@ -13,12 +13,18 @@ import pyudev
 import gi
 from pulsectl import Pulse
 gi.require_version('Gtk', '3.0')
-from gi.repository import Gtk, Gdk
+from gi.repository import Gtk, Gdk, Notify
 
 
 # TODO: fix fullscreen
 # TODO: MTP
 # TODO: no skype in systray
+
+Notify.init("qtile")
+
+
+def notify(title, content):
+    Notify.Notification.new(title, content).show()
 
 
 class MyPrompt(widget.Prompt):
@@ -337,7 +343,7 @@ def switch_pulse_default(prop):
     things = getattr(pulse, '{}_list'.format(prop))()
     for thing in itertools.chain(things, things):
         if set_next:
-            print('setting default {} to {}'.format(prop, thing.name))
+            notify("Sound", "Default {} to {}".format(prop, thing.name))
             pulse.default_set(thing)
             break
         elif thing.name == current_default:
