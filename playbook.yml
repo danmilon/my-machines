@@ -109,6 +109,7 @@
         - google-talkplugin
         - screen
         - notification-thing-git
+        - go-mtpfs-git
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true
