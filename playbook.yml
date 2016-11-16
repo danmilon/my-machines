@@ -102,6 +102,7 @@
         - gst-plugins-bad
         - gst-plugins-ugly
         - gst-libav
+        - transmission-gtk
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
