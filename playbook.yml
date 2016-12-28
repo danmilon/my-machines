@@ -104,6 +104,7 @@
         - gst-libav
         - transmission-gtk
         - gksu
+        - android-udev
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
@@ -119,6 +120,8 @@
         - screen
         - notification-thing-git
         - go-mtpfs-git
+        - android-sdk-platform-tools
+        - android-bash-completion
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true
