@@ -122,6 +122,7 @@
         - go-mtpfs-git
         - android-sdk-platform-tools
         - android-bash-completion
+        - thermald
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true
@@ -160,6 +161,7 @@
         - tlp
         - avahi-daemon
         - org.cups.cupsd
+        - thermald
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true
