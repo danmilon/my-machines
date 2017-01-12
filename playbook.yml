@@ -105,6 +105,7 @@
         - transmission-gtk
         - gksu
         - android-udev
+        - gparted
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
