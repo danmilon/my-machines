@@ -75,6 +75,20 @@ function chpwd() {
     fi
 }
 
+function pytmp() {
+    py_version=${1:-3}
+    cd $(mktemp -d)
+    virtualenv -p python$1 venv
+    . venv/bin/activate
+    for pkg in "$@"; do
+
+    done
+
+    if [ -n "$2" ]; then
+	pip install $(echo $2)
+    fi
+}
+
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
