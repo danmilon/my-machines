@@ -89,6 +89,9 @@ function pytmp() {
     fi
 }
 
+# fzf
+source /usr/share/fzf/key-bindings.zsh
+
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null

@@ -106,6 +106,7 @@
         - gksu
         - android-udev
         - gparted
+        - fzf
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
