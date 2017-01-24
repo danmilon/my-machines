@@ -1,0 +1,7 @@
+directory: ~/Music
+library: ~/Documents/Dropbox/shared/beets/library.blb
+plugins: fetchart mbsync
+import:
+  move: yes
+match:
+    strong_rec_thresh: 0.6
