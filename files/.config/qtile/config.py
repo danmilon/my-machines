@@ -6,6 +6,7 @@ from libqtile.command import lazy
 from libqtile.widget import base as widget_base
 from libqtile import layout, bar, widget, hook
 import os
+import os.path
 from functools import partial
 import subprocess
 import shlex
@@ -247,18 +248,42 @@ class KeyboardLayoutWidget(widget_base._TextBox):
 
 
 class RFKillWidget(widget_base._TextBox):
+    DEV_NAME_MAP = {
+        "WLAN": "ieee80211",
+        "BT": "bluetooth",
+    }
+    DEV_NAME_ID_MAP = {
+        "WLAN": "wlan",
+        "BT": "bluetooth",
+    }
+
     orientations = widget_base.ORIENTATION_HORIZONTAL
     defaults = [
-        ('rfkill_index', 0, 'RF kill index (see "rfkill list")'),
         ('device_name', 'device', 'Name to use for device (e.g. BT, WLAN)')
     ]
 
     def __init__(self, **config):
         super().__init__(markup=True, **config)
         self.add_defaults(RFKillWidget.defaults)
+        if self.device_name not in ["WLAN", "BT"]:
+            raise Exception("Invalid device_name")
+
         ctx = pyudev.Context()
-        dev_path = '/class/rfkill/rfkill{idx}'.format(idx=self.rfkill_index)
-        self._dev = pyudev.Device.from_path(ctx, dev_path)
+        rfkill_paths = [
+            "/sys/class/rfkill/" + os.readlink('/sys/class/rfkill/' + name)
+            for name in os.listdir('/sys/class/rfkill')
+        ]
+        print(rfkill_paths)
+        devices = [
+            pyudev.Devices.from_path(ctx, os.path.abspath(path))
+            for path in rfkill_paths
+            if self.DEV_NAME_MAP[self.device_name] in path
+        ]
+
+        if len(devices) != 1:
+            raise Exception("no or too many devices")
+
+        self._dev = devices[0]
         monitor = pyudev.Monitor.from_netlink(ctx)
         monitor.filter_by('rfkill')
         observer = pyudev.MonitorObserver(monitor, self._udev_callback)
@@ -272,23 +297,26 @@ class RFKillWidget(widget_base._TextBox):
             self.text = self._get_text()
             self.bar.draw()
 
+    def is_blocked(self):
+        return bool(int(self._dev.attributes.get('soft')))
+
     def _get_text(self):
-        self.is_blocked = bool(int(self._dev.attributes.get('soft')))
-        if self.is_blocked:
+        if self.is_blocked():
             color = 'gray'
         else:
             color = 'green'
 
-        return '<span color="{color}">{name}</span>'.format(color=color, name=self.device_name)
+        return '<span color="{color}">{name}</span>'.format(
+            color=color,
+            name=self.device_name,
+        )
 
     def button_press(self, event, x, y):
-        if self.is_blocked:
-            cmd = 'unblock'
-        else:
-            cmd = 'block'
-
-        cmd = 'rfkill {cmd} {idx}'.format(cmd=cmd, idx=self.rfkill_index)
-        subprocess.call(shlex.split(cmd))
+        subprocess.check_call([
+            "rfkill",
+            "unblock" if self.is_blocked() else "block",
+            self.DEV_NAME_ID_MAP[self.device_name]
+        ])
 
 
 widget_defaults = {
@@ -483,8 +511,8 @@ def setup_screens(qtile):
         screens_widgets['systray'](),
         screens_widgets['clock'](),
         screens_widgets['sep'](),
-        RFKillWidget(rfkill_index=0, device_name='WLAN'),
-        RFKillWidget(rfkill_index=1, device_name='BT'),
+        RFKillWidget(device_name='WLAN'),
+        RFKillWidget(device_name='BT'),
         ProcessTrackerWidget(name='MTP',
                              cmd='go-mtpfs mnt/android-mtp',
                              disable_cmd='fusermount -u mnt/android-mtp'),
