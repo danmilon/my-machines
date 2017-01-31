@@ -77,16 +77,19 @@ function chpwd() {
 
 function pytmp() {
     py_version=${1:-3}
+    echo $py_version
     cd $(mktemp -d)
-    virtualenv -p python$1 venv
+    virtualenv -p python$py_version venv
     . venv/bin/activate
     for pkg in "$@"; do
 
     done
 
     if [ -n "$2" ]; then
-	pip install $(echo $2)
+	pip install ipython $(echo $2)
     fi
+
+    venv/bin/ipython
 }
 
 # fzf
