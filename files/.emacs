@@ -12,7 +12,8 @@
   ido flx-ido ido-vertical-mode smex w3 json-reformat pkgbuild-mode flycheck
   flycheck-rust rust-mode buffer-move google-this flymake-sass sass-mode
   multiple-cursors expand-region restclient nix-mode erlang yaml-mode
-  super-save jinja2-mode smartparens multi-term zenburn-theme))
+  super-save jinja2-mode smartparens multi-term zenburn-theme
+  smooth-scrolling))
 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -201,7 +202,8 @@ a sound to be played"
   (column-number-mode)
   (flyspell-prog-mode)
   (auto-complete-mode 1)
-  (rainbow-delimiters-mode)))
+  (rainbow-delimiters-mode)
+  (smooth-scrolling-mode)))
 
 ;; ansi-colors
 (require 'ansi-color)
