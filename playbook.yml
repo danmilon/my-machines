@@ -94,7 +94,7 @@
         - aws-cli
         - gdb
         - abs
-        - gnu-netcat
+        - openbsd-netcat
         - audacity
         - clementine
         - gst-plugins-base
