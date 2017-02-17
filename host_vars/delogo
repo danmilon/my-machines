@@ -1,3 +1,5 @@
+tlp:
+  sata_powersave: true
 disk_devices:
   - nvme0n1p1
 packages:

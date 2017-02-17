@@ -1,3 +1,5 @@
+tlp:
+  sata_powersave: false
 disk_devices:
   - sda
 xkbmap:

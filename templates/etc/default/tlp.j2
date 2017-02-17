@@ -111,8 +111,10 @@ DISK_APM_LEVEL_ON_BAT="128 128"
 
 # SATA aggressive link power management (ALPM):
 #   min_power, medium_power, max_performance
+{% if tlp.sata_powersave %}
 SATA_LINKPWR_ON_AC=max_performance
 SATA_LINKPWR_ON_BAT=min_power
+{% endif %}
 
 # Exclude SATA host devices from link power management.
 # Separate multiple hosts with spaces.
