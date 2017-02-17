@@ -40,10 +40,11 @@
         - python-pip # python3 builtin pip stripped?
         - ipython
         - python-pyflakes # for emacs python flycheck
-        - freetype2-infinality-ultimate
-        - fontconfig-infinality-ultimate
-        - cairo-infinality-ultimate
-        - jdk8-openjdk-infinality
+        # no infinality for now
+        # - freetype2-infinality-ultimate
+        # - fontconfig-infinality-ultimate
+        # - cairo-infinality-ultimate
+        # - jdk8-openjdk-infinality
         - dropbox
         - alsa-utils # for amixer
         - chromium
