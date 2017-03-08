@@ -1,3 +1,5 @@
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/")
+
 (setq package-archives '(
   ("gnu"       . "http://elpa.gnu.org/packages/")
   ("melpa"     . "http://melpa.milkbox.net/packages/")))
@@ -217,7 +219,7 @@ a sound to be played"
 
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
-  "python" "scala" "org" "smartparens" "multi-term"))
+  "python" "scala" "org" "smartparens" "multi-term" "lilypond"))
 
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
