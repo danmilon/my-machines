@@ -171,6 +171,7 @@
         - avahi-daemon
         - org.cups.cupsd
         - thermald
+        - docker
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true
