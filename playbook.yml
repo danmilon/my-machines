@@ -65,6 +65,7 @@
         - xorg-server-xephyr
         - vagrant
         - docker
+        - virtualbox
         - virtualbox-host-modules-arch
         - dkms
         - gtk-recordmydesktop
