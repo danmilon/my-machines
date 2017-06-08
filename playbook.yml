@@ -114,6 +114,7 @@
         - python-requests # dep of beets
         - xf86-input-libinput
         - python-pyudev
+        - lsof
     - name: install aur packages
       yaourt: name={{ item }} state=present
       with_items:
