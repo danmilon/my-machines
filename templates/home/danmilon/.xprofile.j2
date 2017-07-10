@@ -20,6 +20,7 @@ emacs_mu4e () {
 
 # startup programs
 eval $(gpg-agent --daemon)
+compton -CG --backend glx &
 redshift-gtk &
 firefox &
 qtile-run -G WORK emacs &

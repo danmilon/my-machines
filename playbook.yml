@@ -117,6 +117,7 @@
         - xf86-input-libinput
         - python-pyudev
         - lsof
+        - compton
     - name: install aur packages
       tags:
         - packages
