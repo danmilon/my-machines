@@ -12,9 +12,11 @@ xkbmap:
   options:
     - ctrl:nocaps
 xrandr:
-  main_output: eDP1
+  main_output: eDP-1
   initial:
-    mode: 2048x1152
+    mode: 2048x1152_60.00
+    opts: 197.00  2048 2184 2400 2752  1152 1155 1160 1195 -hsync +vsync
+    new: true
   xrandr_home:
-    output: HDMI1
-    left_of: eDP1
+    output: HDMI-1
+    left_of: eDP-1
