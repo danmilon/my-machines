@@ -139,6 +139,7 @@
         - thermald
         - qtile-python3-git
         - git-buildpackage # platform
+        - skypeforlinux
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true

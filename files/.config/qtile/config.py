@@ -331,7 +331,7 @@ groups = [
     Group('WORK'),
     Group('COMMS',
           matches=[
-              Match(wm_class=['Skype', 'Slack', 'Thunderbird'])
+              Match(wm_class=['skypeforlinux', 'Slack', 'Thunderbird'])
           ]),
     Group('OTHER'),
     Group('MUSIC',
