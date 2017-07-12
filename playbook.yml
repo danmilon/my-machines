@@ -143,6 +143,8 @@
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true
+      tags:
+        - packages
       with_items:
         - pulsectl
     - name: install host specific pacman packages
