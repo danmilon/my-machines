@@ -186,6 +186,7 @@
       command: timedatectl set-ntp true
       become: true
     - name: put me in user groups
+      become: true
       user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker
 
 # TODO: mkinitcpio.conf
