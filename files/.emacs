@@ -15,7 +15,7 @@
   flycheck-rust rust-mode buffer-move google-this flymake-sass sass-mode
   multiple-cursors expand-region restclient nix-mode erlang yaml-mode
   super-save jinja2-mode smartparens multi-term zenburn-theme
-  smooth-scrolling))
+  smooth-scrolling docker-tramp))
 
 (unless package-archive-contents
   (package-refresh-contents))
