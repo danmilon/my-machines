@@ -10,18 +10,6 @@
       file: src=files_root/etc/pacman.conf dest=/etc/pacman.conf
       become: true
       register: pacman
-    - name: check infinality key
-      command: pacman-key --list-sigs 962DDE58
-      ignore_errors: true
-      register: infinality_key_exists
-    - name: add infinality key
-      shell: pacman-key -r 962DDE58
-      when: infinality_key_exists|failed
-      become: true
-    - name: sign infinality key
-      shell: pacman-key --lsign-key 962DDE58
-      when: infinality_key_exists|failed
-      become: true
     - name: sync pacman dbs
       pacman: update_cache=yes
       become: true
@@ -42,11 +30,6 @@
         - python-pip # python3 builtin pip stripped?
         - ipython
         - python-pyflakes # for emacs python flycheck
-        # no infinality for now
-        # - freetype2-infinality-ultimate
-        # - fontconfig-infinality-ultimate
-        # - cairo-infinality-ultimate
-        # - jdk8-openjdk-infinality
         - dropbox
         - alsa-utils # for amixer
         - chromium
