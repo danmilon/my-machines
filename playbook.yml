@@ -124,6 +124,7 @@
         - thermald
         - qtile-python3-git
         - git-buildpackage # platform
+        - firefox-extension-https-everywhere
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true
