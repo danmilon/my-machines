@@ -101,6 +101,7 @@
         - python-pyudev
         - lsof
         - compton
+        - firefox-ublock-origin
     - name: install aur packages
       tags:
         - packages
