@@ -146,10 +146,6 @@
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
-;; setup markdown major mode
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-
 ;; text modes
 (add-hook 'text-mode-hook (lambda ()
   (auto-fill-mode 1)
@@ -219,7 +215,8 @@ a sound to be played"
 
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
-  "python" "scala" "org" "smartparens" "multi-term" "lilypond" "tramp"))
+  "python" "scala" "org" "smartparens" "multi-term" "lilypond" "tramp"
+  "markdown"))
 
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
