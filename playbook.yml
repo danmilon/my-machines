@@ -102,6 +102,7 @@
         - lsof
         - compton
         - firefox-ublock-origin
+        - ntfs-3g
     - name: install aur packages
       tags:
         - packages
