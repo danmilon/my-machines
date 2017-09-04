@@ -3,5 +3,7 @@ library: ~/Documents/Dropbox/shared/beets/library.blb
 plugins: fetchart mbsync
 import:
   move: yes
+remove:
+  delete: yes
 match:
     strong_rec_thresh: 0.6
