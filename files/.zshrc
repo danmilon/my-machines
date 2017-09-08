@@ -95,6 +95,11 @@ function pytmp() {
 # fzf
 source /usr/share/fzf/key-bindings.zsh
 
+# prompt
+PROMPT="%B${return_code}%b
+${user_host} ${current_dir}%B${user_symbol}%b "
+RPS1=""
+
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
