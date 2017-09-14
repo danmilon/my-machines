@@ -103,6 +103,7 @@
         - compton
         - firefox-ublock-origin
         - ntfs-3g
+        - markdown
     - name: install aur packages
       tags:
         - packages
