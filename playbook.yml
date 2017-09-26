@@ -127,7 +127,8 @@
         - qtile-python3-git
         - git-buildpackage # platform
         - firefox-extension-https-everywhere
-        - firefox-passff
+        # the 1.0 extension itself is only as part of a -git package, which is
+        # not signed. install extension via addons.firefox.org
         - passff-host-app
     - name: install pip packages not available via packages
       pip: name={{ item }}
