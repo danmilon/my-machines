@@ -182,7 +182,7 @@
     - name: intel ucode boot entry
       become: true
       lineinfile:
-        path: /boot/loader/entries/arch.conf
+        dest: /boot/loader/entries/arch.conf
         line: "initrd /intel-ucode.img"
         insertbefore: "^initrd /initramfs-linux.img$"
 # TODO: mkinitcpio.conf
