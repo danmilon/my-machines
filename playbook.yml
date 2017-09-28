@@ -104,6 +104,7 @@
         - firefox-ublock-origin
         - ntfs-3g
         - markdown
+        - intel-ucode
     - name: install aur packages
       tags:
         - packages
@@ -178,5 +179,10 @@
     - name: put me in user groups
       become: true
       user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker
-
+    - name: intel ucode boot entry
+      become: true
+      lineinfile:
+        path: /boot/loader/entries/arch.conf
+        line: "initrd /intel-ucode.img"
+        insertbefore: "^initrd /initramfs-linux.img$"
 # TODO: mkinitcpio.conf
