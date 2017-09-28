@@ -1,0 +1,9 @@
+#
+# This file is parsed by pam_env module
+#
+# Syntax: simple "KEY=VAL" pairs on separate lines
+#
+
+# See https://wiki.archlinux.org/index.php/Java_Runtime_Environment_fonts
+
+_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
