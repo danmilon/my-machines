@@ -105,6 +105,7 @@
         - ntfs-3g
         - markdown
         - intel-ucode
+        - dnsscrypt-proxy
     - name: install aur packages
       tags:
         - packages
@@ -173,6 +174,7 @@
         - org.cups.cupsd
         - thermald
         - docker
+        - dnscrypt-proxy
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true
