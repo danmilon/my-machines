@@ -17,7 +17,7 @@
   flycheck-rust rust-mode buffer-move google-this flymake-sass sass-mode
   multiple-cursors expand-region restclient nix-mode erlang yaml-mode
   super-save jinja2-mode smartparens multi-term zenburn-theme
-  smooth-scrolling docker-tramp dockerfile-mode elpy))
+  smooth-scrolling docker-tramp dockerfile-mode elpy ace-window))
 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -214,6 +214,9 @@ a sound to be played"
 (add-to-list 'auto-mode-alist '("\\.log\\'" . display-ansi-colors))
 
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
+
+;; ace-window
+(global-set-key (kbd "C-x o") 'ace-window)
 
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
