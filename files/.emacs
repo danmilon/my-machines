@@ -2,7 +2,9 @@
 
 (setq package-archives '(
   ("gnu"       . "http://elpa.gnu.org/packages/")
-  ("melpa"     . "http://melpa.milkbox.net/packages/")))
+  ("melpa"     . "http://melpa.milkbox.net/packages/")
+  ("elpy"      . "https://jorgenschaefer.github.io/packages/")
+))
 
 (package-initialize)
 
@@ -15,7 +17,7 @@
   flycheck-rust rust-mode buffer-move google-this flymake-sass sass-mode
   multiple-cursors expand-region restclient nix-mode erlang yaml-mode
   super-save jinja2-mode smartparens multi-term zenburn-theme
-  smooth-scrolling docker-tramp dockerfile-mode))
+  smooth-scrolling docker-tramp dockerfile-mode elpy))
 
 (unless package-archive-contents
   (package-refresh-contents))

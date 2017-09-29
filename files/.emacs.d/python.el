@@ -1,4 +1,4 @@
-(jedi:setup)
+(elpy-enable)
 
 (add-hook 'python-mode-hook (lambda ()
   (hack-local-variables)
