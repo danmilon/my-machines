@@ -56,6 +56,7 @@
         - gtk-recordmydesktop
         - smplayer
         - youtube-dl
+        - flake8
         - strace
         - file-roller
         - lib32-alsa-plugins
@@ -105,12 +106,6 @@
         - markdown
         - intel-ucode
         - dnsscrypt-proxy
-        # elpy
-        - python-rope
-        - python-jedi
-        - flake8
-        - yapf
-        - autopep8
     - name: install aur packages
       tags:
         - packages
@@ -137,8 +132,6 @@
         # the 1.0 extension itself is only as part of a -git package, which is
         # not signed. install extension via addons.firefox.org
         - passff-host-app
-        # elpy
-        - python-importmagic
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true
