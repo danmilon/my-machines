@@ -106,6 +106,7 @@
         - markdown
         - intel-ucode
         - dnsscrypt-proxy
+        - httpie
     - name: install aur packages
       tags:
         - packages
