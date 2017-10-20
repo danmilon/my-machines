@@ -568,7 +568,11 @@ def dialogs(window):
     should_float = (
         (window.window.get_wm_type() == 'dialog' or
          window.window.get_wm_transient_for()) or
-        (cls in ['Gnome-calculator', 'Gcolor3'])
+        (cls in [
+            'Gnome-calculator',
+            'Gcolor3',
+            'Pinentry',
+        ])
     )
 
     if should_float:
