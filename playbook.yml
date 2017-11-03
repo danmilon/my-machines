@@ -143,6 +143,8 @@
     - name: install host specific pacman packages
       pacman: name={{ item }} state=present
       with_items: "{{ packages|default([]) }}"
+      tags:
+        - packages
     - name: copy stuff
       synchronize: src=files/ dest=/home/danmilon
     - name: copy root stuff
