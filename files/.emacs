@@ -14,8 +14,8 @@
   ido flx-ido ido-vertical-mode smex w3 json-reformat pkgbuild-mode flycheck
   flycheck-rust rust-mode buffer-move google-this flymake-sass sass-mode
   multiple-cursors expand-region restclient nix-mode erlang yaml-mode
-  super-save jinja2-mode smartparens multi-term zenburn-theme
-  smooth-scrolling docker-tramp dockerfile-mode ace-window))
+  super-save jinja2-mode smartparens multi-term zenburn-theme smooth-scrolling
+  docker-tramp dockerfile-mode ace-window ace-jump-mode))
 
 (unless package-archive-contents
   (package-refresh-contents))
@@ -215,6 +215,11 @@ a sound to be played"
 
 ;; ace-window
 (global-set-key (kbd "C-x o") 'ace-window)
+
+;; ace-jump-mode
+(global-set-key (kbd "C-c j c") 'ace-jump-char-mode)
+(global-set-key (kbd "C-c j w") 'ace-jump-word-mode)
+(global-set-key (kbd "C-c j l") 'ace-jump-line-mode)
 
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
