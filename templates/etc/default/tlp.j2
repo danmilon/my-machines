@@ -55,6 +55,13 @@ CPU_MAX_PERF_ON_AC=100
 CPU_MIN_PERF_ON_BAT=0
 CPU_MAX_PERF_ON_BAT=70
 
+# Set energy performance hints (HWP) for Intel P-state governor:
+#   default, performance, balance_performance, balance_power, power
+# Values are given in order of increasing power saving.
+# Note: Intel Skylake or newer CPU and Kernel >= 4.10 required.
+CPU_HWP_ON_AC=balance_performance
+CPU_HWP_ON_BAT=balance_power
+
 # Set the CPU "turbo boost" feature: 0=disable, 1=allow
 # Requires an Intel Core i processor.
 # Important:
@@ -91,8 +98,8 @@ DISK_DEVICES="{{ ' '.join(disk_devices) }}"
 # Levels 1..127 may spin down the disk; 255 allowable on most drives.
 # Separate values for multiple disks with spaces. Use the special value 'keep'
 # to keep the hardware default for the particular disk.
-DISK_APM_LEVEL_ON_AC="254 254"
-DISK_APM_LEVEL_ON_BAT="128 128"
+DISK_APM_LEVEL_ON_AC="{% for _ in disk_devices %}254 {% endfor %}"
+DISK_APM_LEVEL_ON_BAT="{% for _ in disk_devices %}128 {% endfor %}"
 
 # Hard disk spin down timeout:
 #   0:        spin down disabled
@@ -175,21 +182,18 @@ BAY_DEVICE="sr0"
 
 # Runtime Power Management for PCI(e) bus devices: on=disable, auto=enable
 RUNTIME_PM_ON_AC=on
-RUNTIME_PM_ON_BAT=on
-
-# Runtime PM for *all* PCI(e) bus devices, except blacklisted ones:
-#   0=disable, 1=enable
-RUNTIME_PM_ALL=0
+RUNTIME_PM_ON_BAT=auto
 
 # Exclude PCI(e) device adresses the following list from Runtime PM
 # (separate with spaces). Use lspci to get the adresses (1st column).
 #RUNTIME_PM_BLACKLIST="bb:dd.f 11:22.3 44:55.6"
 
-# Exclude PCI(e) devices assigned to the listed drivers from Runtime PM
-# (should prevent accidential power on of hybrid graphics' discrete part).
-# Default is "radeon nouveau"; use "" to disable the feature completely.
+# Exclude PCI(e) devices assigned to the listed drivers from Runtime PM.
+# Default when unconfigured is "amdgpu nouveau nvidia radeon" which
+# prevents accidential power-on of dGPU in hybrid graphics setups.
+# Use "" to disable the feature completely.
 # Separate multiple drivers with spaces.
-RUNTIME_PM_DRIVER_BLACKLIST="radeon nouveau"
+#RUNTIME_PM_DRIVER_BLACKLIST="amdgpu nouveau nvidia radeon"
 
 # Set to 0 to disable, 1 to enable USB autosuspend feature.
 USB_AUTOSUSPEND=1
@@ -199,7 +203,16 @@ USB_AUTOSUSPEND=1
 # Note: input devices (usbhid) are excluded automatically (see below)
 #USB_BLACKLIST="1111:2222 3333:4444"
 
-# WWAN devices are excluded from USB autosuspend: 0=do not exclude / 1=exclude
+# Bluetooth devices are excluded from USB autosuspend:
+#   0=do not exclude, 1=exclude
+USB_BLACKLIST_BTUSB=0
+
+# Phone devices are excluded from USB autosuspend:
+#   0=do not exclude, 1=exclude (enable charging)
+USB_BLACKLIST_PHONE=0
+
+# WWAN devices are excluded from USB autosuspend:
+#   0=do not exclude, 1=exclude
 USB_BLACKLIST_WWAN=1
 
 # Include listed devices into USB autosuspend even if already excluded
