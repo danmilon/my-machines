@@ -107,6 +107,7 @@
         - intel-ucode
         - dnsscrypt-proxy
         - httpie
+        - ansible
     - name: install aur packages
       tags:
         - packages
