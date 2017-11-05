@@ -105,7 +105,7 @@
         - ntfs-3g
         - markdown
         - intel-ucode
-        - dnsscrypt-proxy
+        - dnscrypt-proxy
         - httpie
         - ansible
     - name: install aur packages
