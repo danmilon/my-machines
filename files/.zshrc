@@ -58,7 +58,6 @@ PYMACS_PYTHON=python2
 export ALTERNATE_EDITOR=""
 
 source /usr/share/z/z.sh
-eval "$(rbenv init -)"
 
 alias grep='grep $GREP_OPTIONS'
 unset GREP_OPTIONS
