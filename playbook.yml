@@ -23,7 +23,6 @@
         - automake
         - pkg-config
         - mtr
-        - rfkill
         - pass
         - time # for platform.sh sdk/git
         - python
