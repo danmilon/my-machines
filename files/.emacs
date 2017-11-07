@@ -224,7 +224,7 @@ a sound to be played"
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
   "python" "scala" "org" "smartparens" "multi-term" "lilypond" "tramp"
-  "markdown" "restclient"))
+  "markdown" "restclient" "projectile"))
 
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
