@@ -64,6 +64,11 @@ unset GREP_OPTIONS
 
 alias rm="echo Use 'trash'"
 
+function run-and-notify() {
+    eval "$@"
+    notify-send 'Process Finished' "$*"
+}
+
 function chpwd() {
     if [[ -f venv/bin/activate ]]; then
 	. venv/bin/activate
