@@ -66,7 +66,7 @@ alias rm="echo Use 'trash'"
 
 function run-and-notify() {
     eval "$@"
-    notify-send 'Process Finished' "$*"
+    notify-send 'Process Finished' "<tt>$*</tt>"
 }
 
 function chpwd() {
