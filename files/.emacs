@@ -61,7 +61,9 @@
 	docker-tramp
 	dockerfile-mode
 	ace-window
-	ace-jump-mode))
+	ace-jump-mode
+	realgud
+	))
 
 (unless package-archive-contents
   (package-refresh-contents))
