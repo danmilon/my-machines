@@ -249,7 +249,9 @@ a sound to be played"
   (flyspell-prog-mode)
   (auto-complete-mode 1)
   (rainbow-delimiters-mode)
-  (smooth-scrolling-mode)))
+  (smooth-scrolling-mode)
+  (load-library "realgud")
+  ))
 
 ;; ansi-colors
 (require 'ansi-color)
