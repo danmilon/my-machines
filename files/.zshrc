@@ -64,10 +64,9 @@ unset GREP_OPTIONS
 
 alias rm="echo Use 'trash'"
 
-function run-and-notify() {
-    eval "$@"
-    notify-send 'Process Finished' "<tt>$*</tt>"
-}
+# undistract-me
+source /usr/share/undistract-me/long-running.bash
+notify_when_long_running_commands_finish_install
 
 function chpwd() {
     if [[ -f venv/bin/activate ]]; then

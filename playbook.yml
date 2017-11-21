@@ -135,6 +135,7 @@
         # not signed. install extension via addons.firefox.org
         - passff-host
         - light
+        - undistract-me
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true
