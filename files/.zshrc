@@ -64,10 +64,6 @@ unset GREP_OPTIONS
 
 alias rm="echo Use 'trash'"
 
-# undistract-me
-source /usr/share/undistract-me/long-running.bash
-notify_when_long_running_commands_finish_install
-
 function chpwd() {
     if [[ -f venv/bin/activate ]]; then
 	. venv/bin/activate
@@ -106,3 +102,9 @@ RPS1=""
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
+
+# undistract-me
+source /usr/share/undistract-me/long-running.bash
+# For some reason the following function exits with code 1.
+# Until I find out why, put this at the end of the file.
+notify_when_long_running_commands_finish_install
