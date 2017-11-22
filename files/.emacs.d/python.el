@@ -10,7 +10,10 @@
   (setq jedi:get-in-function-call-delay 100)
   (local-set-key (kbd "C-TAB") 'jedi:complete)
   (electric-indent-mode -1)
-  (local-set-key (kbd "RET") 'newline-and-indent)))
+  (local-set-key (kbd "RET") 'newline-and-indent)
+  (setq venv-dirlookup-names '(".venv" "venv" ".virtualenv" "virtualenv"))
+  (venv-projectile-auto-workon)
+  ))
 
 (defun pdb-unittest-current-file ()
   "run pdb on current unittest file"
