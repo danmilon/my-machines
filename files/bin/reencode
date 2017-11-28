@@ -19,12 +19,12 @@ args = parser.parse_args()
 FFMPEG_CMD = '''
 ffmpeg -y -i '{input}' -vf scale=-2:720 -c:v libx264 -refs 6 -mixed-refs 1 -bf 6
 -weightb 1 -b-pyramid normal -me_method umh -me_range 64 -subq 9 -8x8dct 1
--trellis 2 -fast-pskip 0 -movflags +faststart -c:a libfdk_aac -vbr 4 '{output}'
+-trellis 2 -fast-pskip 0 -movflags +faststart -c:a libopus -b:a 128000 '{output}'
 '''
 
 FFMPEG_2_CMD = '''
 ffmpeg -y -i '{input}' -vf scale=-2:720 -c:v lib{video_codec} -crf {crf} -level 3.1 -preset
-slow -movflags +faststart -c:a libfdk_aac -vbr 4 '{output}'
+slow -movflags +faststart -c:a libopus -b:a 128000 '{output}'
 '''
 
 IMAGE_CONVERT_CMD = '''
@@ -46,7 +46,7 @@ def action(path):
 
     print('reencoding {path}'.format(path=path))
     if args.type == 'video':
-        out_path = path_excl_ext + '_r.mp4'
+        out_path = path_excl_ext + '_r.mkv'
         subprocess.check_call(shlex.split(FFMPEG_2_CMD.format(
             input=path,
             output=out_path,
