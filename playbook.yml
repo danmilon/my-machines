@@ -107,6 +107,7 @@
         - dnscrypt-proxy
         - httpie
         - ansible
+        - sshfs
     - name: install aur packages
       tags:
         - packages
