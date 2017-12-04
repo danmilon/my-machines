@@ -7,7 +7,7 @@ xkbmap:
     - ctrl:nocaps
     - ctrl:ralt_rctrl
 xrandr:
-  main_output: eDP1
+  main_output: eDP-1
   initial:
       mode: 1680x1050_60.00
       opts: 146.25 1680 1784 1960 2240  1050 1053  1059 1089
