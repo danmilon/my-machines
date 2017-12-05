@@ -108,6 +108,7 @@
         - httpie
         - ansible
         - sshfs
+        - libva-intel-driver
     - name: install aur packages
       tags:
         - packages
