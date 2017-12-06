@@ -38,6 +38,7 @@
         - ack
         - aspell-en
         - aspell-el
+        - hunspell-el
         - chromium
         - dnsmasq
         - unrar
