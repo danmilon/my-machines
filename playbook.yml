@@ -174,14 +174,14 @@
       systemd: name={{ item }} enabled=yes
       become: true
       with_items:
-        - screenlock@danmilon
-        - sshd
-        - tlp
-        - avahi-daemon
-        - org.cups.cupsd
-        - thermald
-        - docker
-        - dnscrypt-proxy
+        - screenlock@danmilon.service
+        - sshd.service
+        - tlp.service
+        - avahi-daemon.service
+        - org.cups.cupsd.service
+        - thermald.service
+        - docker.service
+        - dnscrypt-proxy.socket
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true
