@@ -110,6 +110,7 @@
         - ansible
         - sshfs
         - libva-intel-driver
+        - recode
     - name: install aur packages
       tags:
         - packages
