@@ -136,7 +136,7 @@
 (delete-selection-mode 1)                ;; delete the sel with a keyp
 
 ;; integrate with system clipboard
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
