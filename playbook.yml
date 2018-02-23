@@ -112,6 +112,7 @@
         - libva-intel-driver
         - recode
         - systemd-swap
+        - xorg-xmodmap
     - name: install aur packages
       tags:
         - packages
