@@ -4,9 +4,6 @@ export TERMINAL=gnome-terminal
 
 monitor-set-initial-mode
 
-# disable need of FN for F3
-xmodmap -e "keycode 128 = F3"
-
 setxkbmap -model pc104{% for option in xkbmap.options %} -option {{ option }}{% endfor %}
 
 emacs_mu4e () {
