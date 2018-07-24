@@ -27,7 +27,7 @@ gpaste-client &
 blueman-applet &
 WEEKDAY=$(date +%u)
 HOUR=$(date +%H)
-if [[ "$WEEKDAY" -le 5 && "$HOUR" -le 19 && "$HOUR" -ge 9 ]]; then
+if [[ "$WEEKDAY" -le 5 && "$HOUR" -le 19 && "$HOUR" -ge 8 ]]; then
    slack &
 fi
 
