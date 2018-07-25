@@ -7,7 +7,7 @@
         - Templates
         - Public
     - name: copy pacman.conf
-      file: src=files_root/etc/pacman.conf dest=/etc/pacman.conf
+      copy: src=files_root/etc/pacman.conf dest=/etc/pacman.conf
       become: true
       register: pacman
     - name: sync pacman dbs
