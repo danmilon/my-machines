@@ -157,9 +157,6 @@
 ;; load theme
 (load-theme 'zenburn t)
 
-;; projectile
-(projectile-global-mode)
-
 ;; ido/flx-ido
 (ido-mode 1)
 (ido-everywhere 1)
