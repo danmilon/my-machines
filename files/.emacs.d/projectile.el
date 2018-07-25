@@ -6,3 +6,6 @@
    "venv"
    ".virtualenv"
    ".tox"))
+
+
+(setq projectile-enable-caching t)
