@@ -139,6 +139,11 @@
         - passff-host
         - light
         - undistract-me
+        ###################
+        # emacs golang deps
+        - godef-git
+        - gocode-git
+        ###################
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true

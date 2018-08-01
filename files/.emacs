@@ -13,6 +13,7 @@
 	git-commit
 	gnuplot-mode
 	go-mode
+	go-eldoc
 	jedi
 	auto-complete
 	epc
@@ -271,7 +272,7 @@ a sound to be played"
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
   "python" "scala" "org" "smartparens" "multi-term" "lilypond" "tramp"
-  "markdown" "restclient" "projectile"))
+  "markdown" "restclient" "projectile" "golang"))
 
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
