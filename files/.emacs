@@ -14,6 +14,7 @@
 	gnuplot-mode
 	go-mode
 	go-eldoc
+	go-autocomplete
 	jedi
 	auto-complete
 	epc
