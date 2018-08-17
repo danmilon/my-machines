@@ -195,6 +195,12 @@
     - name: put me in user groups
       become: true
       user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker
+    - name: put me in host-specific user groups
+      become: true
+      user:
+        name=danmilon
+        groups={{ extra_groups|default("")|join(",") }}
+        append=yes
     - name: intel ucode boot entry
       become: true
       lineinfile:
