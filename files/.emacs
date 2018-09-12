@@ -10,6 +10,7 @@
 (setq package-list
       '(
 	yasnippet
+	yasnippet-snippets
 	git-commit
 	gnuplot-mode
 	go-mode
