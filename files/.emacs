@@ -19,6 +19,7 @@
 	jedi
 	auto-complete
 	epc
+	dired-du
 	ctable
 	concurrent
 	deferred
