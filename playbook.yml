@@ -153,8 +153,7 @@
       with_items:
         - pulsectl
     - name: install host specific pacman packages
-      pacman: name={{ item }} state=present
-      with_items: "{{ packages|default([]) }}"
+      pacman: name={{ packages|default([]) }} state=present
       tags:
         - packages
     - name: copy stuff
