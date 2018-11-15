@@ -1,5 +1,5 @@
 [user]
-	name = Dan Milon	
+	name = Dan Milon
 	email = i@danmilon.me
 [core]
 	excludesfile = /home/danmilon/.gitignore_global
