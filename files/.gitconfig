@@ -9,6 +9,8 @@
 	ui = true
 [push]
 	default = simple
+	# Accompany tags on commits being pushed.
+	followTags = true
 [pager]
 	status = true
 [branch]
