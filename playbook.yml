@@ -59,6 +59,7 @@
         - smplayer
         - youtube-dl
         - flake8
+        - python2-flake8
         - strace
         - file-roller
         - lib32-alsa-plugins
