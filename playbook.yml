@@ -20,6 +20,7 @@
       pacman: name={{ item }} state=present force=yes
       become: true
       with_items:
+        - thunderbird-extension-enigmail
         - automake
         - pkg-config
         - mtr
@@ -121,7 +122,6 @@
         - physlock
         - chromium-pepper-flash
         - gcolor3
-        - thunderbird-enigmail
         - tor-browser-en
         - z
         - virtualbox-ext-oracle
