@@ -20,6 +20,7 @@
       pacman: name={{ item }} state=present force=yes
       become: true
       with_items:
+        - qtile
         - thunderbird-extension-enigmail
         - automake
         - pkg-config
@@ -132,7 +133,6 @@
         - android-sdk-platform-tools
         - android-bash-completion
         - thermald
-        - qtile-python3-git
         - firefox-extension-https-everywhere
         # the 1.0 extension itself is only as part of a -git package, which is
         # not signed. install extension via addons.firefox.org
