@@ -116,6 +116,7 @@
         - recode
         - systemd-swap
         - xorg-xmodmap
+        - xfce4-notifyd
     - name: install aur packages
       tags:
         - packages
@@ -129,7 +130,6 @@
         - virtualbox-ext-oracle
         - google-talkplugin
         - screen
-        - notification-thing-git
         - go-mtpfs-git
         - android-sdk-platform-tools
         - android-bash-completion
