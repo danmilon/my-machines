@@ -139,7 +139,7 @@
         # not signed. install extension via addons.firefox.org
         - passff-host
         - light
-        - undistract-me
+        - undistract-me-git
         ###################
         # emacs golang deps
         - godef-git
