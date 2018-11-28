@@ -8,6 +8,7 @@ packages:
   - lib32-nvidia-utils
   - libvdpau
   - nvidia-utils
+  - bcm20703a1-firmware
 xkbmap:
   options:
     - ctrl:nocaps
