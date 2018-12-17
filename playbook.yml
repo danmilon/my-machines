@@ -187,6 +187,7 @@
         - thermald.service
         - docker.service
         - dnscrypt-proxy.socket
+        - bluetooth.service
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true
