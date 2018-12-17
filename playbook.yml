@@ -114,7 +114,6 @@
         - sshfs
         - libva-intel-driver
         - recode
-        - systemd-swap
         - xorg-xmodmap
         - xfce4-notifyd
     - name: install aur packages
@@ -188,7 +187,6 @@
         - thermald.service
         - docker.service
         - dnscrypt-proxy.socket
-        - systemd-swap.service
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true
