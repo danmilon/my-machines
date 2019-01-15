@@ -329,12 +329,15 @@ groups = [
 dgroups_key_binder = None
 
 layouts = [
-    layout.bsp.Bsp(
+    layout.columns.Columns(
         border_normal='#000000',
         border_focus='#ff4d96',
         border_width=1,
         border_normal_stack='#000000',
-        border_focus_stack='#535d6c'),
+        border_focus_stack='#535d6c',
+        fair=False,
+        columns=2,
+    ),
     layout.Max()
 ]
 
