@@ -130,20 +130,6 @@ class ImprovedTaskListWidget(widget.TaskList):
         return max_width / num_of_windows
 
 
-class ImprovedWmiiLayout(layout.Wmii):
-    name = 'wmii'
-
-    def add(self, client):
-        has_only_one_client = len(self.columns) == 1 and len(self.columns[0]['rows']) == 1
-
-        if has_only_one_client:
-            self.clients.append(client)
-            self.add_column(True, client)
-            self.focus(client)
-        else:
-            super().add(client)
-
-
 class DropdownWidget(widget_base._TextBox):
     orientations = widget_base.ORIENTATION_HORIZONTAL
     css = b'''
@@ -343,7 +329,7 @@ groups = [
 dgroups_key_binder = None
 
 layouts = [
-    ImprovedWmiiLayout(
+    layout.bsp.Bsp(
         border_normal='#000000',
         border_focus='#ff4d96',
         border_width=1,
