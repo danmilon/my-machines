@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 export WALLPAPER1=~/Pictures/wallpaper1
 export WALLPAPER2=~/Pictures/wallpaper2
 export TERMINAL=gnome-terminal
@@ -27,10 +29,10 @@ nm-applet &
 gpaste-client &
 blueman-applet &
 
-# WEEKDAY=$((`date +%u`))
-# HOUR=$((`date +%H`))
-# if [[ "$WEEKDAY" -le 5 && "$HOUR" -le 19 && "$HOUR" -ge 8 ]]; then
-#    slack &
-# fi
+WEEKDAY=$(date +%u)
+HOUR=$(date +%H)
+if [[ "$WEEKDAY" -le 5 && "$HOUR" -le 19 && "$HOUR" -ge 8 ]]; then
+   slack &
+fi
 
 dropbox &
