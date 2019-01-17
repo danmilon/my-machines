@@ -337,6 +337,7 @@ layouts = [
         border_focus_stack='#535d6c',
         fair=False,
         columns=2,
+        name="col",
     ),
     layout.Max()
 ]
