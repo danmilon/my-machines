@@ -1,0 +1,31 @@
+#!/usr/bin/env python
+import re
+import sys
+import os.path
+
+entries = [
+    line.strip()
+    for line in sys.stdin
+    if 'mp3' in line
+]
+
+
+TYPE_PRIO = {
+    "gnd": 0,
+    "twr": 1,
+    "app": 2,
+}
+
+
+def key(entry):
+    filename = os.path.basename(entry)
+    _type, date, hour = re.match(
+        '((?:gnd)|(?:app)|(?:twr))_(\d{8})_(\d{2}).mp3',
+        filename,
+    ).groups()
+
+    return int(date), int(hour), TYPE_PRIO[_type]
+
+
+for entry in sorted(entries, key=key):
+    print(entry, end=" ")

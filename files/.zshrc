@@ -63,6 +63,9 @@ alias grep='grep $GREP_OPTIONS'
 unset GREP_OPTIONS
 
 alias rm="echo Use 'trash'"
+alias atc-from-internet='(cd ~/atc-archive && vlc --rate=1.5 $(rsync -arv -e "ssh root@home.danmilon.me ssh danmilon@rtlsdr-atc-1.danmilon.node.her.wn" :/home/danmilon/atc-archives/ ~/atc-archive/  | tee /dev/tty | sort-atc-archives))'
+alias atc-from-home='(cd ~/atc-archive && vlc --rate=1.5 $(rsync -arv -e "ssh danmilon@rtlsdr-atc-1.danmilon.node.her.wn" :/home/danmilon/atc-archives/ ~/atc-archive/  | tee /dev/tty | sort-atc-archives))'
+
 
 function chpwd() {
     if [[ -f venv/bin/activate ]]; then
