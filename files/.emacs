@@ -67,6 +67,8 @@
 	ace-window
 	ace-jump-mode
 	realgud
+	tide
+	web-mode
 	))
 
 (unless package-archive-contents
@@ -275,7 +277,7 @@ a sound to be played"
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
   "python" "scala" "org" "smartparens" "multi-term" "lilypond" "tramp"
-  "markdown" "restclient" "projectile" "golang"))
+  "markdown" "restclient" "projectile" "golang" "tide"))
 
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
