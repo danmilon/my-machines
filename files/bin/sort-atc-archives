@@ -20,11 +20,11 @@ TYPE_PRIO = {
 def key(entry):
     filename = os.path.basename(entry)
     _type, date, hour = re.match(
-        '((?:gnd)|(?:app)|(?:twr))_(\d{8})_(\d{2}).mp3',
+        '([a-z_0-9]+)_(\d{8})_(\d{2}).mp3',
         filename,
     ).groups()
 
-    return int(date), int(hour), TYPE_PRIO[_type]
+    return int(date), int(hour), TYPE_PRIO.get(_type, -1)
 
 
 for entry in sorted(entries, key=key):
