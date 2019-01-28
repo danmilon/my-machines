@@ -116,6 +116,7 @@
         - recode
         - xorg-xmodmap
         - xfce4-notifyd
+        - entr
     - name: install aur packages
       tags:
         - packages
