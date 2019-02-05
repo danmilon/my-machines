@@ -48,7 +48,6 @@
 	rust-mode
 	buffer-move
 	google-this
-	flymake-sass
 	sass-mode
 	multiple-cursors
 	expand-region
@@ -231,8 +230,6 @@ a sound to be played"
 (add-hook 'dired-load-hook '(lambda () (require 'dired-x)))
 (setq dired-omit-mode t)
 (setq dired-omit-files "^\\...+$")
-
-(add-hook 'find-file-hook 'flymake-find-file-hook)
 
 ;; remove trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
