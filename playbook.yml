@@ -110,7 +110,6 @@
         - intel-ucode
         - dnscrypt-proxy
         - httpie
-        - ansible
         - sshfs
         - libva-intel-driver
         - recode
