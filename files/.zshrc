@@ -17,7 +17,6 @@ export TERM=xterm-256color
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-alias git='hub'
 alias clip='xclip -selection clipboard'
 alias o='xdg-open'
 alias less='less -R'
