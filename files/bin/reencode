@@ -9,7 +9,11 @@ import concurrent.futures
 
 parser = argparse.ArgumentParser(description='x264/x265 encode files')
 parser.add_argument('files', nargs='+')
-parser.add_argument('--type', choices=['image', 'video'], required=True)
+parser.add_argument(
+    '--type',
+    choices=['image', 'video', 'audio'],
+    required=True,
+)
 parser.add_argument('--crf', type=int, default=27)
 parser.add_argument('--video-codec', choices=['x264', 'x265'], default='x265')
 parser.add_argument('--jpeg-quality', type=int, default=90)
@@ -35,6 +39,10 @@ IMAGE_OPTIMIZE_CMD = '''
 jpegtran -copy all -optimize -progressive -outfile '{output}'
 '''
 
+AUDIO_CMD = '''
+ffmpeg -i '{input}' -c:a libopus -b:a 128k '{output}'
+'''
+
 if args.parallel is None:
     args.parallel = os.cpu_count()
 
@@ -52,6 +60,12 @@ def action(path):
             output=out_path,
             crf=args.crf,
             video_codec=args.video_codec)))
+    elif args.type == 'audio':
+        out_path = path_excl_ext + '_r.opus'
+        subprocess.check_call(shlex.split(AUDIO_CMD.format(
+            input=path,
+            output=out_path,
+        )))
     elif args.type == 'image':
         out_path = path_excl_ext + '_r.jpg'
         convert = subprocess.Popen(shlex.split(IMAGE_CONVERT_CMD.format(
