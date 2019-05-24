@@ -68,6 +68,7 @@
 	realgud
 	tide
 	web-mode
+	blacken
 	))
 
 (unless package-archive-contents
