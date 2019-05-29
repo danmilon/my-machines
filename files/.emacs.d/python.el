@@ -13,7 +13,6 @@
   (local-set-key (kbd "RET") 'newline-and-indent)
   (setq venv-dirlookup-names '(".venv" "venv" ".virtualenv" "virtualenv"))
   (venv-projectile-auto-workon)
-  (blacken-mode)
   ))
 
 (defun pdb-unittest-current-file ()
