@@ -116,6 +116,7 @@
         - xorg-xmodmap
         - xfce4-notifyd
         - entr
+        - rlwrap
     - name: install aur packages
       tags:
         - packages
