@@ -1,8 +1,3 @@
-# Set a restrictive umask.
-# Even though our home folder might be 700, we don't want our files in /tmp for
-# example to be readable by others.
-umask -S u=rwx,g=,o=
-
 autoload -U zmv
 
 export ZSH=/usr/share/oh-my-zsh
