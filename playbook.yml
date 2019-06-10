@@ -145,6 +145,7 @@
         - godef-git
         - gocode-git
         ###################
+        - plantuml
     - name: install pip packages not available via packages
       pip: name={{ item }}
       become: true
