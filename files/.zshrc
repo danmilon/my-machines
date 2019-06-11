@@ -105,6 +105,9 @@ RPS1=""
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
 
+# kubectl completion
+. /usr/share/zsh/site-functions/_kubectl
+
 # undistract-me
 source /usr/share/undistract-me/long-running.bash
 # For some reason the following function exits with code 1.
