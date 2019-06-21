@@ -68,6 +68,7 @@
 	realgud
 	tide
 	web-mode
+	pipenv
 	))
 
 (unless package-archive-contents
