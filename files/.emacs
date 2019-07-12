@@ -62,6 +62,7 @@
 	smooth-scrolling
 	super-save
 	tide
+	use-package
 	virtualenvwrapper
 	w3
 	web-mode
