@@ -9,66 +9,66 @@
 ;; set required packages
 (setq package-list
       '(
-	yasnippet
-	yasnippet-snippets
+	ace-jump-mode
+	ace-window
+	auto-complete
+	autopair
+	buffer-move
+	concurrent
+	ctable
+	dash
+	deferred
+	dired-du
+	docker-tramp
+	dockerfile-mode
+	epc
+	epl
+	erlang
+	expand-region
+	flx-ido
+	flycheck
+	flycheck-rust
 	git-commit
 	gnuplot-mode
-	go-mode
-	go-eldoc
 	go-autocomplete
+	go-eldoc
+	go-mode
+	google-this
+	ido
+	ido-vertical-mode
 	jedi
-	auto-complete
-	epc
-	dired-du
-	ctable
-	concurrent
-	deferred
+	jinja2-mode
+	json-reformat
 	lorem-ipsum
 	lua-mode
 	magit
 	markdown-mode
+	multi-term
+	multiple-cursors
+	nix-mode
+	pipenv
+	pkg-info
+	pkgbuild-mode
 	popup
 	projectile
-	pkg-info
-	epl
-	scad-mode
-	virtualenvwrapper
-	dash
 	rainbow-delimiters
-	autopair
-	ido
-	flx-ido
-	ido-vertical-mode
-	smex
-	w3
-	json-reformat
-	pkgbuild-mode
-	flycheck
-	flycheck-rust
-	rust-mode
-	buffer-move
-	google-this
-	sass-mode
-	multiple-cursors
-	expand-region
-	restclient
-	nix-mode
-	erlang
-	yaml-mode
-	super-save
-	jinja2-mode
-	smartparens
-	multi-term
-	zenburn-theme
-	smooth-scrolling
-	docker-tramp
-	dockerfile-mode
-	ace-window
-	ace-jump-mode
 	realgud
+	restclient
+	rust-mode
+	sass-mode
+	scad-mode
+	smartparens
+	smex
+	smooth-scrolling
+	super-save
 	tide
+	virtualenvwrapper
+	w3
 	web-mode
-	pipenv
+	yaml-mode
+	yasnippet
+	yasnippet-snippets
+	zenburn-theme
 	))
 
 (unless package-archive-contents
