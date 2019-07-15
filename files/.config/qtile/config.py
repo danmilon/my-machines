@@ -210,29 +210,6 @@ class DropdownWidget(widget_base._TextBox):
         return False
 
 
-class KeyboardLayoutWidget(widget_base._TextBox):
-    orientations = widget_base.ORIENTATION_HORIZONTAL
-    defaults = [
-        ("configured_keyboards", ["us"], "A list of predefined keyboard layouts "
-            "represented as strings. For example: "
-            "['us', 'us colemak', 'es', 'fr']."),
-    ]
-
-    def __init__(self, **config):
-        super().__init__(**config)
-        self.add_defaults(KeyboardLayoutWidget.defaults)
-
-    def button_press(self, x, y, btn):
-        if btn == 1:
-            self.next_keyboard()
-
-    def get_current_keyboard(self):
-        pass
-
-    def next_keyboard(self):
-        pass
-
-
 class RFKillWidget(widget_base._TextBox):
     DEV_NAME_MAP = {
         "WLAN": "ieee80211",
