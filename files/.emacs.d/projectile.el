@@ -2,7 +2,7 @@
 (require 'use-package)
 (use-package projectile
     :bind-keymap
-    ("C-c C-p" . projectile-command-map)
+    ("C-c p" . projectile-command-map)
     :config
     (setq projectile-globally-ignored-directories '(
        ".git"
