@@ -17,106 +17,108 @@
     - name: install packages
       tags:
         - packages
-      pacman: name={{ item }} state=present force=yes
+      pacman:
+        name:
+          - qtile
+          - thunderbird-extension-enigmail
+          - automake
+          - pkg-config
+          - mtr
+          - pass
+          - time # for platform.sh sdk/git
+          - python
+          - python-pip # python3 builtin pip stripped?
+          - ipython
+          - python-pyflakes # for emacs python flycheck
+          - dropbox
+          - alsa-utils # for amixer
+          - chromium
+          - bind-tools # for dig
+          - yaourt
+          - tk
+          - ack
+          - aspell-en
+          - aspell-el
+          - hunspell-el
+          - chromium
+          - dnsmasq
+          - unrar
+          - unzip
+          - qemu
+          - wireshark-qt
+          - xterm
+          - xorg-xprop
+          - xorg-server-xephyr
+          - vagrant
+          - docker
+          - virtualbox
+          - virtualbox-host-modules-arch
+          - dkms
+          - gtk-recordmydesktop
+          - smplayer
+          - youtube-dl
+          - flake8
+          - python2-flake8
+          - strace
+          - file-roller
+          - lib32-alsa-plugins
+          - mesa-vdpau
+          - lib32-sdl
+          - lib32-libtheora
+          - lib32-openal
+          - wireless_tools
+          - squashfs-tools
+          - dhclient
+          - scrot
+          - ethtool
+          - cpupower
+          - tlp
+          - libreoffice
+          - parallel
+          - ipcalc
+          - tcpdump
+          - whois
+          - cups
+          - nss-mdns
+          - aws-cli
+          - gdb
+          - abs
+          - openbsd-netcat
+          - audacity
+          - clementine
+          - gst-plugins-base
+          - gst-plugins-good
+          - gst-plugins-bad
+          - gst-plugins-ugly
+          - gst-libav
+          - transmission-gtk
+          - gksu
+          - android-udev
+          - gparted
+          - fzf
+          - keybase
+          - beets
+          - python-requests # dep of beets
+          - xf86-input-libinput
+          - python-pyudev
+          - lsof
+          - compton
+          - firefox-ublock-origin
+          - ntfs-3g
+          - markdown
+          - intel-ucode
+          - dnscrypt-proxy
+          - httpie
+          - sshfs
+          - libva-intel-driver
+          - recode
+          - xorg-xmodmap
+          - xfce4-notifyd
+          - entr
+          - rlwrap
+        state: present
+        force: yes
       become: true
-      with_items:
-        - qtile
-        - thunderbird-extension-enigmail
-        - automake
-        - pkg-config
-        - mtr
-        - pass
-        - time # for platform.sh sdk/git
-        - python
-        - python-pip # python3 builtin pip stripped?
-        - ipython
-        - python-pyflakes # for emacs python flycheck
-        - dropbox
-        - alsa-utils # for amixer
-        - chromium
-        - bind-tools # for dig
-        - yaourt
-        - tk
-        - ack
-        - aspell-en
-        - aspell-el
-        - hunspell-el
-        - chromium
-        - dnsmasq
-        - unrar
-        - unzip
-        - qemu
-        - wireshark-qt
-        - xterm
-        - xorg-xprop
-        - xorg-server-xephyr
-        - vagrant
-        - docker
-        - virtualbox
-        - virtualbox-host-modules-arch
-        - dkms
-        - gtk-recordmydesktop
-        - smplayer
-        - youtube-dl
-        - flake8
-        - python2-flake8
-        - strace
-        - file-roller
-        - lib32-alsa-plugins
-        - mesa-vdpau
-        - lib32-sdl
-        - lib32-libtheora
-        - lib32-openal
-        - wireless_tools
-        - squashfs-tools
-        - dhclient
-        - scrot
-        - ethtool
-        - cpupower
-        - tlp
-        - libreoffice
-        - parallel
-        - ipcalc
-        - tcpdump
-        - whois
-        - cups
-        - nss-mdns
-        - aws-cli
-        - gdb
-        - abs
-        - openbsd-netcat
-        - audacity
-        - clementine
-        - gst-plugins-base
-        - gst-plugins-good
-        - gst-plugins-bad
-        - gst-plugins-ugly
-        - gst-libav
-        - transmission-gtk
-        - gksu
-        - android-udev
-        - gparted
-        - fzf
-        - keybase
-        - beets
-        - python-requests # dep of beets
-        - xf86-input-libinput
-        - python-pyudev
-        - lsof
-        - compton
-        - firefox-ublock-origin
-        - ntfs-3g
-        - markdown
-        - intel-ucode
-        - dnscrypt-proxy
-        - httpie
-        - sshfs
-        - libva-intel-driver
-        - recode
-        - xorg-xmodmap
-        - xfce4-notifyd
-        - entr
-        - rlwrap
     - name: install aur packages
       tags:
         - packages
