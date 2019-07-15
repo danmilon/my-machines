@@ -323,7 +323,7 @@ screens = []
 
 
 def switch_kbd_layout(qtile):
-    widget = qtile.widgetMap['keyboardlayout']
+    widget = qtile.widgets_map['keyboardlayout']
     widget.next_keyboard()
 
 
