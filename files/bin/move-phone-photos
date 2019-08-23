@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+
+# rsync --remove-source-files --size-only -e 'ssh -p 2222' -av --files-from=<(ssh -p 2222 192.168.42.129 'find DCIM/Camera -ctime +200') 192.168.42.129: ./camera-sync
+import argparse
+import tempfile
+import shutil
+import subprocess
+
+parser = argparse.ArgumentParser(description="copy photos from phone locally")
+parser.add_argument(
+    "--before-days",
+    type=int,
+    help="Only move files created before that many days.",
+    default=30,
+)
+parser.add_argument(
+    "--ssh-port", type=int, help="SSH port the phone is listening at.", default=2222
+)
+parser.add_argument("--host", help="IP of the phone.", required=True)
+parser.add_argument("--dest", help="Destination directory.", required=True)
+
+args = parser.parse_args()
+
+with tempfile.NamedTemporaryFile() as tmp:
+    find_popen = subprocess.Popen(
+        [
+            "ssh",
+            "-p",
+            str(args.ssh_port),
+            args.host,
+            f"find DCIM/Camera -ctime +{args.before_days}",
+        ],
+        stdout=subprocess.PIPE,
+    )
+
+    shutil.copyfileobj(find_popen.stdout, tmp)
+    tmp.flush()
+    retcode = find_popen.wait()
+    if retcode != 0:
+        raise Exception("failed to connect to host")
+
+    subprocess.check_call(
+        [
+            "rsync",
+            "--remove-source-files",
+            "--size-only",
+            "-e",
+            f"ssh -p {args.ssh_port}",
+            "-av",
+            "--files-from",
+            tmp.name,
+            f"{args.host}:",
+            args.dest,
+        ]
+    )
