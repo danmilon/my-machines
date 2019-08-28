@@ -16,6 +16,7 @@ export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/oh-my-zsh/lib/history.zsh
 
 alias clip='xclip -selection clipboard'
 alias o='xdg-open'
@@ -42,7 +43,6 @@ export HISTSIZE=100000
 export HISTFILESIZE=100000
 
 setopt appendhistory
-PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 export GOPATH=~/.go
 PATH=$GOPATH/bin:$PATH
