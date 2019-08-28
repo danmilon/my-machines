@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: gtools.pdb.set_trace()
+# key: gtr
+# group: debug
+# --
+import gtools.pdb; gtools.pdb.set_trace()

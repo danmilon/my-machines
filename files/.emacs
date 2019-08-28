@@ -238,6 +238,7 @@ a sound to be played"
 
 ;; yasnippet
 (yas-global-mode 1)
+(yas-load-directory ".emacs.d/yasnippets")
 
 ;; enable flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
