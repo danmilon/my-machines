@@ -469,6 +469,12 @@ def setup_screens(qtile):
     }
 
     num_of_screens = len(qtile.conn.pseudoscreens)
+    rfkill_widgets = []
+    for device in ["WLAN", "BT"]:
+        try:
+            rfkill_widgets.append(RFKillWidget(device_name=device))
+        except Exception:
+            pass
 
     main_screen_widgets = [
         screens_widgets['group-box'](),
@@ -477,8 +483,7 @@ def setup_screens(qtile):
         screens_widgets['systray'](),
         screens_widgets['clock'](),
         screens_widgets['sep'](),
-        RFKillWidget(device_name='WLAN'),
-        RFKillWidget(device_name='BT'),
+    ] + rfkill_widgets + [
         ProcessTrackerWidget(name='MTP',
                              cmd='go-mtpfs mnt/android-mtp',
                              disable_cmd='fusermount -u mnt/android-mtp'),
