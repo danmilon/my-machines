@@ -47,6 +47,7 @@
           - qemu
           - wireshark-qt
           - xterm
+          - xfce4-terminal
           - xorg-xprop
           - xorg-server-xephyr
           - vagrant
