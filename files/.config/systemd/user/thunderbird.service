@@ -1,0 +1,8 @@
+[Unit]
+Description=Thunderbird
+
+[Service]
+ExecStart=/usr/bin/thunderbird
+
+[Install]
+WantedBy=default.target

@@ -445,6 +445,28 @@ auto_fullscreen = True
 def setwallpaper():
     subprocess.check_call(shlex.split('feh --bg-scale Pictures/wallpaper1 Pictures/wallpaper2'))
 
+@hook.subscribe.startup
+def autostart():
+    # subprocess.call(["systemctl", "--user", "import-environment"])
+    services = [
+            "monitor-set-initial-mode",
+            "clementine",
+            "emacs",
+            "emacs-client-frame",
+            "firefox",
+            "keyboard",
+            "nm-applet",
+            "thunderbird",
+            "compton",
+    ]
+
+    now = datetime.now()
+    if now.weekday() < 5 and now.hour < 19 and now.hour > 8:
+        services.append("slack")
+
+    for service in services:
+        subprocess.call(["systemctl", "--user", "start", service])
+
 
 def setup_screens(qtile):
     bar_commons = {

@@ -1,0 +1,8 @@
+[Unit]
+Description=Slack
+
+[Service]
+ExecStart=/usr/bin/slack
+
+[Install]
+WantedBy=default.target

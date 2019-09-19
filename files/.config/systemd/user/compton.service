@@ -1,0 +1,8 @@
+[Unit]
+Description=compton
+
+[Service]
+ExecStart=/usr/bin/compton
+
+[Install]
+WantedBy=default.target

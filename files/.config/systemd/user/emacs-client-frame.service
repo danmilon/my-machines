@@ -1,0 +1,10 @@
+[Unit]
+Description=Emacs client frame
+Requires=emacs.service
+After=emacs.service
+
+[Service]
+ExecStart=/usr/bin/emacsclient -c
+
+[Install]
+WantedBy=default.target

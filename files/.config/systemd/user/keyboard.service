@@ -1,0 +1,9 @@
+[Unit]
+Description=keyboard settings
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/setxkbmap -model pc104 -option ctrl:nocaps
+
+[Install]
+WantedBy=default.target
