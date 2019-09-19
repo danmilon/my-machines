@@ -26,7 +26,7 @@ alias updateall='sudo yaourt --noconfirm -Syu'
 alias ls='ls --color -F --hide="*~" --hide="#*#"'
 alias cp='cp -i'
 alias here='nautilus ./ > /dev/null 2>&1 &'
-alias heret='gnome-terminal . > /dev/null 2>&1 &'
+alias heret='$TERMINAL . > /dev/null 2>&1 &'
 
 # browsers
 alias chromium='chromium --enable-webgl --no-referrers'
@@ -37,7 +37,6 @@ alias e="$SUDO_EDITOR"
 alias se='sudoedit'
 alias ew="emacsclient -c"
 export EDITOR=emacsclient
-export TERMINAL=gnome-terminal
 export HISTCONTROL=ignoredups:erasedups
 export HISTSIZE=100000
 export HISTFILESIZE=100000
