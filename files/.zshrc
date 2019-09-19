@@ -5,7 +5,7 @@ export ZSH_CUSTOM=~/.zsh/custom
 
 export DEFAULT_USER="danmilon"
 ZSH_THEME="my-bira"
-plugins=(gitfast pip vagrant urltools sudo python pass)
+plugins=(gitfast pip vagrant urltools sudo python pass kubectl)
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_AUTO_UPDATE="true"
@@ -104,9 +104,6 @@ RPS1=""
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
-
-# kubectl completion
-. /usr/share/zsh/site-functions/_kubectl
 
 # undistract-me
 source /usr/share/undistract-me/long-running.bash
