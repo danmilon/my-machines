@@ -1,6 +1,6 @@
 autoload -U zmv
 
-export ZSH=/usr/share/oh-my-zsh
+export ZSH=~/.oh-my-zsh/
 export ZSH_CUSTOM=~/.zsh/custom
 
 export DEFAULT_USER="danmilon"
@@ -15,8 +15,8 @@ source $ZSH/oh-my-zsh.sh
 export TERM=xterm-256color
 [ -n "$TMUX" ] && export TERM=screen-256color
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/oh-my-zsh/lib/history.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSH/lib/history.zsh
 
 alias clip='xclip -selection clipboard'
 alias o='xdg-open'
@@ -93,7 +93,7 @@ function pytmp() {
 }
 
 # fzf
-source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/shell/key-bindings.zsh
 
 # prompt
 PROMPT="%B${return_code}%b
