@@ -291,7 +291,10 @@ widget_defaults = {
 
 groups = [
     Group('MAIN'),
-    Group('WORK'),
+    Group('WORK',
+          matches=[
+              Match(wm_class=['Emacs']),
+          ]),
     Group('COMMS',
           matches=[
               Match(wm_class=['skypeforlinux', 'Slack', 'Thunderbird'])
