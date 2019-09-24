@@ -23,7 +23,7 @@ from gi.repository import Gtk, Gdk, Notify
 
 Notify.init("qtile")
 
-os.environ.setdefault("TERMINAL", "xfce4-terminal")
+terminal_program = os.environ.get("TERMINAL", "xfce4-terminal")
 
 def notify(title, content):
     Notify.Notification.new(title, content).show()
@@ -402,7 +402,7 @@ keys = [
     Key('M-C-<Return>', lazy.layout.toggle_split()),
     Key('M-m', lazy.layout.toggle_fullscreen()),
     Key('M-S-<Return>', lazy.window.toggle_floating()),
-    Key('C-S-<grave>', lazy.spawn(os.getenv('TERMINAL'))),
+    Key('C-S-<grave>', lazy.spawn(terminal_program)),
     Key('M-<Tab>', lazy.next_layout()),
     Key('M-o', lazy.next_screen()),
     Key('M-q', lazy.window.kill()),
