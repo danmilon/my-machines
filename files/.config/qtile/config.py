@@ -23,6 +23,7 @@ from gi.repository import Gtk, Gdk, Notify
 
 Notify.init("qtile")
 
+os.environ.setdefault("TERMINAL", "xfce4-terminal")
 
 def notify(title, content):
     Notify.Notification.new(title, content).show()
