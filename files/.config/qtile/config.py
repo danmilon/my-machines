@@ -323,7 +323,17 @@ screens = []
 
 
 def switch_kbd_layout(qtile):
-    widget = qtile.widgets_map['keyboardlayout']
+    widgets = None
+    if hasattr(qtile, "widgetMap"):
+        # qtile < 0.14.0
+        widgets = qtile.widgetMap
+    elif hasattr(qtile, "widgets_map"):
+        # qtile >= 0.14.0
+        widgets = qtile.widgets_map
+    else:
+        raise Exception("cannot find qtile widgets map")
+
+    widget = widgets['keyboardlayout']
     widget.next_keyboard()
 
 
