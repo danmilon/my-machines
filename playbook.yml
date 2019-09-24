@@ -10,46 +10,178 @@
       copy: src=files_root/etc/pacman.conf dest=/etc/pacman.conf
       become: true
       register: pacman
+      when: ansible_distribution == "Archlinux"
     - name: sync pacman dbs
       pacman: update_cache=yes
       become: true
-      when: pacman.changed
+      when: pacman.changed and ansible_distribution == "Archlinux"
+    - name: add yum repositories
+      tags:
+        - packages
+      yum_repository:
+        name: slack
+        description: Slack
+        baseurl: "https://packagecloud.io/slacktechnologies/slack/fedora/21/$basearch"
+        gpgcheck: true
+        gpgkey: "https://slack.com/gpg/slack_pubkey.gpg"
+        metadata_expire: "300"
+        sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
+      become: true
+      when: ansible_distribution == "Fedora"
+    - name: install external yum repos
+      command: |
+        dnf config-manager
+        --add-repo
+        {{ item.repo_url }}
+      args:
+        creates: "/etc/yum.repos.d/{{ item.file_name }}"
+        warn: false
+      become: true
+      with_items:
+        - repo_url: https://copr.fedorainfracloud.org/coprs/tofik/autorandr/repo/fedora-30/tofik-autorandr-fedora-30.repo
+          file_name: _copr:copr.fedorainfracloud.org:jdoss:slack-repo.repo
+        - repo_url: https://download.docker.com/linux/fedora/docker-ce.repo
+          file_name: docker-ce.repo
+      when: ansible_distribution == "Fedora"
+    - name: install h264 yum repo
+      command: dnf config-manager --set-enabled fedora-cisco-openh264
+      args:
+        warn: false
+        creates: /etc/yum.repos.d/fedora-cisco-openh264.repo
+      become: true
+      when: ansible_distribution == "Fedora"
+    - name: install rpmfusion repos
+      command: dnf -y install {{ item.repo_url }}
+      args:
+        warn: false
+        creates: "/etc/yum.repos.d/{{ item.file_name }}"
+      become: true
+      with_items:
+        - repo_url: https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-30.noarch.rpm
+          file_name: rpmfusion-free.repo
+        - repo_url: https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-30.noarch.rpm
+          file_name: rpmfusion-nonfree.repo
+      when: ansible_distribution == "Fedora"
+    - name: remove undesirable yum packages
+      tags:
+        - packages
+      package:
+        name:
+          - PackageKit-command-not-found
+        state: absent
+      become: true
+      when: ansible_distribution == "Fedora"
     - name: install packages
       tags:
         - packages
-      pacman:
+      package:
         name:
           - qtile
-          - thunderbird-extension-enigmail
+          - zsh
+          - pass
+          - zsh-syntax-highlighting
+          - make
+          - thunderbird
+          - thunderbird-enigmail
           - automake
           - pkg-config
           - mtr
-          - pass
-          - time # for platform.sh sdk/git
-          - python
-          - python-pip # python3 builtin pip stripped?
-          - ipython
-          - python-pyflakes # for emacs python flycheck
-          - dropbox
-          - alsa-utils # for amixer
+          - time
+          - python3-ipython
+          - alsa-utils
           - chromium
-          - bind-tools # for dig
-          - yaourt
-          - tk
-          - ack
           - aspell-en
           - aspell-el
           - hunspell-el
-          - chromium
           - dnsmasq
-          - unrar
           - unzip
           - qemu
-          - wireshark-qt
+          - wireshark
           - xterm
           - xfce4-terminal
+          - xorg-x11-server-Xephyr
+          - youtube-dl
+          - strace
+          - file-roller
+          - file-roller-nautilus
+          - wireless-tools
+          - squashfs-tools
+          - scrot
+          - ethtool
+          - tlp
+          - libreoffice
+          - parallel
+          - ipcalc
+          - whois
+          - cups
+          - nss-mdns
+          - awscli
+          - gdb
+          - nmap-ncat
+          - tcpdump
+          - audacity
+          - clementine
+          - transmission-gtk
+          - gstreamer-plugins-base
+          - gstreamer-plugins-good
+          - gstreamer-plugins-bad-free
+          - gparted
+          - fzf
+          - beets
+          - python3-pyudev
+          - lsof
+          - compton
+          - ntfs-3g
+          - dnscrypt-proxy
+          - httpie
+          - fuse-sshfs
+          - recode
+          - xfce4-notifyd
+          - entr
+          - rlwrap
+          - light
+          - lightdm-gtk
+          - plantuml
+          - thermald
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - feh
+          - lilypond
+          - blueman
+          - network-manager-applet
+          - gpaste
+          - redshift-gtk
+          - trash-cli
+          - git-annex
+          - pwgen
+          - python2-virtualenv
+          - pavucontrol
+          - htop
+          - mozilla-openh264
+          - gstreamer1-plugin-openh264
+          - ffmpeg
+          - gstreamer1-libav
+          - lm_sensors
+          - ipcalc
+          - gimp
+          - smplayer
+      become: true
+    # Old Archlinux packages that we haven't found an alternative for Fedora.
+    - name: install archlinux packages
+      tags:
+        - packages
+      package:
+        name:
+          - python
+          - python-pip # python3 builtin pip stripped?
+          - python-pyflakes # for emacs python flycheck
+          - dropbox
+          - bind-tools # for dig
+          - ack
+          - chromium
+          - unrar
           - xorg-xprop
-          - xorg-server-xephyr
           - vagrant
           - docker
           - virtualbox
@@ -57,70 +189,31 @@
           - dkms
           - gtk-recordmydesktop
           - smplayer
-          - youtube-dl
           - flake8
           - python2-flake8
-          - strace
-          - file-roller
           - lib32-alsa-plugins
           - mesa-vdpau
           - lib32-sdl
           - lib32-libtheora
           - lib32-openal
-          - wireless_tools
-          - squashfs-tools
           - dhclient
-          - scrot
-          - ethtool
           - cpupower
-          - tlp
-          - libreoffice
-          - parallel
-          - ipcalc
-          - tcpdump
-          - whois
-          - cups
-          - nss-mdns
-          - aws-cli
-          - gdb
-          - abs
-          - openbsd-netcat
-          - audacity
-          - clementine
-          - gst-plugins-base
-          - gst-plugins-good
-          - gst-plugins-bad
           - gst-plugins-ugly
           - gst-libav
-          - transmission-gtk
           - gksu
           - android-udev
-          - gparted
-          - fzf
           - keybase
-          - beets
           - python-requests # dep of beets
           - xf86-input-libinput
-          - python-pyudev
-          - lsof
-          - compton
           - firefox-ublock-origin
-          - ntfs-3g
           - markdown
           - intel-ucode
-          - dnscrypt-proxy
-          - httpie
-          - sshfs
           - libva-intel-driver
-          - recode
-          - xorg-xmodmap
-          - xfce4-notifyd
-          - entr
-          - rlwrap
         state: present
         force: yes
       become: true
-    - name: install aur packages
+      when: ansible_distribution == "Archlinux"
+    - name: install AUR packages
       tags:
         - packages
       yaourt: name={{ item }} state=present
@@ -136,30 +229,33 @@
         - go-mtpfs-git
         - android-sdk-platform-tools
         - android-bash-completion
-        - thermald
         - firefox-extension-https-everywhere
         # the 1.0 extension itself is only as part of a -git package, which is
         # not signed. install extension via addons.firefox.org
         - passff-host
-        - light
         - undistract-me-git
         ###################
         # emacs golang deps
         - godef-git
         - gocode-git
         ###################
-        - plantuml
+      when: ansible_distribution == "Archlinux"
     - name: install pip packages not available via packages
-      pip: name={{ item }}
+      tags:
+        - packages
+      pip:
+        name:
+          - pulsectl
+          - virtualenv
+          - black
       become: true
-      tags:
-        - packages
-      with_items:
-        - pulsectl
-    - name: install host specific pacman packages
-      pacman: name={{ packages|default([]) }} state=present
-      tags:
-        - packages
+    # Not made compatible with fedora.
+    # - name: install host specific packages
+    #   package:
+    #     name: "{{ packages|default([]) }}"
+    #   tags:
+    #     - packages
+    #   become: true
     - name: copy stuff
       synchronize: src=files/ dest=/home/danmilon
     - name: copy root stuff
@@ -179,25 +275,36 @@
         - { path: 'usr/local/bin/monitor-set-initial-mode', mode: '0755' }
         - { path: 'usr/local/bin/monitor-only-external', mode: '0755'}
         - { path: 'etc/default/tlp' }
+    - name: disable systemd services
+      systemd:
+        name: "{{ item }}"
+        enabled: false
+      with_items:
+        - gdm.service
+      become: true
     - name: enable systemd services
-      systemd: name={{ item }} enabled=yes
+      systemd:
+        name: "{{ item}}"
+        enabled: true
       become: true
       with_items:
         - screenlock@danmilon.service
         - sshd.service
         - tlp.service
         - avahi-daemon.service
-        - org.cups.cupsd.service
+        - cups.service
         - thermald.service
         - docker.service
         - dnscrypt-proxy.socket
         - bluetooth.service
+        - lightdm.service
+        - systemd-timesyncd.service
     - name: enable ntp
       command: timedatectl set-ntp true
       become: true
     - name: put me in user groups
       become: true
-      user: name=danmilon groups=wheel,uucp,rfkill,users,kvm,wireshark,docker
+      user: name=danmilon groups=wheel,users,kvm,wireshark,docker
     - name: put me in host-specific user groups
       become: true
       user:
@@ -210,4 +317,4 @@
         dest: /boot/loader/entries/arch.conf
         line: "initrd /intel-ucode.img"
         insertbefore: "^initrd /initramfs-linux.img$"
-# TODO: mkinitcpio.conf
+      when: ansible_distribution == "Archlinux"
