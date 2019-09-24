@@ -575,6 +575,7 @@ def dialogs(window):
             'Gnome-calculator',
             'Gcolor3',
             'Pinentry',
+            'Gcr-prompter',
         ])
     )
 
