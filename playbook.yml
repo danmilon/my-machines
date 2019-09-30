@@ -166,6 +166,7 @@
           - ipcalc
           - gimp
           - smplayer
+          - socat
       become: true
     # Old Archlinux packages that we haven't found an alternative for Fedora.
     - name: install archlinux packages
