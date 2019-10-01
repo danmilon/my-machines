@@ -167,6 +167,7 @@
           - gimp
           - smplayer
           - socat
+          - brasero
           # unnecessary psh packages
           - dash
           - mosh
