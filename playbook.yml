@@ -169,6 +169,7 @@
           - socat
           - brasero
           - vlc
+          - golang
           # unnecessary psh packages
           - dash
           - mosh
