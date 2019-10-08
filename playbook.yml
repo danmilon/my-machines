@@ -171,6 +171,8 @@
           - brasero
           - vlc
           - golang
+          - httpie
+          - python3-black
           # unnecessary psh packages
           - dash
           - mosh
