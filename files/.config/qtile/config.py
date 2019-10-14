@@ -7,6 +7,7 @@ from libqtile.widget import base as widget_base
 from libqtile import layout, bar, widget, hook
 import os
 import os.path
+from datetime import datetime
 from functools import partial
 import subprocess
 import shlex
