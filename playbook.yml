@@ -173,6 +173,7 @@
           - golang
           - httpie
           - python3-black
+          - glibc-static # fedora-only?
           # unnecessary psh packages
           - dash
           - mosh
