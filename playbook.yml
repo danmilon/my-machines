@@ -172,6 +172,7 @@
           - vlc
           - golang
           - httpie
+          - dropbox
           - python3-black
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
@@ -188,7 +189,6 @@
           - python
           - python-pip # python3 builtin pip stripped?
           - python-pyflakes # for emacs python flycheck
-          - dropbox
           - bind-tools # for dig
           - ack
           - chromium
