@@ -151,6 +151,8 @@
           - blueman
           - network-manager-applet
           - gpaste
+          - ImageMagick
+          - libjpeg-turbo-utils
           - redshift-gtk
           - trash-cli
           - git-annex
