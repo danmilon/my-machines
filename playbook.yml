@@ -179,6 +179,7 @@
           - lshw
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
+          - kubernetes-client # fedora-only
           # unnecessary psh packages
           - dash
           - mosh
