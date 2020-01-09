@@ -177,6 +177,7 @@
           - dropbox
           - python3-black
           - lshw
+          - docker-compose
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
           - kubernetes-client # fedora-only
