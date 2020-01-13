@@ -500,7 +500,9 @@ def setup_screens(qtile):
         'systray': partial(widget.Systray),
         'clock': partial(widget.Clock, format='%a %d %b, %H:%M'),
         'sep': partial(widget.Sep),
-        'kbd-layout': partial(widget.KeyboardLayout, configured_keyboards=['us', 'el,us']),
+        # Commented out because it degrading performance.
+        # See: https://github.com/qtile/qtile/issues/1446
+        # 'kbd-layout': partial(widget.KeyboardLayout, configured_keyboards=['us', 'el,us']),
         'layout': partial(widget.CurrentLayout),
         'power-management': partial(DropdownWidget)
     }
@@ -530,7 +532,7 @@ def setup_screens(qtile):
                               cmd_stop='gksu systemctl stop tlp',
                               update_interval=15),
         screens_widgets['sep'](),
-        screens_widgets['kbd-layout'](),
+        # screens_widgets['kbd-layout'](),
         screens_widgets['sep'](),
         widget.Battery(charge_char='<span color="green">BAT</span>',
                        discharge_char='<span color="orange">BAT</span>',
@@ -549,7 +551,7 @@ def setup_screens(qtile):
         screens_widgets['task-list'](),
         screens_widgets['clock'](),
         screens_widgets['sep'](),
-        screens_widgets['kbd-layout'](),
+        # screens_widgets['kbd-layout'](),
         screens_widgets['sep'](),
         screens_widgets['layout']()
     ]
