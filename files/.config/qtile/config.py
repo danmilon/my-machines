@@ -561,9 +561,11 @@ def setup_screens(qtile):
         screens.append(Screen(top=bar.Bar(secondary_screen_widgets, **bar_commons)))
 
 
-@hook.subscribe.screen_change
-def restart_on_randr(qtile, ev):
-    qtile.cmd_restart()
+# This can make qtile crash for unknown reasons.
+# See: https://github.com/qtile/qtile/issues/1346
+# @hook.subscribe.screen_change
+# def restart_on_randr(qtile, ev):
+#     qtile.cmd_restart()
 
 
 @hook.subscribe.client_new
