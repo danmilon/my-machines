@@ -460,7 +460,7 @@ auto_fullscreen = True
 def setwallpaper():
     subprocess.check_call(shlex.split('feh --bg-scale Pictures/wallpaper1 Pictures/wallpaper2'))
 
-@hook.subscribe.startup
+@hook.subscribe.startup_once
 def autostart():
     # subprocess.call(["systemctl", "--user", "import-environment"])
     services = [
