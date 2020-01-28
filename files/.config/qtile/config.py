@@ -473,6 +473,7 @@ def autostart():
             "nm-applet",
             "thunderbird",
             "compton",
+            "blueman-applet",
     ]
 
     now = datetime.now()
