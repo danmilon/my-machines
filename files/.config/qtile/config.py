@@ -1,7 +1,12 @@
 import itertools
 from libqtile.config import (
-    Group, Match, Screen, EzKey as Key, EzDrag as Drag, EzClick as
-    Click)
+    Group,
+    Match,
+    Screen,
+    EzKey as Key,
+    EzDrag as Drag,
+    EzClick as Click,
+)
 from libqtile.command import lazy
 from libqtile.widget import base as widget_base
 from libqtile import layout, bar, widget, hook
@@ -14,7 +19,8 @@ import shlex
 import pyudev
 import gi
 from pulsectl import Pulse
-gi.require_version('Gtk', '3.0')
+
+gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, Gdk, Notify
 
 
@@ -25,6 +31,7 @@ from gi.repository import Gtk, Gdk, Notify
 Notify.init("qtile")
 
 terminal_program = os.environ.get("TERMINAL", "xfce4-terminal")
+
 
 def notify(title, content):
     Notify.Notification.new(title, content).show()
@@ -37,32 +44,29 @@ class MyPrompt(widget.Prompt):
 class ProcessTrackerWidget2(widget_base.ThreadPoolText):
     orientations = widget_base.ORIENTATION_HORIZONTAL
     defaults = [
-        ('name', 'NAME', 'Title of widget'),
-        ('cmd_start', 'CMD', 'Command to run'),
-        ('cmd_stop', 'CMD_STOP', 'Command to run to stop'),
-        ('cmd_status', 'CMD_STATUS', 'Command to run to check status')
-
+        ("name", "NAME", "Title of widget"),
+        ("cmd_start", "CMD", "Command to run"),
+        ("cmd_stop", "CMD_STOP", "Command to run to stop"),
+        ("cmd_status", "CMD_STATUS", "Command to run to check status"),
     ]
 
     def __init__(self, **config):
-        super().__init__(text='', markup=True, **config)
+        super().__init__(text="", markup=True, **config)
         self.add_defaults(ProcessTrackerWidget2.defaults)
         self.running = True
 
     def poll(self):
         ret_code = subprocess.call(shlex.split(self.cmd_status))
-        self.running = (ret_code == 0)
+        self.running = ret_code == 0
         return self._get_text()
 
     def _get_text(self):
         if self.running:
-            color = 'green'
+            color = "green"
         else:
-            color = 'grey'
+            color = "grey"
 
-        return '<span color="{color}">{name}</span>'.format(
-            color=color,
-            name=self.name)
+        return '<span color="{color}">{name}</span>'.format(color=color, name=self.name)
 
     def _refresh(self):
         self.update(self.poll())
@@ -73,7 +77,9 @@ class ProcessTrackerWidget2(widget_base.ThreadPoolText):
         else:
             cmd = self.cmd_start
 
-        fut = self.qtile.run_in_executor(partial(subprocess.check_call, shlex.split(cmd)))
+        fut = self.qtile.run_in_executor(
+            partial(subprocess.check_call, shlex.split(cmd))
+        )
         fut.add_done_callback(lambda fut: self._refresh())
         self.timer_setup()
 
@@ -81,30 +87,30 @@ class ProcessTrackerWidget2(widget_base.ThreadPoolText):
 class ProcessTrackerWidget(widget_base._TextBox):
     orientations = widget_base.ORIENTATION_HORIZONTAL
     defaults = [
-        ('name', 'NAME', 'Title of widget'),
-        ('cmd', 'CMD', 'Command to run'),
-        ('disable_cmd', False, 'Command to run instead of SIGTERM')
+        ("name", "NAME", "Title of widget"),
+        ("cmd", "CMD", "Command to run"),
+        ("disable_cmd", False, "Command to run instead of SIGTERM"),
     ]
 
     def __init__(self, **config):
-        super().__init__(text='', markup=True, **config)
+        super().__init__(text="", markup=True, **config)
         self.proc = None
         self.add_defaults(ProcessTrackerWidget.defaults)
         self._set_text()
 
     def _set_text(self):
         if self.proc:
-            color = 'green'
+            color = "green"
         else:
-            color = 'grey'
+            color = "grey"
 
         self.text = '<span color="{color}">{name}</span>'.format(
-            color=color,
-            name=self.name)
+            color=color, name=self.name
+        )
         self.draw()
 
     def button_press(self, x, y, btn):
-        print('button_press')
+        print("button_press")
         if not self.proc:
             self.proc = subprocess.Popen(shlex.split(self.cmd))
             try:
@@ -134,7 +140,7 @@ class ImprovedTaskListWidget(widget.TaskList):
 
 class DropdownWidget(widget_base._TextBox):
     orientations = widget_base.ORIENTATION_HORIZONTAL
-    css = b'''
+    css = b"""
         row {
             background-color: #222222;
         }
@@ -150,28 +156,31 @@ class DropdownWidget(widget_base._TextBox):
         label:hover {
             color: black;
         }
-    '''
+    """
 
     def __init__(self, **config):
-        super().__init__(text='PM', **config)
+        super().__init__(text="PM", **config)
         style_provider = Gtk.CssProvider()
         style_provider.load_from_data(self.css)
         Gtk.StyleContext.add_provider_for_screen(
             Gdk.Screen.get_default(),
             style_provider,
-            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+            Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
+        )
 
-        self._win = Gtk.Window(name='notification', type=Gtk.WindowType.POPUP)
+        self._win = Gtk.Window(name="notification", type=Gtk.WindowType.POPUP)
         self._win.connect("delete-event", Gtk.main_quit)
 
         self._listbox = Gtk.ListBox()
         self._listbox.set_selection_mode(Gtk.SelectionMode.NONE)
         self._win.add(self._listbox)
-        self.add_entry('Log Off', 'loginctl kill-session ' + os.getenv('XDG_SESSION_ID'))
-        self.add_entry('Suspend', 'systemctl suspend')
-        self.add_entry('Hibernate', 'systemctl hibernate')
-        self.add_entry('Restart', 'systemctl reboot')
-        self.add_entry('Shutdown', 'systemctl poweroff')
+        self.add_entry(
+            "Log Off", "loginctl kill-session " + os.getenv("XDG_SESSION_ID")
+        )
+        self.add_entry("Suspend", "systemctl suspend")
+        self.add_entry("Hibernate", "systemctl hibernate")
+        self.add_entry("Restart", "systemctl reboot")
+        self.add_entry("Shutdown", "systemctl poweroff")
         self._win.move(-2000, -2000)
         self._win.show_all()
         self._visible = False
@@ -188,12 +197,13 @@ class DropdownWidget(widget_base._TextBox):
         ev_box = Gtk.EventBox()
         label1 = Gtk.Label(text, xalign=0)
         ev_box.add(label1)
-        ev_box.connect('button-press-event', action)
+        ev_box.connect("button-press-event", action)
         vbox.pack_start(ev_box, True, True, 0)
         self._listbox.add(row)
 
     def button_press(self, x, y, btn):
         from gi.repository import GLib
+
         GLib.idle_add(self._button_press, x, y, btn)
 
     def _button_press(self, x, y, btn):
@@ -213,19 +223,11 @@ class DropdownWidget(widget_base._TextBox):
 
 
 class RFKillWidget(widget_base._TextBox):
-    DEV_NAME_MAP = {
-        "WLAN": "ieee80211",
-        "BT": "bluetooth",
-    }
-    DEV_NAME_ID_MAP = {
-        "WLAN": "wlan",
-        "BT": "bluetooth",
-    }
+    DEV_NAME_MAP = {"WLAN": "ieee80211", "BT": "bluetooth"}
+    DEV_NAME_ID_MAP = {"WLAN": "wlan", "BT": "bluetooth"}
 
     orientations = widget_base.ORIENTATION_HORIZONTAL
-    defaults = [
-        ('device_name', 'device', 'Name to use for device (e.g. BT, WLAN)')
-    ]
+    defaults = [("device_name", "device", "Name to use for device (e.g. BT, WLAN)")]
 
     def __init__(self, **config):
         super().__init__(markup=True, **config)
@@ -235,8 +237,8 @@ class RFKillWidget(widget_base._TextBox):
 
         ctx = pyudev.Context()
         rfkill_paths = [
-            "/sys/class/rfkill/" + os.readlink('/sys/class/rfkill/' + name)
-            for name in os.listdir('/sys/class/rfkill')
+            "/sys/class/rfkill/" + os.readlink("/sys/class/rfkill/" + name)
+            for name in os.listdir("/sys/class/rfkill")
         ]
         print(rfkill_paths)
         devices = [
@@ -250,7 +252,7 @@ class RFKillWidget(widget_base._TextBox):
 
         self._dev = devices[0]
         monitor = pyudev.Monitor.from_netlink(ctx)
-        monitor.filter_by('rfkill')
+        monitor.filter_by("rfkill")
         observer = pyudev.MonitorObserver(monitor, self._udev_callback)
         observer.start()
         self.text = self._get_text()
@@ -263,65 +265,57 @@ class RFKillWidget(widget_base._TextBox):
             self.bar.draw()
 
     def is_blocked(self):
-        return bool(int(self._dev.attributes.get('soft')))
+        return bool(int(self._dev.attributes.get("soft")))
 
     def _get_text(self):
         if self.is_blocked():
-            color = 'gray'
+            color = "gray"
         else:
-            color = 'green'
+            color = "green"
 
         return '<span color="{color}">{name}</span>'.format(
-            color=color,
-            name=self.device_name,
+            color=color, name=self.device_name
         )
 
     def button_press(self, event, x, y):
-        subprocess.check_call([
-            "rfkill",
-            "unblock" if self.is_blocked() else "block",
-            self.DEV_NAME_ID_MAP[self.device_name]
-        ])
+        subprocess.check_call(
+            [
+                "rfkill",
+                "unblock" if self.is_blocked() else "block",
+                self.DEV_NAME_ID_MAP[self.device_name],
+            ]
+        )
 
 
 widget_defaults = {
-    'font': 'Monospace',
-    'fontsize': 15,
-    'padding': 3,
-    'inactive': '#aaaaaa'
+    "font": "Monospace",
+    "fontsize": 15,
+    "padding": 3,
+    "inactive": "#aaaaaa",
 }
 
 groups = [
-    Group('MAIN'),
-    Group('WORK',
-          matches=[
-              Match(wm_class=['Emacs']),
-          ]),
-    Group('COMMS',
-          matches=[
-              Match(wm_class=['skypeforlinux', 'Slack', 'Thunderbird'])
-          ]),
-    Group('OTHER'),
-    Group('MUSIC',
-          matches=[
-              Match(wm_class=['Clementine'])
-          ])
+    Group("MAIN"),
+    Group("WORK", matches=[Match(wm_class=["Emacs"])]),
+    Group("COMMS", matches=[Match(wm_class=["skypeforlinux", "Slack", "Thunderbird"])]),
+    Group("OTHER"),
+    Group("MUSIC", matches=[Match(wm_class=["Clementine"])]),
 ]
 
 dgroups_key_binder = None
 
 layouts = [
     layout.columns.Columns(
-        border_normal='#000000',
-        border_focus='#ff4d96',
+        border_normal="#000000",
+        border_focus="#ff4d96",
         border_width=1,
-        border_normal_stack='#000000',
-        border_focus_stack='#535d6c',
+        border_normal_stack="#000000",
+        border_focus_stack="#535d6c",
         fair=False,
         columns=2,
         name="col",
     ),
-    layout.Max()
+    layout.Max(),
 ]
 
 screens = []
@@ -338,18 +332,16 @@ def switch_kbd_layout(qtile):
     else:
         raise Exception("cannot find qtile widgets map")
 
-    widget = widgets['keyboardlayout']
+    widget = widgets["keyboardlayout"]
     widget.next_keyboard()
 
 
 def switch_pulse_default(prop):
-    pulse = Pulse('qtile')
-    current_default = getattr(
-        pulse.server_info(),
-        'default_{}_name'.format(prop))
+    pulse = Pulse("qtile")
+    current_default = getattr(pulse.server_info(), "default_{}_name".format(prop))
 
     set_next = False
-    things = getattr(pulse, '{}_list'.format(prop))()
+    things = getattr(pulse, "{}_list".format(prop))()
     for thing in itertools.chain(things, things):
         if set_next:
             notify("Sound", "Default {} to {}".format(prop, thing.name))
@@ -358,92 +350,98 @@ def switch_pulse_default(prop):
         elif thing.name == current_default:
             set_next = True
 
-    if prop == 'sink':
-        list_cmd = 'list-sink-inputs'
-        move_cmd = 'move-sink-input'
+    if prop == "sink":
+        list_cmd = "list-sink-inputs"
+        move_cmd = "move-sink-input"
     else:
-        list_cmd = 'list-source-outputs'
-        move_cmd = 'move-source-output'
+        list_cmd = "list-source-outputs"
+        move_cmd = "move-source-output"
 
     streams = subprocess.getoutput(
-        "pacmd {} | grep index | awk '{{ print $2 }}'".format(list_cmd))
+        "pacmd {} | grep index | awk '{{ print $2 }}'".format(list_cmd)
+    )
     streams = [int(idx.strip()) for idx in streams.splitlines()]
 
     for stream in streams:
         cmd = "pacmd {cmd} {stream_id} {thing_id}".format(
-            cmd=move_cmd,
-            stream_id=stream,
-            thing_id=thing.index)
+            cmd=move_cmd, stream_id=stream, thing_id=thing.index
+        )
         print(cmd)
         subprocess.check_call(shlex.split(cmd))
 
 
 def switch_pulse_default_sink(qtile):
-    return switch_pulse_default('sink')
+    return switch_pulse_default("sink")
 
 
 def switch_pulse_default_source(qtile):
-    return switch_pulse_default('source')
+    return switch_pulse_default("source")
 
 
 keys = [
-    Key('M-p', lazy.layout.up()),
-    Key('M-f', lazy.layout.right()),
-    Key('M-n', lazy.layout.down()),
-    Key('M-v', lazy.window.toggle_minimize()),
-    Key('M-b', lazy.layout.left()),
-    Key('M-C-p', lazy.layout.shuffle_up()),
-    Key('M-C-f', lazy.layout.shuffle_right()),
-    Key('M-C-n', lazy.layout.shuffle_down()),
-    Key('M-C-b', lazy.layout.shuffle_left()),
-    Key('M-S-f', lazy.layout.grow_right()),
-    Key('M-S-b', lazy.layout.grow_left()),
-    Key('M-<space>', lazy.layout.next()),
-    Key('M-S-<space>', lazy.layout.rotate()),
-    Key('M-C-<Return>', lazy.layout.toggle_split()),
-    Key('M-m', lazy.layout.toggle_fullscreen()),
-    Key('M-S-<Return>', lazy.window.toggle_floating()),
-    Key('C-S-<grave>', lazy.spawn(terminal_program)),
-    Key('M-<Tab>', lazy.next_layout()),
-    Key('M-o', lazy.next_screen()),
-    Key('M-q', lazy.window.kill()),
-    Key('M-C-r', lazy.restart()),
-    Key('M-C-q', lazy.shutdown()),
-    Key('M-r', lazy.spawncmd()),
-    Key('A-<Shift_L>', lazy.function(switch_kbd_layout)),
-    Key('<XF86AudioRaiseVolume>', lazy.spawn('amixer -q sset Master 5%+')),
-    Key('<XF86AudioLowerVolume>', lazy.spawn('amixer -q sset Master 5%-')),
-    Key('A-<XF86AudioRaiseVolume>', lazy.spawn('amixer -q sset Master 100%')),
-    Key('A-<XF86AudioLowerVolume>', lazy.spawn('amixer -q sset Master 0%')),
-    Key('<XF86AudioMute>', lazy.spawn('amixer -q sset Master toggle')),
-    Key('M-<bracketleft>', lazy.function(switch_pulse_default_sink)),
-    Key('M-<bracketright>', lazy.function(switch_pulse_default_source)),
-    Key('<XF86MonBrightnessUp>', lazy.spawn('light -A 10')),
-    Key('<XF86MonBrightnessDown>', lazy.spawn('light -U 10')),
-    Key('<XF86KbdBrightnessUp>', lazy.spawn('kbdlight up')),
-    Key('<XF86KbdBrightnessDown>', lazy.spawn('kbdlight down')),
-    Key('A-<XF86KbdBrightnessUp>', lazy.spawn('kbdlight max')),
-    Key('A-<XF86KbdBrightnessDown>', lazy.spawn('kbdlight off')),
-    Key('A-<XF86MonBrightnessUp>', lazy.spawn('light -S 100')),
-    Key('A-<XF86MonBrightnessDown>', lazy.spawn('light -S 0')),
-    Key('M-C-h', lazy.spawn('nautilus')),
-    Key('M-C-e', lazy.spawn('emacs')),
-    Key('M-C-c', lazy.spawn('gnome-calculator')),
-    Key('M-C-l', lazy.spawn('physlock -s'))
+    Key("M-p", lazy.layout.up()),
+    Key("M-f", lazy.layout.right()),
+    Key("M-n", lazy.layout.down()),
+    Key("M-v", lazy.window.toggle_minimize()),
+    Key("M-b", lazy.layout.left()),
+    Key("M-C-p", lazy.layout.shuffle_up()),
+    Key("M-C-f", lazy.layout.shuffle_right()),
+    Key("M-C-n", lazy.layout.shuffle_down()),
+    Key("M-C-b", lazy.layout.shuffle_left()),
+    Key("M-S-f", lazy.layout.grow_right()),
+    Key("M-S-b", lazy.layout.grow_left()),
+    Key("M-<space>", lazy.layout.next()),
+    Key("M-S-<space>", lazy.layout.rotate()),
+    Key("M-C-<Return>", lazy.layout.toggle_split()),
+    Key("M-m", lazy.layout.toggle_fullscreen()),
+    Key("M-S-<Return>", lazy.window.toggle_floating()),
+    Key("C-S-<grave>", lazy.spawn(terminal_program)),
+    Key("M-<Tab>", lazy.next_layout()),
+    Key("M-o", lazy.next_screen()),
+    Key("M-q", lazy.window.kill()),
+    Key("M-C-r", lazy.restart()),
+    Key("M-C-q", lazy.shutdown()),
+    Key("M-r", lazy.spawncmd()),
+    Key("A-<Shift_L>", lazy.function(switch_kbd_layout)),
+    Key("<XF86AudioRaiseVolume>", lazy.spawn("amixer -q sset Master 5%+")),
+    Key("<XF86AudioLowerVolume>", lazy.spawn("amixer -q sset Master 5%-")),
+    Key("A-<XF86AudioRaiseVolume>", lazy.spawn("amixer -q sset Master 100%")),
+    Key("A-<XF86AudioLowerVolume>", lazy.spawn("amixer -q sset Master 0%")),
+    Key("<XF86AudioMute>", lazy.spawn("amixer -q sset Master toggle")),
+    Key("M-<bracketleft>", lazy.function(switch_pulse_default_sink)),
+    Key("M-<bracketright>", lazy.function(switch_pulse_default_source)),
+    Key("<XF86MonBrightnessUp>", lazy.spawn("light -A 10")),
+    Key("<XF86MonBrightnessDown>", lazy.spawn("light -U 10")),
+    Key("<XF86KbdBrightnessUp>", lazy.spawn("kbdlight up")),
+    Key("<XF86KbdBrightnessDown>", lazy.spawn("kbdlight down")),
+    Key("A-<XF86KbdBrightnessUp>", lazy.spawn("kbdlight max")),
+    Key("A-<XF86KbdBrightnessDown>", lazy.spawn("kbdlight off")),
+    Key("A-<XF86MonBrightnessUp>", lazy.spawn("light -S 100")),
+    Key("A-<XF86MonBrightnessDown>", lazy.spawn("light -S 0")),
+    Key("M-C-h", lazy.spawn("nautilus")),
+    Key("M-C-e", lazy.spawn("emacs")),
+    Key("M-C-c", lazy.spawn("gnome-calculator")),
+    Key("M-C-l", lazy.spawn("physlock -s")),
 ]
 
-keys.extend(Key('M-' + str(idx), lazy.group[group.name].toscreen())
-            for idx, group in enumerate(groups, start=1))
+keys.extend(
+    Key("M-" + str(idx), lazy.group[group.name].toscreen())
+    for idx, group in enumerate(groups, start=1)
+)
 
-keys.extend(Key('M-S-' + str(idx), lazy.window.togroup(group.name))
-            for idx, group in enumerate(groups, start=1))
+keys.extend(
+    Key("M-S-" + str(idx), lazy.window.togroup(group.name))
+    for idx, group in enumerate(groups, start=1)
+)
 
 mouse = [
-    Drag('M-<Button1>', lazy.window.set_position_floating(),
-         start=lazy.window.get_position()),
-    Drag('M-<Button3>', lazy.window.set_size_floating(),
-         start=lazy.window.get_size()),
-    Click('M-<Button2>', lazy.window.bring_to_front())
+    Drag(
+        "M-<Button1>",
+        lazy.window.set_position_floating(),
+        start=lazy.window.get_position(),
+    ),
+    Drag("M-<Button3>", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Click("M-<Button2>", lazy.window.bring_to_front()),
 ]
 
 dgroups_key_binder = None
@@ -458,22 +456,25 @@ auto_fullscreen = True
 
 @hook.subscribe.startup
 def setwallpaper():
-    subprocess.check_call(shlex.split('feh --bg-scale Pictures/wallpaper1 Pictures/wallpaper2'))
+    subprocess.check_call(
+        shlex.split("feh --bg-scale Pictures/wallpaper1 Pictures/wallpaper2")
+    )
+
 
 @hook.subscribe.startup_once
 def autostart():
     # subprocess.call(["systemctl", "--user", "import-environment"])
     services = [
-            "monitor-set-initial-mode",
-            "clementine",
-            "emacs",
-            "emacs-client-frame",
-            "firefox",
-            "keyboard",
-            "nm-applet",
-            "thunderbird",
-            "compton",
-            "blueman-applet",
+        "monitor-set-initial-mode",
+        "clementine",
+        "emacs",
+        "emacs-client-frame",
+        "firefox",
+        "keyboard",
+        "nm-applet",
+        "thunderbird",
+        "compton",
+        "blueman-applet",
     ]
 
     now = datetime.now()
@@ -485,27 +486,22 @@ def autostart():
 
 
 def setup_screens(qtile):
-    bar_commons = {
-        'size': 26,
-        'background': '#222222'
-    }
+    bar_commons = {"size": 26, "background": "#222222"}
 
     screens_widgets = {
-        'group-box': partial(widget.GroupBox,
-                             rounded=False,
-                             highlight_method='block'),
-        'prompt': partial(widget.Prompt),
-        'task-list': partial(ImprovedTaskListWidget,
-                             rounded=False,
-                             highlight_method='block'),
-        'systray': partial(widget.Systray),
-        'clock': partial(widget.Clock, format='%a %d %b, %H:%M'),
-        'sep': partial(widget.Sep),
+        "group-box": partial(widget.GroupBox, rounded=False, highlight_method="block"),
+        "prompt": partial(widget.Prompt),
+        "task-list": partial(
+            ImprovedTaskListWidget, rounded=False, highlight_method="block"
+        ),
+        "systray": partial(widget.Systray),
+        "clock": partial(widget.Clock, format="%a %d %b, %H:%M"),
+        "sep": partial(widget.Sep),
         # Commented out because it degrading performance.
         # See: https://github.com/qtile/qtile/issues/1446
         # 'kbd-layout': partial(widget.KeyboardLayout, configured_keyboards=['us', 'el,us']),
-        'layout': partial(widget.CurrentLayout),
-        'power-management': partial(DropdownWidget)
+        "layout": partial(widget.CurrentLayout),
+        "power-management": partial(DropdownWidget),
     }
 
     num_of_screens = len(qtile.conn.pseudoscreens)
@@ -516,45 +512,55 @@ def setup_screens(qtile):
         except Exception:
             pass
 
-    main_screen_widgets = [
-        screens_widgets['group-box'](),
-        screens_widgets['prompt'](),
-        screens_widgets['task-list'](),
-        screens_widgets['systray'](),
-        screens_widgets['clock'](),
-        screens_widgets['sep'](),
-    ] + rfkill_widgets + [
-        ProcessTrackerWidget(name='MTP',
-                             cmd='go-mtpfs mnt/android-mtp',
-                             disable_cmd='fusermount -u mnt/android-mtp'),
-        ProcessTrackerWidget2(name='TLP',
-                              cmd_status='systemctl status tlp',
-                              cmd_start='gksu systemctl start tlp',
-                              cmd_stop='gksu systemctl stop tlp',
-                              update_interval=15),
-        screens_widgets['sep'](),
-        # screens_widgets['kbd-layout'](),
-        screens_widgets['sep'](),
-        widget.Battery(charge_char='<span color="green">BAT</span>',
-                       discharge_char='<span color="orange">BAT</span>',
-                       low_percentage=0.2,
-                       format='{char} {percent:2.0%}',
-                       markup=True),
-        screens_widgets['sep'](),
-        screens_widgets['layout'](),
-        screens_widgets['sep'](),
-        screens_widgets['power-management']()
-    ]
+    main_screen_widgets = (
+        [
+            screens_widgets["group-box"](),
+            screens_widgets["prompt"](),
+            screens_widgets["task-list"](),
+            screens_widgets["systray"](),
+            screens_widgets["clock"](),
+            screens_widgets["sep"](),
+        ]
+        + rfkill_widgets
+        + [
+            ProcessTrackerWidget(
+                name="MTP",
+                cmd="go-mtpfs mnt/android-mtp",
+                disable_cmd="fusermount -u mnt/android-mtp",
+            ),
+            ProcessTrackerWidget2(
+                name="TLP",
+                cmd_status="systemctl status tlp",
+                cmd_start="gksu systemctl start tlp",
+                cmd_stop="gksu systemctl stop tlp",
+                update_interval=15,
+            ),
+            screens_widgets["sep"](),
+            # screens_widgets['kbd-layout'](),
+            screens_widgets["sep"](),
+            widget.Battery(
+                charge_char='<span color="green">BAT</span>',
+                discharge_char='<span color="orange">BAT</span>',
+                low_percentage=0.2,
+                format="{char} {percent:2.0%}",
+                markup=True,
+            ),
+            screens_widgets["sep"](),
+            screens_widgets["layout"](),
+            screens_widgets["sep"](),
+            screens_widgets["power-management"](),
+        ]
+    )
 
     secondary_screen_widgets = [
-        screens_widgets['group-box'](),
-        screens_widgets['prompt'](),
-        screens_widgets['task-list'](),
-        screens_widgets['clock'](),
-        screens_widgets['sep'](),
+        screens_widgets["group-box"](),
+        screens_widgets["prompt"](),
+        screens_widgets["task-list"](),
+        screens_widgets["clock"](),
+        screens_widgets["sep"](),
         # screens_widgets['kbd-layout'](),
-        screens_widgets['sep'](),
-        screens_widgets['layout']()
+        screens_widgets["sep"](),
+        screens_widgets["layout"](),
     ]
 
     main_screen = Screen(top=bar.Bar(main_screen_widgets, **bar_commons))
@@ -576,18 +582,11 @@ def dialogs(window):
     try:
         cls = window.window.get_wm_class()[1]
     except:
-        cls = ''
+        cls = ""
 
     should_float = (
-        (window.window.get_wm_type() == 'dialog' or
-         window.window.get_wm_transient_for()) or
-        (cls in [
-            'Gnome-calculator',
-            'Gcolor3',
-            'Pinentry',
-            'Gcr-prompter',
-        ])
-    )
+        window.window.get_wm_type() == "dialog" or window.window.get_wm_transient_for()
+    ) or (cls in ["Gnome-calculator", "Gcolor3", "Pinentry", "Gcr-prompter"])
 
     if should_float:
         window.floating = True
