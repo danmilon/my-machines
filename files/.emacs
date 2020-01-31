@@ -9,9 +9,7 @@
 ;; set required packages
 (setq package-list
       '(
-	ace-jump-mode
 	ace-window
-	auto-complete
 	autopair
 	buffer-move
 	concurrent
@@ -30,16 +28,17 @@
 	flycheck-rust
 	git-commit
 	gnuplot-mode
-	go-autocomplete
 	go-eldoc
 	go-mode
 	google-this
 	ido
 	ido-vertical-mode
-	jedi
 	jinja2-mode
 	json-reformat
 	lorem-ipsum
+	lsp-mode
+	lsp-python-ms
+	lsp-ui
 	lua-mode
 	magit
 	markdown-mode
@@ -72,45 +71,12 @@
 	zenburn-theme
 	))
 
+; install the missing packages
 (unless package-archive-contents
   (package-refresh-contents))
-
-; install the missing packages
 (dolist (package package-list)
   (unless (package-installed-p package)
     (package-install package)))
-
-;; set font size
-(set-face-attribute 'default nil :height 105)
-
-;; font scale keybinds
-(defvar text-scale-mode-amount)
-(setq text-scale-mode-step 1.05)
-
-(define-globalized-minor-mode
-  global-text-scale-mode
-  text-scale-mode
-  (lambda () (text-scale-mode 1)))
-
-(defun global-text-scale-adjust (inc) (interactive)
-  (text-scale-set 1)
-  (kill-local-variable 'text-scale-mode-amount)
-  (setq-default text-scale-mode-amount (+ text-scale-mode-amount inc))
-  (global-text-scale-mode 1))
-
-(global-set-key [C-mouse-4] '(lambda () (interactive)
-			       (global-text-scale-adjust 1)))
-(global-set-key [(control ?+)] '(lambda () (interactive)
-				  (global-text-scale-adjust 1)))
-(global-set-key [C-mouse-5] '(lambda () (interactive)
-			      (global-text-scale-adjust -1)))
-(global-set-key [(control ?-)] '(lambda () (interactive)
-				 (global-text-scale-adjust -1)))
-(global-set-key (kbd "C-0") '(lambda () (interactive)
-			      (global-text-scale-adjust
-			       (- text-scale-mode-amount))
-			      (global-text-scale-mode -1)))
-
 
 ;; set fill column
 (setq-default fill-column 79)
@@ -149,130 +115,138 @@
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
 ;; save buffers frequently
-(super-save-mode)
+(use-package super-save
+  :config
+  ;; add integration with ace-window
+  (add-to-list 'super-save-triggers 'ace-window)
+  (super-save-mode +1))
 
 ;; uniquify: unique buffer names
-(require 'uniquify) ;; make buffer names more unique
-(setq
-  uniquify-buffer-name-style 'post-forward
-  uniquify-separator ":"
-  uniquify-after-kill-buffer-p t
-  uniquify-ignore-buffers-re "^\\*")
+(use-package uniquify
+  :config
+  (setq
+   uniquify-buffer-name-style 'post-forward
+   uniquify-separator ":"
+   uniquify-after-kill-buffer-p t
+   uniquify-ignore-buffers-re "^\\*"))
 
 (global-set-key (kbd "M-g") 'goto-line)
 
 ;; load theme
 (load-theme 'zenburn t)
 
-;; ido/flx-ido
-(ido-mode 1)
-(ido-everywhere 1)
-(setq
- ido-max-prospects 8                  ; don't spam my minibuffer
-  ido-case-fold  t                    ; be case-insensitive
-  ido-enable-last-directory-history t ; remember last used dirs
-  ido-max-work-directory-list 30      ; should be enough
-  ido-max-work-file-list      50      ; remember many
-  ido-use-filename-at-point nil       ; don't use filename at point (annoying)
-  ido-use-url-at-point nil            ; don't use url at point (annoying)
-  ido-enable-flex-matching nil        ; don't try to be too smart
-  ido-max-prospects 8                 ; don't spam my minibuffer
-  ido-confirm-unique-completion t)    ; wait for RET, even with unique completion
+;; ido - https://www.emacswiki.org/emacs/InteractivelyDoThings
+(use-package ido
+  :config
+  (setq ido-max-prospects 8                  ; don't spam my minibuffer
+	ido-case-fold  t                    ; be case-insensitive
+	ido-enable-last-directory-history t ; remember last used dirs
+	ido-max-work-directory-list 30      ; should be enough
+	ido-max-work-file-list      50      ; remember many
+	ido-use-filename-at-point nil       ; don't use filename at point (annoying)
+	ido-use-url-at-point nil            ; don't use url at point (annoying)
+	ido-enable-flex-matching nil        ; don't try to be too smart
+	ido-max-prospects 8                 ; don't spam my minibuffer
+	ido-confirm-unique-completion t)    ; wait for RET, even with unique completion
+  (ido-mode t)
+  (ido-everywhere t)
+  (ido-vertical-mode 1))
+
+;; flx-ido - https://github.com/lewang/flx
+(use-package flx-ido
+  :config
+  (flx-ido-mode 1)
+  ;; disable ido faces to see flx highlights
+  (setq ido-use-faces nil))
 
 ;; when using ido, the confirmation is rather annoying...
  (setq confirm-nonexistent-file-or-buffer nil)
 
-;; magit
-(global-set-key (kbd "C-c g") 'magit-status)
+;; SMEX for smart M-x - https://github.com/nonsequitur/smex
+(use-package smex
+  :ensure t
+  :bind ("M-x" . smex))
 
-(ido-vertical-mode 1)
+;; Flyspell
+(use-package flyspell
+  :hook ((text-mode . flyspell-mode)
+	 (prog-mode . flyspell-prog-mode)))
 
-(flx-ido-mode 1)
-
-;; disable ido faces to see flx highlights.
-(setq ido-use-faces nil)
-
-;; smex
-(smex-initialize)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
-
-;; text modes
-(add-hook 'text-mode-hook (lambda ()
-  (auto-fill-mode 1)
-  (flyspell-mode 1)))
-
-;; libnotify fun
-(defun notify (title msg &optional icon sound)
-  "Show a popup if we're on X, or echo it otherwise; TITLE is the title
-of the message, MSG is the context. Optionally, you can provide an ICON and
-a sound to be played"
-
-  (interactive)
-  (when sound (shell-command
-                (concat "mplayer -really-quiet " sound " 2> /dev/null")))
-  (if (eq window-system 'x)
-    (shell-command (concat "notify-send "
-
-                     (if icon (concat "-i " icon) "")
-                     " '" title "' '" msg "'"))
-    ;; text only version
-
-    (message (concat title ": " msg))))
-
+;; realgud
+(use-package realgud)
 
 ;; lorem ipsum
-(autoload 'Lorem-ipsum-insert-paragraphs "lorem-ipsum" "" t)
-(autoload 'Lorem-ipsum-insert-sentences "lorem-ipsum" "" t)
-(autoload 'Lorem-ipsum-insert-list "lorem-ipsum" "" t)
+(use-package lorem-ipsum)
 
-;; dired enhancements
-;; load dired-x when dired is loaded
-(add-hook 'dired-load-hook '(lambda () (require 'dired-x)))
-(setq dired-omit-mode t)
-(setq dired-omit-files "^\\...+$")
+(use-package dired
+  :config
+  ;; always delete and copy recursively
+  (setq dired-recursive-deletes 'always)
+  (setq dired-recursive-copies 'always)
+
+  ;; Omit hidden files.
+  (setq dired-omit-mode t)
+  (setq dired-omit-files "^\\...+$")
+
+  ;; enable some really cool extensions like C-x C-j(dired-jump)
+  (require 'dired-x))
+
+(use-package ace-window
+  :bind (("C-x o" . 'ace-window)))
+
+(use-package yasnippet
+  :config
+  (yas-global-mode 1)
+  (yas-load-directory ".emacs.d/yasnippets"))
+
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+;; ansi-colors
+(use-package ansi-color
+  :mode ("\\.log\\'" . display-ansi-colors)
+  :config
+  (defun display-ansi-colors ()
+    (interactive)
+    (ansi-color-apply-on-region (point-min) (point-max))))
+
+;; MISC
 
 ;; remove trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-;; yasnippet
-(yas-global-mode 1)
-(yas-load-directory ".emacs.d/yasnippets")
+;; Fonts & Resizing
+;; set font size
+(set-face-attribute 'default nil :height 105)
 
-;; enable flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; font scale keybinds
+(defvar text-scale-mode-amount)
+(setq text-scale-mode-step 1.05)
 
-;; common modes for programming
-(add-hook 'prog-mode-hook (lambda ()
-  (auto-fill-mode 1)
-  (electric-indent-mode)
-  (linum-mode)
-  (column-number-mode)
-  (flyspell-prog-mode)
-  (auto-complete-mode 1)
-  (rainbow-delimiters-mode)
-  (smooth-scrolling-mode)
-  (load-library "realgud")
-  ))
+(define-globalized-minor-mode
+  global-text-scale-mode
+  text-scale-mode
+  (lambda () (text-scale-mode 1)))
 
-;; ansi-colors
-(require 'ansi-color)
-(defun display-ansi-colors ()
-  (interactive)
-  (ansi-color-apply-on-region (point-min) (point-max)))
+(defun global-text-scale-adjust (inc) (interactive)
+  (text-scale-set 1)
+  (kill-local-variable 'text-scale-mode-amount)
+  (setq-default text-scale-mode-amount (+ text-scale-mode-amount inc))
+  (global-text-scale-mode 1))
 
-(add-to-list 'auto-mode-alist '("\\.log\\'" . display-ansi-colors))
+(global-set-key [C-mouse-4] '(lambda () (interactive)
+			       (global-text-scale-adjust 1)))
+(global-set-key [(control ?+)] '(lambda () (interactive)
+				  (global-text-scale-adjust 1)))
+(global-set-key [C-mouse-5] '(lambda () (interactive)
+			      (global-text-scale-adjust -1)))
+(global-set-key [(control ?-)] '(lambda () (interactive)
+				 (global-text-scale-adjust -1)))
+(global-set-key (kbd "C-0") '(lambda () (interactive)
+			      (global-text-scale-adjust
+			       (- text-scale-mode-amount))
+			      (global-text-scale-mode -1)))
 
-(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
-
-;; ace-window
-(global-set-key (kbd "C-x o") 'ace-window)
-
-;; ace-jump-mode
-(global-set-key (kbd "C-c j c") 'ace-jump-char-mode)
-(global-set-key (kbd "C-c j w") 'ace-jump-word-mode)
-(global-set-key (kbd "C-c j l") 'ace-jump-line-mode)
 
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
@@ -281,3 +255,14 @@ a sound to be played"
 
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
+
+;; modes for everything
+(auto-fill-mode 1)
+(electric-indent-mode)
+(global-linum-mode)
+(column-number-mode)
+(rainbow-delimiters-mode)
+(smooth-scrolling-mode)
+
+;; Comment Or Uncomment region.
+(global-set-key (kbd "C-c c") 'comment-or-uncomment-region)

@@ -1,2 +1,2 @@
-(load-library "lilypond-mode")
-(add-to-list 'auto-mode-alist '("\\.ly$" . lilypond-mode))
+(use-package lilypond-mode
+  :mode ("\\.ly\\'" . lilypond-mode))
