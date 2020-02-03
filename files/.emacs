@@ -117,6 +117,7 @@
 
 ;; save buffers frequently
 (use-package super-save
+  :delight
   :config
   ;; add integration with ace-window
   (add-to-list 'super-save-triggers 'ace-window)
