@@ -16,6 +16,7 @@
 	ctable
 	dash
 	deferred
+	delight
 	dired-du
 	docker-tramp
 	dockerfile-mode
