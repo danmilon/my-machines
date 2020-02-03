@@ -1,6 +1,3 @@
-(require 'lsp-python-ms)
-(require 'lsp-ui)
-
 (add-hook 'python-mode-hook (lambda ()
   (hack-local-variables)
   (ignore-errors

@@ -136,6 +136,9 @@
 (use-package lsp-ui
   :hook ((lsp-mode . lsp-ui-mode)))
 
+(use-package lsp-python-ms
+  :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
+
 ;; uniquify: unique buffer names
 (use-package uniquify
   :config
