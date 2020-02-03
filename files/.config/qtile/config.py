@@ -591,6 +591,9 @@ def dialogs(window):
     if should_float:
         window.floating = True
 
+# https://github.com/qtile/qtile/issues/1327
+# for handling android studio hiding itself
+wmname = "LG3D"
 
 def main(qtile):
     setup_screens(qtile)
