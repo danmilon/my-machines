@@ -212,6 +212,11 @@
 (use-package ace-window
   :bind (("C-x o" . 'ace-window)))
 
+;; j2 is a common jinja 2 extension
+;; it might be followed by further extensions
+(use-package jinja2-mode
+  :mode "\\.j2.*\\'")
+
 (use-package yasnippet
   :config
   (yas-global-mode 1)
