@@ -1,17 +1,12 @@
 (require 'lsp-python-ms)
 (require 'lsp-ui)
 
-(add-hook 'lsp-mode-hook 'lsp-ui-mode)
 (add-hook 'python-mode-hook (lambda ()
   (hack-local-variables)
   (ignore-errors
     (venv-workon project-venv-name)
     (setq mode-line-format (cons '(:exec venv-current-name) mode-line-format)))
-  (setq lsp-prefer-flymake nil)
-  (lsp)
   (electric-indent-mode -1)
-  ;TODO: move to prog-mode?
-  (lsp-auto-guess-root t)
   (local-set-key (kbd "RET") 'newline-and-indent)
   (setq venv-dirlookup-names '(".venv" "venv" ".virtualenv" "virtualenv"))
   (venv-projectile-auto-workon)

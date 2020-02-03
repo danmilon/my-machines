@@ -126,6 +126,16 @@
 (use-package eldoc
   :delight)
 
+(use-package lsp-mode
+  :commands (lsp lsp-deferred)
+  :hook ((python-mode . lsp))
+  :config
+  (setq lsp-prefer-flymake nil
+	lsp-auto-guess-root t))
+
+(use-package lsp-ui
+  :hook ((lsp-mode . lsp-ui-mode)))
+
 ;; uniquify: unique buffer names
 (use-package uniquify
   :config
