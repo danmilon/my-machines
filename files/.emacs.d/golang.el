@@ -1,4 +1,4 @@
-(add-hook 'go-mode-hook (lambda ()
-  (go-eldoc-setup)
-  (setq tab-width 4)
-  ))
+(use-package go-eldoc
+  :hook (ho-mode . go-eldoc-setup)
+  :config
+  (setq tab-width 4))
