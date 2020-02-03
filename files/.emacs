@@ -123,6 +123,9 @@
   (add-to-list 'super-save-triggers 'ace-window)
   (super-save-mode +1))
 
+(use-package eldoc
+  :delight)
+
 ;; uniquify: unique buffer names
 (use-package uniquify
   :config
