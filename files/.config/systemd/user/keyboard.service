@@ -3,7 +3,7 @@ Description=keyboard settings
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/setxkbmap -model pc104 -option ctrl:nocaps
+ExecStart=/usr/bin/setxkbmap us,gr -model pc104 -option ctrl:nocaps -option grp:alt_shift_toggle
 
 [Install]
 WantedBy=default.target
