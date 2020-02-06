@@ -390,7 +390,6 @@ keys = [
     Key("M-C-b", lazy.layout.shuffle_left()),
     Key("M-S-f", lazy.layout.grow_right()),
     Key("M-S-b", lazy.layout.grow_left()),
-    Key("M-<space>", lazy.layout.next()),
     Key("M-S-<space>", lazy.layout.rotate()),
     Key("M-C-<Return>", lazy.layout.toggle_split()),
     Key("M-m", lazy.layout.toggle_fullscreen()),
