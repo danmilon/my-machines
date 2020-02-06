@@ -100,9 +100,12 @@ PROMPT="%B${return_code}%b
 ${user_host} ${current_dir}%B${user_symbol}%b $ "
 RPS1=""
 
+# Platform.sh stuff:
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
+
+alias platform-tb='PLATFORMSH_CLI_ACCOUNTS_API=http://testbed.plat.farm platform'
 
 # undistract-me
 source /usr/share/undistract-me/long-running.bash
