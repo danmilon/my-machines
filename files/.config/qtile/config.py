@@ -418,7 +418,7 @@ keys = [
     Key("A-<XF86MonBrightnessUp>", lazy.spawn("light -S 100")),
     Key("A-<XF86MonBrightnessDown>", lazy.spawn("light -S 0")),
     Key("M-C-h", lazy.spawn("nautilus")),
-    Key("M-C-e", lazy.spawn("emacs")),
+    Key("M-C-e", lazy.spawn("emacsclient -c")),
     Key("M-C-c", lazy.spawn("gnome-calculator")),
     Key("M-C-l", lazy.spawn("physlock -s")),
 ]
