@@ -225,6 +225,9 @@
 (use-package flycheck
   :init (global-flycheck-mode))
 
+(use-package restclient-mode
+  :mode "\\.http\\'")
+
 ;; ansi-colors
 (use-package ansi-color
   :mode ("\\.log\\'" . display-ansi-colors)
