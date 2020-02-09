@@ -474,6 +474,7 @@ def autostart():
         "thunderbird",
         "compton",
         "blueman-applet",
+        "redshift-gtk",
     ]
 
     now = datetime.now()
