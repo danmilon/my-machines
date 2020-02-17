@@ -1,4 +1,3 @@
-;; projectile
 (use-package projectile
     :bind-keymap
     ("C-c p" . projectile-command-map)
