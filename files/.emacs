@@ -10,6 +10,7 @@
 (setq package-list
       '(
 	ace-window
+	amx
 	autopair
 	buffer-move
 	concurrent
@@ -59,7 +60,6 @@
 	sass-mode
 	scad-mode
 	smartparens
-	smex
 	smooth-scrolling
 	super-save
 	tide
@@ -181,10 +181,13 @@
 ;; when using ido, the confirmation is rather annoying...
  (setq confirm-nonexistent-file-or-buffer nil)
 
-;; SMEX for smart M-x - https://github.com/nonsequitur/smex
-(use-package smex
-  :ensure t
-  :bind ("M-x" . smex))
+;; amx for smart M-x
+(use-package amx
+  :config
+  (setq amx-backend 'ivy
+	amx-show-key-bindings t)
+  (amx-mode))
+
 (use-package ivy
   :delight
   :bind
