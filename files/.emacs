@@ -135,7 +135,12 @@
 	lsp-auto-guess-root t))
 
 (use-package lsp-ui
-  :hook ((lsp-mode . lsp-ui-mode)))
+  :hook ((lsp-mode . lsp-ui-mode))
+  :config
+  ;; Disable auto-showing docs. Can still show with lsp-ui-doc-glance.
+  (setq lsp-ui-doc-enable nil
+	lsp-ui-doc-delay 0)
+  :bind (("s-l h g" . lsp-ui-doc-glance)))
 
 (use-package lsp-python-ms
   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
