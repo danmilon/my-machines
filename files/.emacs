@@ -233,7 +233,9 @@
   (require 'dired-x))
 
 (use-package ace-window
-  :bind (("C-x o" . 'ace-window)))
+  :bind (("C-x o" . 'ace-window))
+  :config
+  (setq aw-scope 'frame))
 
 ;; j2 is a common jinja 2 extension
 ;; it might be followed by further extensions
