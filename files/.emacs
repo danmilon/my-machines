@@ -14,6 +14,7 @@
 	autopair
 	buffer-move
 	concurrent
+	counsel
 	ctable
 	dash
 	deferred
@@ -216,6 +217,11 @@
   (setq ivy-re-builders-alist
 	;; allow input not in order
         '((t   . ivy--regex-ignore-order))))
+
+(use-package counsel
+  :bind (("C-x C-f" . counsel-find-file)
+	 ("C-h f" . counsel-describe-function)
+	 ("C-h v" . counsel-describe-variable)))
 
 ;; Flyspell
 (use-package flyspell
