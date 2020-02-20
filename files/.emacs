@@ -276,6 +276,9 @@
     (interactive)
     (ansi-color-apply-on-region (point-min) (point-max))))
 
+(use-package linum
+  :hook (prog-mode . linum-mode))
+
 ;; MISC
 
 ;; remove trailing whitespace before save
@@ -325,7 +328,6 @@
 ;; modes for everything
 (auto-fill-mode 1)
 (electric-indent-mode)
-(global-linum-mode)
 (column-number-mode)
 (rainbow-delimiters-mode)
 (smooth-scrolling-mode)
