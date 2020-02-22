@@ -200,9 +200,9 @@
 
 (use-package ivy
   :delight
-  :bind
-  (:map ivy-mode-map
-   ("C-'" . ivy-avy))
+  :bind (("C-x b" . ivy-switch-buffer)
+	 :map ivy-mode-map
+	 ("C-'" . ivy-avy))
   :config
   (ivy-mode 1)
   ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
