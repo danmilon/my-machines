@@ -379,6 +379,20 @@
   (setq org-plantuml-jar-path
 	"/usr/share/java/plantuml/plantuml.jar"))
 
+(use-package projectile
+    :bind-keymap
+    ("C-c p" . projectile-command-map)
+    :config
+    (setq projectile-globally-ignored-directories '(
+       ".git"
+       "venv"
+       ".virtualenv"
+       ".tox"))
+    (setq projectile-enable-caching t)
+    (setq projectile-use-git-grep 1)
+    (setq projectile-completion-system 'ivy)
+    (projectile-mode))
+
 ;; ansi-colors
 (use-package ansi-color
   :mode ("\\.log\\'" . display-ansi-colors)
