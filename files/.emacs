@@ -393,6 +393,10 @@
     (setq projectile-completion-system 'ivy)
     (projectile-mode))
 
+(use-package tramp
+  :config
+  (setq tramp-default-method "ssh"))
+
 ;; ansi-colors
 (use-package ansi-color
   :mode ("\\.log\\'" . display-ansi-colors)
@@ -449,7 +453,7 @@
 
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
-  "python" "scala" "smartparens" "multi-term" "tramp"
+  "python" "scala" "smartparens" "multi-term"
   "restclient" "projectile" "tide"))
 
 (dolist (filename load-files-list)
