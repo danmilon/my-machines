@@ -354,6 +354,11 @@
 (use-package linum
   :hook (prog-mode . linum-mode))
 
+(use-package autorevert
+  :delight
+  :config
+  (global-auto-revert-mode))
+
 ;; MISC
 
 ;; remove trailing whitespace before save
