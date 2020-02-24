@@ -452,10 +452,7 @@
 
 
 ;; load  .emacs.d/*.el
-(setq load-files-list '(
-  "python" "scala" "smartparens" "multi-term"
-  "restclient" "projectile" "tide"))
-
+(setq load-files-list '("python" "multi-term" "tide"))
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
 
