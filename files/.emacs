@@ -346,6 +346,11 @@
 (use-package lilypond-mode
   :mode ("\\.ly\\'" . lilypond-mode))
 
+(use-package go-eldoc
+  :hook (ho-mode . go-eldoc-setup)
+  :config
+  (setq tab-width 4))
+
 ;; ansi-colors
 (use-package ansi-color
   :mode ("\\.log\\'" . display-ansi-colors)
@@ -403,7 +408,7 @@
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
   "python" "scala" "org" "smartparens" "multi-term" "tramp"
-  "markdown" "restclient" "projectile" "golang" "tide" "magit"))
+  "markdown" "restclient" "projectile" "tide" "magit"))
 
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
