@@ -351,6 +351,11 @@
   :config
   (setq tab-width 4))
 
+(use-package magit
+  :bind (("C-c g" . magit-status))
+  :config
+  (setq magit-diff-refine-hunk 'all))
+
 ;; ansi-colors
 (use-package ansi-color
   :mode ("\\.log\\'" . display-ansi-colors)
@@ -408,7 +413,7 @@
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
   "python" "scala" "org" "smartparens" "multi-term" "tramp"
-  "markdown" "restclient" "projectile" "tide" "magit"))
+  "markdown" "restclient" "projectile" "tide"))
 
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
