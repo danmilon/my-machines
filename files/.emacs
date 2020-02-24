@@ -343,6 +343,9 @@
   (sp-with-modes sp--lisp-modes
     (sp-local-pair "(" nil :bind "C-(")))
 
+(use-package lilypond-mode
+  :mode ("\\.ly\\'" . lilypond-mode))
+
 ;; ansi-colors
 (use-package ansi-color
   :mode ("\\.log\\'" . display-ansi-colors)
@@ -399,7 +402,7 @@
 
 ;; load  .emacs.d/*.el
 (setq load-files-list '(
-  "python" "scala" "org" "smartparens" "multi-term" "lilypond" "tramp"
+  "python" "scala" "org" "smartparens" "multi-term" "tramp"
   "markdown" "restclient" "projectile" "golang" "tide" "magit"))
 
 (dolist (filename load-files-list)
