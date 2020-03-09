@@ -186,6 +186,7 @@
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
           - kubernetes-client # fedora-only
+          - torbrowser-launcher # fedora-only
           # unnecessary psh packages
           - dash
           - mosh
