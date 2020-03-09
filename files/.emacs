@@ -269,6 +269,8 @@
   :mode "\\.http\\'")
 
 (use-package smartparens
+  ;; Explicitly demand it because the presence of :bind makes it defer.
+  :demand t
   :bind (:map sp-keymap
 	 ("C-M-f" . sp-forward-sexp)
 	 ("C-M-b" . sp-backward-sexp)
