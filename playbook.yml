@@ -179,6 +179,10 @@
           - lshw
           - docker-compose
           - pipenv
+          # zsh notify plugin dependencies
+          - wmctrl
+          - xdotool
+          # ------------
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
           - kubernetes-client # fedora-only

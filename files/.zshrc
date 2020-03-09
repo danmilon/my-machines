@@ -14,6 +14,10 @@ plugins=(
     python
     pass
     kubectl
+
+    # notify when a long running command finishes.
+    # https://github.com/marzocchi/zsh-notify
+    notify
 )
 
 ENABLE_CORRECTION="true"
@@ -116,9 +120,3 @@ export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
 
 alias platform-tb='PLATFORMSH_CLI_ACCOUNTS_API=http://testbed.plat.farm platform'
-
-# undistract-me
-source /usr/share/undistract-me/long-running.bash
-# For some reason the following function exits with code 1.
-# Until I find out why, put this at the end of the file.
-notify_when_long_running_commands_finish_install
