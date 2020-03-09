@@ -5,7 +5,17 @@ export ZSH_CUSTOM=~/.zsh/custom
 
 export DEFAULT_USER="danmilon"
 ZSH_THEME="my-bira"
-plugins=(gitfast pip vagrant urltools sudo python pass kubectl)
+plugins=(
+    gitfast
+    pip
+    vagrant
+    urltools
+    sudo
+    python
+    pass
+    kubectl
+)
+
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 DISABLE_AUTO_UPDATE="true"
