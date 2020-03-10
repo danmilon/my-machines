@@ -22,7 +22,14 @@ plugins=(
 
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
-DISABLE_AUTO_UPDATE="true"
+
+if [ "$ZSH" = "~/.oh-my-zsh" ]; then
+    # Auto update.
+    DISABLE_UPDATE_PROMPT=true
+else
+    # Completely disable if installed system-wide (e.g. like on Arch from AUR).
+    DISABLE_AUTO_UPDATE=true
+fi
 
 source $ZSH/oh-my-zsh.sh
 
