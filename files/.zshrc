@@ -120,3 +120,4 @@ export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
 
 alias platform-tb='PLATFORMSH_CLI_ACCOUNTS_API=http://testbed.plat.farm platform'
+alias platform-staging="PLATFORMSH_CLI_SESSION_ID=staging PLATFORMSH_CLI_API_URL=https://api.staging.plat.farm PLATFORMSH_CLI_ACCOUNTS_API=https://accounts.staging.plat.farm/api/v1/ PLATFORMSH_CLI_OAUTH2_AUTH_URL=https://accounts.staging.plat.farm/oauth2/authorize PLATFORMSH_CLI_OAUTH2_TOKEN_URL=https://accounts.staging.plat.farm/oauth2/token PLATFORMSH_CLI_OAUTH2_REVOKE_URL=https://accounts.staging.plat.farm/oauth2/revoke platform"
