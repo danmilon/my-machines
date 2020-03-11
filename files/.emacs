@@ -467,3 +467,14 @@
 
 ;; Comment Or Uncomment region.
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
+
+;; Shell mode for ZSH fixes
+(when (equal (getenv "SHELL") "/usr/bin/zsh")
+  (add-hook
+   'shell-mode-hook
+   (lambda ()
+     (setq comint-input-ring-file-name "~/.zsh_history")
+     ; Ignore timestamps in history file. Assumes that zsh EXTENDED_HISTORY
+     ; option is in use.
+     (setq comint-input-ring-separator "\n: \\([0-9]+\\):\\([0-9]+\\);")
+     (comint-read-input-ring t))))
