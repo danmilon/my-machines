@@ -343,8 +343,8 @@ def switch_pulse_default(prop):
     set_next = False
     things = getattr(pulse, "{}_list".format(prop))()
     for thing in itertools.chain(things, things):
-        if set_next:
-            notify("Sound", "Default {} to {}".format(prop, thing.name))
+        if "monitor" not in thing.name and set_next:
+            notify("Sound", "Default {} to {}".format(prop, thing.description))
             pulse.default_set(thing)
             break
         elif thing.name == current_default:
