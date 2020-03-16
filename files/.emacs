@@ -202,6 +202,9 @@
 (use-package ivy
   :delight
   :bind (("C-x b" . ivy-switch-buffer)
+	 ("C-c C-r" . ivy-resume)
+	 ("C-c v" . ivy-push-view)
+	 ("C-c V" . ivy-pop-view)
 	 :map ivy-mode-map
 	 ("C-'" . ivy-avy))
   :config
