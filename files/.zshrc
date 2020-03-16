@@ -33,7 +33,14 @@ fi
 
 source $ZSH/oh-my-zsh.sh
 
-export TERM=xterm-256color
+if [[ -n "$INSIDE_EMACS" ]]; then
+    # Emacs leaks escape sequences with ZSH and xterm-256color.
+    # This TERM value seems to get rid of the leaked escape sequences and preserve color.
+    export TERM=eterm-color
+else
+    export TERM=xterm-256color
+fi
+
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
