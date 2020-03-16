@@ -63,6 +63,7 @@
 	smartparens
 	smooth-scrolling
 	super-save
+	swiper
 	tide
 	use-package
 	virtualenvwrapper
@@ -222,6 +223,12 @@
   :bind (("C-x C-f" . counsel-find-file)
 	 ("C-h f" . counsel-describe-function)
 	 ("C-h v" . counsel-describe-variable)))
+
+(use-package swiper
+  :bind (
+	 ;; There's no notion of forwards/backwards search with swiper.
+	 ("C-s" . swiper)
+	 ("C-r" . swiper)))
 
 ;; Flyspell
 (use-package flyspell
