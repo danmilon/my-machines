@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+[[ "$CONNECTION_ID" = "psh-vpn" ]] || exit 0
+
+# e.g. VPN_IP4_ADDRESS_0=10.8.0.58/32 0.0.0.0 cut -f2 -d: | cut -f1 -d/
+VPN_IP="$(echo -n $VPN_IP4_ADDRESS_0 | awk '{print $1}' | awk -F / '{print $1}')"
+
+# e.g. VPN_IP4_ROUTE_0=10.8.0.1/32 10.8.0.57 50
+VPN_DEST="$(echo -n $VPN_IP4_ROUTE_0 | awk '{print $2}')"
+VPN_ROUTE_METRIC="$(echo -n $VPN_IP4_ROUTE_0 | awk '{print $3}')"
+
+case "$NM_DISPATCHER_ACTION" in
+    vpn-pre-down)
+        iptables -D OUTPUT -t mangle -p tcp --dport 2222 -j MARK --set-mark 0x1
+        iptables -D OUTPUT -t mangle -p tcp --dport 444 -j MARK --set-mark 0x1
+        iptables -t nat -D POSTROUTING -o "$VPN_IP_IFACE" -j SNAT --to-source "$VPN_IP"
+        ip rule del fwmark 0x1
+        ip route del default table 200
+        ip route del "$VPN_DEST" table 200
+        sysctl --quiet net.ipv4.conf."$VPN_IP_IFACE".rp_filter=1
+    ;;
+    *)
+	exit 0
+    ;;
+esac
