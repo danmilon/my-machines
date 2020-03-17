@@ -196,15 +196,16 @@
         '((t   . ivy--regex-ignore-order))))
 
 (use-package counsel
-  :bind (("C-x C-f" . counsel-find-file)
-	 ("C-h f" . counsel-describe-function)
-	 ("C-h v" . counsel-describe-variable)))
+  :bind (([remap find-file] . counsel-find-file)
+	 ([remap describe-function] . counsel-describe-function)
+	 ([remap describe-variable] . counsel-describe-variable)
+	 ([remap comint-history-isearch-backward-regexp] . counsel-shell-history)))
 
 (use-package swiper
   :bind (
 	 ;; There's no notion of forwards/backwards search with swiper.
-	 ("C-s" . swiper)
-	 ("C-r" . swiper)))
+	 ([remap isearch-forward] . swiper)
+	 ([remap isearch-backward] . swiper)))
 
 ;; Flyspell
 (use-package flyspell
@@ -231,7 +232,7 @@
   (require 'dired-x))
 
 (use-package ace-window
-  :bind (("C-x o" . 'ace-window))
+  :bind (([remap other-window] . 'ace-window))
   :config
   (setq aw-scope 'frame))
 
