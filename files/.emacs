@@ -249,8 +249,8 @@
 (use-package flycheck
   :init (global-flycheck-mode))
 
-(use-package restclient-mode
-  :mode "\\.http\\'")
+(use-package restclient
+  :mode ("\\.http\\'" . restclient-mode))
 
 (use-package smartparens
   ;; Explicitly demand it because the presence of :bind makes it defer.
