@@ -26,7 +26,6 @@
 	epl
 	erlang
 	expand-region
-	flx-ido
 	flycheck
 	flycheck-rust
 	git-commit
@@ -34,9 +33,7 @@
 	go-eldoc
 	go-mode
 	google-this
-	ido
 	ivy
-	ido-vertical-mode
 	jinja2-mode
 	json-reformat
 	lorem-ipsum
@@ -165,30 +162,6 @@
 ;; load theme
 (load-theme 'zenburn t)
 
-;; ido - https://www.emacswiki.org/emacs/InteractivelyDoThings
-(use-package ido
-  :config
-  (setq ido-max-prospects 8                  ; don't spam my minibuffer
-	ido-case-fold  t                    ; be case-insensitive
-	ido-enable-last-directory-history t ; remember last used dirs
-	ido-max-work-directory-list 30      ; should be enough
-	ido-max-work-file-list      50      ; remember many
-	ido-use-filename-at-point nil       ; don't use filename at point (annoying)
-	ido-use-url-at-point nil            ; don't use url at point (annoying)
-	ido-enable-flex-matching nil        ; don't try to be too smart
-	ido-max-prospects 8                 ; don't spam my minibuffer
-	ido-confirm-unique-completion t)    ; wait for RET, even with unique completion
-  (ido-mode t)
-  (ido-everywhere t)
-  (ido-vertical-mode 1))
-
-;; flx-ido - https://github.com/lewang/flx
-(use-package flx-ido
-  :config
-  (flx-ido-mode 1)
-  ;; disable ido faces to see flx highlights
-  (setq ido-use-faces nil))
-
 ;; when using ido, the confirmation is rather annoying...
  (setq confirm-nonexistent-file-or-buffer nil)
 
@@ -201,7 +174,7 @@
 
 (use-package ivy
   :delight
-  :bind (("C-x b" . ivy-switch-buffer)
+  :bind (([remap switch-to-buffer] . ivy-switch-buffer)
 	 ("C-c C-r" . ivy-resume)
 	 ("C-c v" . ivy-push-view)
 	 ("C-c V" . ivy-pop-view)
