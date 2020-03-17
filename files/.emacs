@@ -400,19 +400,17 @@
   (global-auto-revert-mode))
 
 (use-package multi-term
-  :bind (("C-c C-t t" . 'multi-term)
-	 ("C-c C-t n" . 'multi-term-next)
-	 ("C-c C-t p" . 'multi-term-prev)
-	 ("C-c C-t d o" . 'multi-term-dedicated-open)
-	 ("C-c C-t d c" . 'multi-term-dedicated-close)
-	 ("C-c C-t d t" . 'multi-term-dedicated-toggle)
-	 ("C-c C-t d s" . 'multi-term-dedicated-select)))
+  :bind (("C-c C-t t" . multi-term)
+	 ("C-c C-t n" . multi-term-next)
+	 ("C-c C-t p" . multi-term-prev)
+	 ("C-c C-t d o" . multi-term-dedicated-open)
+	 ("C-c C-t d c" . multi-term-dedicated-close)
+	 ("C-c C-t d t" . multi-term-dedicated-toggle)
+	 ("C-c C-t d s" . multi-term-dedicated-select)))
 
-;; (use-package term
-;;   :bind (:map term-mode-map
-;; 	 ("C-c C-k" . 'term-char-mode)
-;; 	 :map term-raw-map
-;; 	 ("C-c C-j" . 'term-line-mode)))
+(use-package term
+  :bind (("C-c C-k" . term-char-mode)
+	 ("C-c C-j" . term-line-mode)))
 
 ;; MISC
 
