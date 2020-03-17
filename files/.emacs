@@ -399,6 +399,21 @@
   :config
   (global-auto-revert-mode))
 
+(use-package multi-term
+  :bind (("C-c C-t t" . 'multi-term)
+	 ("C-c C-t n" . 'multi-term-next)
+	 ("C-c C-t p" . 'multi-term-prev)
+	 ("C-c C-t d o" . 'multi-term-dedicated-open)
+	 ("C-c C-t d c" . 'multi-term-dedicated-close)
+	 ("C-c C-t d t" . 'multi-term-dedicated-toggle)
+	 ("C-c C-t d s" . 'multi-term-dedicated-select)))
+
+;; (use-package term
+;;   :bind (:map term-mode-map
+;; 	 ("C-c C-k" . 'term-char-mode)
+;; 	 :map term-raw-map
+;; 	 ("C-c C-j" . 'term-line-mode)))
+
 ;; MISC
 
 ;; remove trailing whitespace before save
@@ -413,7 +428,7 @@
 (setq text-scale-mode-step 1.05)
 
 ;; load  .emacs.d/*.el
-(setq load-files-list '("python" "multi-term" "tide"))
+(setq load-files-list '("python" "tide"))
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
 
