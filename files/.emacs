@@ -418,6 +418,7 @@
 	 ("C-c C-t d s" . multi-term-dedicated-select)))
 
 (use-package term
+  ;; Also affecting multi-term.
   ;; <2020-03-18 Wed> TODO: These are the default keybinds, why don't they work
   ;; out of the box?
   :bind (("C-c C-k" . term-char-mode)
