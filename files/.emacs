@@ -125,7 +125,7 @@
   :config
   ;; add integration with ace-window
   (add-to-list 'super-save-triggers 'ace-window)
-  (super-save-mode +1))
+  (super-save-mode))
 
 (use-package eldoc
   :delight)
