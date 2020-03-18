@@ -473,3 +473,7 @@
       (set-window-display-table (selected-window) display-table))))
 
 (add-hook 'window-configuration-change-hook 'dan/pretty-terminal-window-divider)
+
+;; Enable commands that are disabled by default because they're confusing to
+;; new users.
+(put 'narrow-to-region 'disabled nil)
