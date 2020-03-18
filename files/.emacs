@@ -462,3 +462,14 @@
      ; option is in use.
      (setq comint-input-ring-separator "\n: \\([0-9]+\\):\\([0-9]+\\);")
      (comint-read-input-ring t))))
+
+;; In terminal mode, make the window divider prettier (Instead of dashed line,
+;; make it solid).
+;; See https://www.reddit.com/r/emacs/comments/3u0d0u/how_do_i_make_the_vertical_window_divider_more/
+(defun dan/pretty-terminal-window-divider ()
+  (unless (display-graphic-p)
+    (let ((display-table (or buffer-display-table standard-display-table)))
+      (set-display-table-slot display-table 5 ?│)
+      (set-window-display-table (selected-window) display-table))))
+
+(add-hook 'window-configuration-change-hook 'dan/pretty-terminal-window-divider)
