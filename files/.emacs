@@ -392,8 +392,8 @@
     (interactive)
     (ansi-color-apply-on-region (point-min) (point-max))))
 
-(use-package linum
-  :hook (prog-mode . linum-mode))
+(use-package display-line-numbers
+  :hook (prog-mode . display-line-numbers-mode))
 
 (use-package autorevert
   :delight
