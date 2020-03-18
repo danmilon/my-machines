@@ -400,6 +400,14 @@
   :config
   (global-auto-revert-mode))
 
+(use-package winner
+  ;; Winner mode is a global minor mode that records the changes in the window
+  ;; configuration (i.e., how the frames are partitioned into windows), so that
+  ;; you can undo them.
+  :delight
+  :config
+  (winner-mode))
+
 (use-package multi-term
   :bind (("C-c C-t t" . multi-term)
 	 ("C-c C-t n" . multi-term-next)
