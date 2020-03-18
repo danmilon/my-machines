@@ -247,7 +247,8 @@
   (yas-load-directory ".emacs.d/yasnippets"))
 
 (use-package flycheck
-  :init (global-flycheck-mode))
+  :config
+  (global-flycheck-mode))
 
 (use-package restclient
   :mode ("\\.http\\'" . restclient-mode))
