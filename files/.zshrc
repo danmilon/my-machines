@@ -46,7 +46,7 @@ fi
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH/lib/history.zsh
 
-alias clip='xclip -selection clipboard'
+alias clip='xsel --clipboard --input'
 alias o='xdg-open'
 alias less='less -R'
 alias updateall='sudo yaourt --noconfirm -Syu'

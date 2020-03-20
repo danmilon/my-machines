@@ -5,7 +5,7 @@ import time
 
 # read clipboard
 clipboard = subprocess.check_output([
-    'xclip', '-o', '-selection', 'clipboard'
+    'xsel', '--clipboard', '--output',
 ])
 
 clipboard = clipboard.decode()

@@ -179,6 +179,7 @@
           - lshw
           - docker-compose
           - pipenv
+          - xsel # clipboard management from the console.
           # zsh notify plugin dependencies
           - wmctrl
           - xdotool
