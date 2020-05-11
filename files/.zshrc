@@ -44,7 +44,14 @@ fi
 [ -n "$TMUX" ] && export TERM=screen-256color
 
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Shell History
 source $ZSH/lib/history.zsh
+
+# When searching for history entries in the line editor, do not display
+# duplicates of a line previously found, even if the duplicates are not
+# contiguous.
+setopt hist_find_no_dups
 
 alias clip='xsel --clipboard --input'
 alias o='xdg-open'
