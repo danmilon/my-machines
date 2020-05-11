@@ -116,8 +116,9 @@
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
 ;; Performance
-(setq gc-cons-threshold (* 1000 1000 1000)   ;; 100MB
-      read-process-output-max (* 1024 1024)) ;; 1MB
+;; Commented out to test magit diffs.
+;; (setq gc-cons-threshold (* 1000 1000 1000)   ;; 100MB
+;;       read-process-output-max (* 1024 1024)) ;; 1MB
 
 ;; save buffers frequently
 (use-package super-save
