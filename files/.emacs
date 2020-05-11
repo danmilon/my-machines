@@ -362,7 +362,9 @@
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((plantuml . t)
-     (python . t)))
+     (python . t)
+     (sql . t)
+     (shell . t)))
 
   (setq org-plantuml-jar-path
 	"/usr/share/java/plantuml/plantuml.jar"))
