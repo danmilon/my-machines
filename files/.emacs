@@ -128,6 +128,10 @@
   (add-to-list 'super-save-triggers 'ace-window)
   (super-save-mode))
 
+(use-package savehist
+  :config
+  (savehist-mode))
+
 (use-package eldoc
   :delight)
 
