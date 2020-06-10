@@ -128,6 +128,7 @@
           - gparted
           - fzf
           - beets
+          - beets-plugins # fedora-only?
           - python3-pyudev
           - lsof
           - compton
