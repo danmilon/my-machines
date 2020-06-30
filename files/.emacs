@@ -431,6 +431,13 @@
   :bind (("C-c C-k" . term-char-mode)
 	 ("C-c C-j" . term-line-mode)))
 
+(use-package forge
+  :after magit
+  :config
+  (add-to-list
+   'forge-alist
+   '("lab.plat.farm" "lab.plat.farm/api/v4" "lab.plat.farm" forge-gitlab-repository)))
+
 ;; MISC
 
 ;; remove trailing whitespace before save
