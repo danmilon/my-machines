@@ -1,0 +1,7 @@
+[Unit]
+Description=Slice used to run slow and stupid stuff.
+Before=slices.target
+
+[Slice]
+CPUAccounting=true
+CPUQuota=10%
