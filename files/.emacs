@@ -436,7 +436,8 @@
   :config
   (add-to-list
    'forge-alist
-   '("lab.plat.farm" "lab.plat.farm/api/v4" "lab.plat.farm" forge-gitlab-repository)))
+   '("lab.plat.farm" "lab.plat.farm/api/v4" "lab.plat.farm" forge-gitlab-repository))
+  (setq forge-topic-list-limit (quote (60 . -1))))
 
 ;; MISC
 
