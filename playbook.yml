@@ -184,6 +184,7 @@
           # zsh notify plugin dependencies
           - wmctrl
           - xdotool
+          - python3-pulsectl # used by the qtile config
           # ------------
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
