@@ -257,7 +257,7 @@
 (use-package yasnippet
   :config
   (yas-global-mode 1)
-  (yas-load-directory ".emacs.d/yasnippets"))
+  (yas-load-directory "~/.emacs.d/yasnippets"))
 
 (use-package flycheck
   :config
