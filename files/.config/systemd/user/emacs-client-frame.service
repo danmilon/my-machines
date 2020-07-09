@@ -4,7 +4,7 @@ Requires=emacs.service
 After=emacs.service
 
 [Service]
-ExecStart=/usr/bin/emacsclient -c
+ExecStart=/usr/local/bin/emacsclient -c
 
 [Install]
 WantedBy=default.target
