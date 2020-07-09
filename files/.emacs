@@ -137,10 +137,18 @@
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook ((python-mode . lsp))
+  :hook ((python-mode . lsp)
+	 (go-mode . lsp))
   :config
   (setq lsp-prefer-flymake nil
-	lsp-auto-guess-root t))
+	lsp-auto-guess-root t)
+
+  ;; Golang
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+  (setq lsp-gopls-server-path "~/.go/bin/gopls"))
 
 (use-package lsp-ui
   :hook ((lsp-mode . lsp-ui-mode))
