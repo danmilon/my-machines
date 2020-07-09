@@ -447,6 +447,63 @@
    '("lab.plat.farm" "lab.plat.farm/api/v4" "lab.plat.farm" forge-gitlab-repository))
   (setq forge-topic-list-limit (quote (60 . -1))))
 
+(use-package tramp
+  :config
+  (add-to-list
+   'tramp-methods
+   '("psssh"
+     (tramp-login-program        "/bin/sh -c 'psssh-client $@ @$0'")
+     (tramp-login-args           (("%h") ("-o" "EscapeChar=none" "-A" "-p" "444") ("%c")))
+     (tramp-remote-shell         "/bin/sh")
+     (tramp-remote-shell-login   ("-l"))
+     (tramp-remote-shell-args    ("-c"))
+     (tramp-copy-program         "psssh-scp")
+     (tramp-copy-args            (("%c") ("-p" "%k") ("-q") ("-r")))))
+
+  (customize-set-variable
+   'tramp-ssh-controlmaster-options
+   (concat
+    "-o ControlPath=~/.ssh/sockets/%%C "
+    "-o ControlMaster=auto -o ControlPersist=yes"))
+
+  (setq remote-file-name-inhibit-cache nil)
+  (setq vc-ignore-dir-regexp
+	(format "\\(%s\\)\\|\\(%s\\)"
+		vc-ignore-dir-regexp
+		tramp-file-name-regexp))
+
+  ;; Advices to override test functions, but tramp already caches the results
+  ;; of those per-connection so it's not too bad.
+  ;; (defun psssh-tramp-get-remote-stat (&rest r)
+  ;;   "/usr/bin/stat")
+  ;; (advice-add 'tramp-get-remote-stat :override 'psssh-tramp-get-remote-stat)
+  ;; (defun psssh-tramp-get-remote-readlink (&rest r)
+  ;;   "/usr/bin/readlink")
+  ;; (advice-add 'tramp-get-remote-readlink :override 'psssh-tramp-get-remote-readlink)
+  ;; (defun psssh-tramp-get-test-command (&rest r)
+  ;;   "/usr/bin/test")
+  ;; (advice-add 'tramp-get-test-command :override 'psssh-tramp-get-test-command)
+  ;; (defun psssh-tramp-find-file-exists-command (&rest r)
+  ;;   "/usr/bin/test -e")
+  ;; (advice-add 'tramp-find-file-exists-command :override 'psssh-tramp-find-file-exists-command)
+  ;; (defun psssh-tramp-get-ls-command (&rest r)
+  ;;   "/bin/ls")
+  ;; (advice-add 'tramp-get-ls-command :override 'psssh-tramp-get-ls-command)
+  ;; (defun psssh-tramp-get-ls-command-with-quoting-style (&rest r)
+  ;;   t)
+  ;; (advice-add 'tramp-get-ls-command-with-quoting-style :override 'psssh-tramp-get-ls-command-with-quoting-style)
+  ;; (defun psssh-tramp-get-ls-command-with-dired (&rest r)
+  ;;   t)
+  ;; (advice-add 'tramp-get-ls-command-with-dired :override (lambda (t)))
+  ;; TODO: Possibly use tramp-connection-properties
+  )
+
+(use-package auth-source
+  :config
+  (setq auth-sources
+	'((:source "~/.authinfo.gpg"))))
+
+
 ;; MISC
 
 ;; remove trailing whitespace before save
