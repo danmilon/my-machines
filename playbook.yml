@@ -141,7 +141,7 @@
           - entr
           - rlwrap
           - light
-          - lightdm-gtk
+          - gdm
           - plantuml
           - thermald
           - docker-ce
@@ -323,7 +323,7 @@
         - docker.service
         - dnscrypt-proxy.socket
         - bluetooth.service
-        - lightdm.service
+        - gdm.service
         - systemd-timesyncd.service
     - name: enable ntp
       command: timedatectl set-ntp true
