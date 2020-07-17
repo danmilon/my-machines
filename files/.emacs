@@ -391,6 +391,9 @@
        "venv"
        ".virtualenv"
        ".tox"))
+    ;; When switching projects, show the commander instead of doing find-file.
+    (setq projectile-switch-project-action
+	  #'projectile-commander)
     (setq projectile-enable-caching t)
     (setq projectile-use-git-grep 1)
     (setq projectile-completion-system 'ivy)
