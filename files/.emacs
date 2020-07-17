@@ -561,3 +561,6 @@
 ;; Enable commands that are disabled by default because they're confusing to
 ;; new users.
 (put 'narrow-to-region 'disabled nil)
+
+;; Save bookmarks on every edit, not only on exit.
+(customize-set-variable 'bookmark-save-flag 1)
