@@ -245,7 +245,8 @@
   (require 'dired-x))
 
 (use-package ace-window
-  :bind (([remap other-window] . 'ace-window))
+  :bind (([remap other-window] . 'ace-window)
+	 ([remap delete-window] . 'ace-delete-window))
   :config
   (setq aw-scope 'frame))
 
