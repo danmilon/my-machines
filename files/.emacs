@@ -460,9 +460,7 @@
      (tramp-login-args           (("%h") ("-o" "EscapeChar=none" "-A" "-p" "444") ("%c")))
      (tramp-remote-shell         "/bin/sh")
      (tramp-remote-shell-login   ("-l"))
-     (tramp-remote-shell-args    ("-c"))
-     (tramp-copy-program         "psssh-scp")
-     (tramp-copy-args            (("%c") ("-p" "%k") ("-q") ("-r")))))
+     (tramp-remote-shell-args    ("-c"))))
 
   (customize-set-variable
    'tramp-ssh-controlmaster-options
