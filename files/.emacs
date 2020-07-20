@@ -507,6 +507,9 @@
 
 ;; MISC
 
+;; Prefer horizontal window splitting.
+(setq split-height-threshold 100)
+
 ;; remove trailing whitespace before save
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
