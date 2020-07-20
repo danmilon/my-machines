@@ -137,8 +137,7 @@
 
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook ((python-mode . lsp)
-	 (go-mode . lsp))
+  :hook ((python-mode go-mode) . lsp)
   :config
   (setq lsp-prefer-flymake nil
 	lsp-auto-guess-root t)
@@ -151,7 +150,7 @@
   (setq lsp-gopls-server-path "~/.go/bin/gopls"))
 
 (use-package lsp-ui
-  :hook ((lsp-mode . lsp-ui-mode))
+  :hook (lsp-mode . lsp-ui-mode)
   :config
   ;; Disable auto-showing docs. Can still show with lsp-ui-doc-glance.
   (setq lsp-ui-doc-enable nil
