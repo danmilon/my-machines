@@ -455,8 +455,11 @@
   (add-to-list
    'tramp-methods
    '("psssh"
-     (tramp-login-program        "/bin/sh -c 'psssh-client $@ @$0'")
-     (tramp-login-args           (("%h") ("-o" "EscapeChar=none" "-A" "-p" "444") ("%c")))
+     ;; keep essential args in tramp-login-program because when doing
+     ;; multi-term from a tramp dired buffer, it doesn't pass tramp-login-args
+     ;; (so for example absence of -A means no agent forwarding).
+     (tramp-login-program        "/bin/sh -c 'psssh-client -p 444 -A $@ @$0'")
+     (tramp-login-args           (("%h") ("-o" "EscapeChar=none") ("%c")))
      (tramp-remote-shell         "/bin/sh")
      (tramp-remote-shell-login   ("-l"))
      (tramp-remote-shell-args    ("-c"))))
