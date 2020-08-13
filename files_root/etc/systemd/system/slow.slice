@@ -4,8 +4,8 @@ Before=slices.target
 
 [Slice]
 CPUAccounting=true
-CPUQuota=10%
+CPUQuota=5%
 
 # Defaults to 100, so this means 10%.
 IOAccounting=true
-IOWeight=10
+IOWeight=5
