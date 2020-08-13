@@ -423,7 +423,12 @@
   :config
   (defun display-ansi-colors ()
     (interactive)
-    (ansi-color-apply-on-region (point-min) (point-max))))
+    (ansi-color-apply-on-region (point-min) (point-max)))
+
+  ;; Colors in compilation buffers.
+  (defun colorize-compilation-buffer ()
+    (ansi-color-apply-on-region compilation-filter-start (point)))
+  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer))
 
 (use-package display-line-numbers
   :hook (prog-mode . display-line-numbers-mode))
