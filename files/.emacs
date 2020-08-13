@@ -382,6 +382,7 @@
 	"/usr/share/java/plantuml/plantuml.jar"))
 
 (use-package projectile
+    :delight
     :bind-keymap
     ("C-c p" . projectile-command-map)
     :config
