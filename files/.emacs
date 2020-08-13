@@ -635,3 +635,9 @@
           bookmark-files)
   (byte-recompile-directory bookmarkplus-dir 0)
   (require 'bookmark+))
+
+(use-package profiler
+  :config
+  (setf (caar profiler-report-cpu-line-format) 100
+      (caar profiler-report-memory-line-format) 100)
+  (setq profiler-max-stack-depth 30))
