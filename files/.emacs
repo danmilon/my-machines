@@ -397,6 +397,14 @@
     (setq projectile-enable-caching t)
     (setq projectile-use-git-grep 1)
     (setq projectile-completion-system 'ivy)
+
+    (defun my/ad-projectile-project-root (orig-fun &optional dir)
+      "This should disable projectile when visiting files with ftp tramp."
+      (let ((dir (file-truename (or dir default-directory))))
+	(unless (file-remote-p dir)
+	  (funcall orig-fun dir))))
+    (advice-add 'projectile-project-root :around #'my/ad-projectile-project-root)
+
     (projectile-mode))
 
 (use-package tramp
