@@ -484,6 +484,15 @@
      (tramp-remote-shell-login   ("-l"))
      (tramp-remote-shell-args    ("-c"))))
 
+  (add-to-list
+   'tramp-methods
+   '("pssshi"
+     (tramp-login-program "/bin/sh -c \"(test -e /tmp/id || ssh-keygen -f /tmp/id -P '') && psssh-client -o StrictHostKeyChecking=no -i /tmp/id $(echo -n 'import sys; print(next(h for h in root.hosts.itervalues() if h.__name__.startswith(sys.argv[3])).ip)' | platform script /dev/stdin i-009e7ca4c5556fc20)\"")
+     (tramp-login-args (("%h")))
+     (tramp-remote-shell "/bin/sh")
+     (tramp-remote-shell-login ("-l"))
+     (tramp-remote-shell-args ("-c"))))
+
   (customize-set-variable
    'tramp-ssh-controlmaster-options
    (concat
