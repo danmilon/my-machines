@@ -409,7 +409,13 @@
 
 (use-package tramp
   :config
-  (setq tramp-default-method "ssh"))
+  (setq tramp-default-method "ssh")
+
+  ;; Disable backups in tramp.
+  (add-hook 'find-file-hook
+            (lambda ()
+	      (when (file-remote-p default-directory)
+		(setq-local backup-inhibited t)))))
 
 ;; ansi-colors
 (use-package ansi-color
