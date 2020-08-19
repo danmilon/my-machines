@@ -381,6 +381,16 @@
   (setq org-plantuml-jar-path
 	"/usr/share/java/plantuml/plantuml.jar"))
 
+(use-package virtualenvwrapper
+  :config
+  (setq venv-dirlookup-names '(".venv" "venv" ".virtualenv" "virtualenv"))
+  (defun dan/venv-projectile-auto-workon ()
+    (unless (file-remote-p default-directory)
+      (venv-projectile-auto-workon)))
+
+  :hook ((text-mode . dan/venv-projectile-auto-workon)
+	 (prog-mode . dan/venv-projectile-auto-workon)))
+
 (use-package projectile
     :delight
     :bind-keymap

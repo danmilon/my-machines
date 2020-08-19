@@ -5,8 +5,6 @@
     (setq mode-line-format (cons '(:exec venv-current-name) mode-line-format)))
   (electric-indent-mode -1)
   (local-set-key (kbd "RET") 'newline-and-indent)
-  (setq venv-dirlookup-names '(".venv" "venv" ".virtualenv" "virtualenv"))
-  (venv-projectile-auto-workon)
   (pipenv-mode)
   ))
 
