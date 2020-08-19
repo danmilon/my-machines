@@ -557,9 +557,8 @@
 
 (use-package auth-source
   :config
-  (setq auth-sources
-	'((:source "~/.authinfo.gpg"))))
-
+  (setq auth-sources '((:source "~/.authinfo.gpg"))
+	auth-source-save-behavior nil))
 
 ;; MISC
 
