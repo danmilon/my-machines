@@ -416,16 +416,6 @@
 
     (projectile-mode))
 
-(use-package tramp
-  :config
-  (setq tramp-default-method "ssh")
-
-  ;; Disable backups in tramp.
-  (add-hook 'find-file-hook
-            (lambda ()
-	      (when (file-remote-p default-directory)
-		(setq-local backup-inhibited t)))))
-
 ;; ansi-colors
 (use-package ansi-color
   :mode ("\\.log\\'" . display-ansi-colors)
@@ -507,6 +497,14 @@
    (concat
     "-o ControlPath=~/.ssh/sockets/%%C "
     "-o ControlMaster=auto -o ControlPersist=yes"))
+
+  (setq tramp-default-method "ssh")
+
+  ;; Disable backups in tramp.
+  (add-hook 'find-file-hook
+            (lambda ()
+	      (when (file-remote-p default-directory)
+		(setq-local backup-inhibited t))))
 
   (setq remote-file-name-inhibit-cache nil)
   (setq vc-ignore-dir-regexp
