@@ -586,9 +586,13 @@
 (setq text-scale-mode-step 1.05)
 
 ;; load  .emacs.d/*.el
-(setq load-files-list '("python" "tide" "hydra" "psh"))
+(setq load-files-list '("python" "tide" "hydra"))
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
+
+;; load psh-el.
+(add-to-list 'load-path "~/.emacs.d/emacs-psh/")
+(require 'psh)
 
 ;; modes for everything
 (auto-fill-mode 1)
