@@ -100,16 +100,6 @@ alias atc-from-internet='(cd ~/atc-archive && vlc --rate=1.5 $(rsync -arv -e "ss
 alias atc-from-home='(cd ~/atc-archive && vlc --rate=1.5 $(rsync -arv -e "ssh danmilon@rtlsdr-atc-1.danmilon.node.her.wn" :/home/danmilon/atc-archives/ ~/atc-archive/  | tee -a /dev/tty ~/tmp/atc | sort-atc-archives))'
 
 
-function chpwd() {
-    if [[ -f venv/bin/activate ]]; then
-	. venv/bin/activate
-    elif [[ -f .virtualenv/bin/activate ]]; then
-	. .virtualenv/bin/activate
-    elif [[ -f .env/bin/activate ]]; then
-	. .env/bin/activate
-    fi
-}
-
 function pytmp() {
     py_version=${1:-3}
     echo $py_version
@@ -135,10 +125,23 @@ PROMPT="%B${return_code}%b
 ${user_host} ${current_dir}%B${user_symbol}%b $ "
 RPS1=""
 
+# pyenv.
+export PATH="/home/danmilon/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 # Platform.sh stuff:
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
 
 alias platform-tb='PLATFORMSH_CLI_ACCOUNTS_API=http://testbed.plat.farm platform'
-alias platform-staging="PLATFORMSH_CLI_SESSION_ID=staging PLATFORMSH_CLI_API_URL=https://api.staging.plat.farm PLATFORMSH_CLI_ACCOUNTS_API=https://accounts.staging.plat.farm/api/v1/ PLATFORMSH_CLI_OAUTH2_AUTH_URL=https://accounts.staging.plat.farm/oauth2/authorize PLATFORMSH_CLI_OAUTH2_TOKEN_URL=https://accounts.staging.plat.farm/oauth2/token PLATFORMSH_CLI_OAUTH2_REVOKE_URL=https://accounts.staging.plat.farm/oauth2/revoke platform"
+alias platform-staging='PLATFORMSH_CLI_SESSION_ID=staging \
+PLATFORMSH_CLI_API_URL=https://api.staging.plat.farm \
+PLATFORMSH_CLI_ACCOUNTS_API=https://accounts.staging.plat.farm/api/v1/ \
+PLATFORMSH_CLI_OAUTH2_AUTH_URL=https://auth.plat.farm/oauth2/authorize \
+PLATFORMSH_CLI_OAUTH2_TOKEN_URL=https://auth.plat.farm/oauth2/token \
+PLATFORMSH_CLI_OAUTH2_REVOKE_URL=https://auth.plat.farm/oauth2/revoke \
+PLATFORMSH_CLI_CERTIFIER_URL=https://ssh.auth.plat.farm \
+PLATFORMSH_CLI_SSH_DOMAIN_WILDCARD=*.plat.farm \
+platform'

@@ -63,7 +63,6 @@
 	swiper
 	tide
 	use-package
-	virtualenvwrapper
 	w3
 	web-mode
 	yaml-mode
@@ -381,15 +380,6 @@
   (setq org-plantuml-jar-path
 	"/usr/share/java/plantuml/plantuml.jar"))
 
-(use-package virtualenvwrapper
-  :config
-  (setq venv-dirlookup-names '(".venv" "venv" ".virtualenv" "virtualenv"))
-  (defun dan/venv-projectile-auto-workon ()
-    (unless (file-remote-p default-directory)
-      (venv-projectile-auto-workon)))
-
-  :hook ((text-mode prog-mode dired-mode) . dan/venv-projectile-auto-workon))
-
 (use-package projectile
     :delight
     :bind-keymap
@@ -434,8 +424,7 @@
 
 (use-package autorevert
   :delight
-  :config
-  (global-auto-revert-mode))
+  )
 
 (use-package winner
   ;; Winner mode is a global minor mode that records the changes in the window
