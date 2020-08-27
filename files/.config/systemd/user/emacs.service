@@ -8,7 +8,9 @@ Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
 
 [Service]
 Type=notify
-ExecStart=/usr/local/bin/emacs --fg-daemon
+# Go through ZSH to run our zshrc which amongst others, edits the PATH.
+# Force it to be interactive so that it reads .zshrc.
+ExecStart=/usr/bin/zsh -i -c '/usr/local/bin/emacs --fg-daemon'
 ExecStop=/usr/local/bin/emacsclient --eval "(kill-emacs)"
 # The location of the SSH auth socket varies by distribution, and some
 # set it from PAM, so don't override by default.
