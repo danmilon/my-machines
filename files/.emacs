@@ -480,26 +480,6 @@
 		vc-ignore-dir-regexp
 		tramp-file-name-regexp))
 
-  (setq tramp-props
-	'(("locale" . "LC_ALL=en_US.utf8")
-	  ("test . "test)
-	  ("readlink" "\\readlink")
-	  ("stat" "env QUOTING_STYLE=locale \\stat")
-	  ("id" . "env QUOTING_STYLE=locale \\stat")
-	  ("ls" . "--quoting-style=literal --show-control-chars")
-	  ("ls--quoting-style=literal --show-control-chars" . "/bin/ls --color=never")
-	  ("ls--dired" . "--quoting-style=literal --show-control-chars")
-	  ("df-blocksize" . "--dired")
-	  ("df" . "\\df --block-size=1 --output=size,used,avail")
-	  ("file-exists" . "test -e")
-	  ("case-insensitive" . nil)))
-
-  (mapc (lambda (prop)
-	  (add-to-list 'tramp-connection-properties
-		       (list (regexp-quote "/psssh:.*:")
-			     (car prop) (cdr prop))))
-	tramp-props)
-
   ;; Disable auto-save backups.
   (add-to-list 'backup-directory-alist
                (cons tramp-file-name-regexp nil))
