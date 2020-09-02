@@ -368,6 +368,9 @@
   (setq org-todo-keywords
 	'((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
+  ;; Do not mess up my windows.
+  (setq org-src-window-setup 'current-window)
+
   ;; plantuml integration via org-babel
   ;; https://eschulte.github.io/babel-dev/DONE-integrate-plantuml-support.html
   (org-babel-do-load-languages
