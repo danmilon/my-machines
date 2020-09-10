@@ -33,6 +33,7 @@
 	go-eldoc
 	go-mode
 	google-this
+	gruvbox-theme
 	ivy
 	jinja2-mode
 	json-reformat
@@ -171,7 +172,7 @@
 (global-set-key (kbd "M-g") 'goto-line)
 
 ;; load theme
-(load-theme 'zenburn t)
+(load-theme 'gruvbox-dark-soft t)
 
 ;; when using ido, the confirmation is rather annoying...
  (setq confirm-nonexistent-file-or-buffer nil)
