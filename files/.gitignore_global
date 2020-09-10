@@ -4,3 +4,6 @@
 *.pyc
 node_modules
 .dir-locals.el
+
+# pyenv
+.python-version
