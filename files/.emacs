@@ -408,6 +408,12 @@
 	  (funcall orig-fun dir))))
     (advice-add 'projectile-project-root :around #'my/ad-projectile-project-root)
 
+    (defun projectile-run-pdb ()
+      "Invoke `pdb' in the project's root."
+      (interactive)
+      (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
+	(call-interactively 'realgud:pdb)))
+
     (projectile-mode))
 
 ;; ansi-colors
