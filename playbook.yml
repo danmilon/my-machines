@@ -301,13 +301,6 @@
         - { path: 'usr/local/bin/monitor-set-initial-mode', mode: '0755' }
         - { path: 'usr/local/bin/monitor-only-external', mode: '0755'}
         - { path: 'etc/default/tlp' }
-    - name: disable systemd services
-      systemd:
-        name: "{{ item }}"
-        enabled: false
-      with_items:
-        - gdm.service
-      become: true
     - name: enable systemd services
       systemd:
         name: "{{ item}}"
