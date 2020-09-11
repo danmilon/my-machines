@@ -154,8 +154,7 @@
   :config
   ;; Disable auto-showing docs. Can still show with lsp-ui-doc-glance.
   (setq lsp-ui-doc-enable nil
-	lsp-ui-doc-delay 0)
-  :bind (("s-l h g" . lsp-ui-doc-glance)))
+	lsp-ui-doc-delay 0))
 
 (use-package lsp-python-ms
   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
