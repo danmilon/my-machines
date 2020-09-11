@@ -38,6 +38,7 @@
 	jinja2-mode
 	json-reformat
 	lorem-ipsum
+	lsp-ivy
 	lsp-mode
 	lsp-python-ms
 	lsp-ui
@@ -155,6 +156,10 @@
   ;; Disable auto-showing docs. Can still show with lsp-ui-doc-glance.
   (setq lsp-ui-doc-enable nil
 	lsp-ui-doc-delay 0))
+
+(use-package lsp-ivy
+  :after (lsp-ui)
+  :bind (([remap lsp-ui-peek-find-workspace-symbol] . lsp-ivy-workspace-symbol)))
 
 (use-package lsp-python-ms
   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
