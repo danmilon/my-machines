@@ -13,12 +13,20 @@ plugins=(
     sudo
     python
     pass
-    kubectl
 
     # notify when a long running command finishes.
     # https://github.com/marzocchi/zsh-notify
     notify
 )
+
+kubectl() {
+    # Lazy load kubectl completion.
+    # Normally we'd add kubectl to the plugins list, but it adds 0.1s to the startup time.
+    # See https://github.com/ohmyzsh/ohmyzsh/issues/6843#issuecomment-414193880
+    unfunction "$0"
+    source <(kubectl completion zsh)
+    $0 "$@"
+}
 
 ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
