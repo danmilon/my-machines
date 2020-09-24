@@ -67,6 +67,7 @@
 	use-package
 	w3
 	web-mode
+	which-key
 	yaml-mode
 	yasnippet
 	yasnippet-snippets
@@ -136,9 +137,17 @@
 (use-package eldoc
   :delight)
 
+(use-package which-key
+  :config
+  (which-key-mode))
+
 (use-package lsp-mode
   :commands (lsp lsp-deferred)
-  :hook ((python-mode go-mode) . lsp)
+  :hook ((python-mode . lsp)
+	 (go-mode . lsp)
+	 ;; which-key makes it easy to learn the long lsp keybinds.
+	 (lsp-mode . lsp-enable-which-key-integration))
+  :after (which-key)
   :config
   (setq lsp-prefer-flymake nil
 	lsp-auto-guess-root t)
