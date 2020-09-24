@@ -224,7 +224,13 @@
   :bind (([remap find-file] . counsel-find-file)
 	 ([remap describe-function] . counsel-describe-function)
 	 ([remap describe-variable] . counsel-describe-variable)
-	 ([remap comint-history-isearch-backward-regexp] . counsel-shell-history)))
+	 ([remap comint-history-isearch-backward-regexp] . counsel-shell-history)
+
+	 :map minibuffer-local-map
+	 ("C-r"     . counsel-minibuffer-history)
+
+	 :map shell-mode-map
+	 ("C-r" . counsel-shell-history)))
 
 (use-package swiper
   :bind (
