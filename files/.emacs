@@ -631,3 +631,7 @@
 
 (use-package ibuffer
   :bind (([remap list-buffers] . ibuffer)))
+
+(use-package ediff
+  :config
+  (customize-set-variable 'ediff-window-setup-function 'ediff-setup-windows-plain))
