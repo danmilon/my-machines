@@ -635,3 +635,7 @@
 (use-package ediff
   :config
   (customize-set-variable 'ediff-window-setup-function 'ediff-setup-windows-plain))
+
+;; TODO: Submit this as an MR (add BECOME to the initial regexp-opt)
+(setq comint-password-prompt-regexp
+      (rx (or (regexp comint-password-prompt-regexp) "BECOME password:")))
