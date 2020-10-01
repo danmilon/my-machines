@@ -491,7 +491,8 @@
   (add-to-list
    'forge-alist
    '("lab.plat.farm" "lab.plat.farm/api/v4" "lab.plat.farm" forge-gitlab-repository))
-  (setq forge-topic-list-limit (quote (60 . -1))))
+  ;; Show maximum 30 OPEN topics in each list in magit status, and no CLOSED.
+  (setq forge-topic-list-limit (quote (30 . -1))))
 
 (use-package tramp
   :config
