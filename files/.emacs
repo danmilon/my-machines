@@ -122,6 +122,12 @@
 ;; (setq gc-cons-threshold (* 1000 1000 1000)   ;; 100MB
 ;;       read-process-output-max (* 1024 1024)) ;; 1MB
 
+(use-package gcmh
+  ;; GC Magit Hack.
+  ;; Prevent GC when active, promote it when idle.
+  :config
+  (gcmh-mode))
+
 ;; save buffers frequently
 (use-package super-save
   :delight
