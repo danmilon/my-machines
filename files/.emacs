@@ -125,6 +125,7 @@
 (use-package gcmh
   ;; GC Magit Hack.
   ;; Prevent GC when active, promote it when idle.
+  :delight
   :config
   (gcmh-mode))
 
