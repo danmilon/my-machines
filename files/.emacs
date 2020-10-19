@@ -647,6 +647,9 @@
 ;; Especially useful for the shell commands history.
 (setq history-delete-duplicates t)
 
+;; Default 100 is too low.
+(customize-set-variable 'history-length 500)
+
 ;; TODO: Submit this as an MR (add BECOME to the initial regexp-opt)
 (setq comint-password-prompt-regexp
       (rx (or (regexp comint-password-prompt-regexp) "BECOME password:")))
