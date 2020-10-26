@@ -646,6 +646,7 @@
 
 ;; Especially useful for the shell commands history.
 (setq history-delete-duplicates t)
+(setq comint-input-ignoredups t)
 
 ;; Default 100 is too low.
 (customize-set-variable 'history-length 500)
