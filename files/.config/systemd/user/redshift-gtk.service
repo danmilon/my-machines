@@ -2,7 +2,7 @@
 Description=Redshift GTK
 
 [Service]
-ExecStart=/usr/bin/redshift-gtk
+ExecStart=/usr/bin/redshift-gtk -v
 
 [Install]
 WantedBy=default.target
