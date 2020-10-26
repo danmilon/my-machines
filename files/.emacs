@@ -552,6 +552,10 @@
   (setq auth-sources '((:source "~/.authinfo.gpg"))
 	auth-source-save-behavior nil))
 
+(use-package slime
+  :config
+  (setq inferior-lisp-program "sbcl"))
+
 ;; MISC
 
 ;; Prefer horizontal window splitting.
