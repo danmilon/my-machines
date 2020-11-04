@@ -351,6 +351,10 @@
        md
        odt))))
 
+(use-package ox-gfm
+  ;; org export backend to Github Flavored Markdown.
+  :after org)
+
 (use-package projectile
     :delight
     :bind-keymap
