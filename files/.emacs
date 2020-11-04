@@ -339,7 +339,17 @@
      (shell . t)))
 
   (setq org-plantuml-jar-path
-	"/usr/share/java/plantuml/plantuml.jar"))
+	"/usr/share/java/plantuml/plantuml.jar")
+
+  ;; Enable org-export backends.
+  (custom-set-variables
+   '(org-export-backends
+     '(ascii
+       html
+       icalendar
+       latex
+       md
+       odt))))
 
 (use-package projectile
     :delight
