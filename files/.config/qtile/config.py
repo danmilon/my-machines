@@ -465,7 +465,8 @@ def autostart():
     # subprocess.call(["systemctl", "--user", "import-environment"])
     services = [
         "monitor-set-initial-mode",
-        "clementine",
+        # Don't do clementine cause it breaks the keyboard (!).
+        # "clementine",
         "emacs",
         "emacs-client-frame",
         "firefox",
