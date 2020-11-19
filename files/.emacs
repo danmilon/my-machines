@@ -265,6 +265,7 @@
   ;; Omit hidden files.
   (setq dired-omit-mode t)
   (setq dired-omit-files "^\\...+$")
+  (setq dired-omit-verbose nil)
 
   ;; enable some really cool extensions like C-x C-j(dired-jump)
   (require 'dired-x))
