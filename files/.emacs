@@ -10,11 +10,9 @@
 (setq package-list
       '(
 	ace-window
-	amx
 	autopair
 	buffer-move
 	concurrent
-	counsel
 	ctable
 	dash
 	deferred
@@ -34,11 +32,9 @@
 	go-mode
 	google-this
 	gruvbox-theme
-	ivy
 	jinja2-mode
 	json-reformat
 	lorem-ipsum
-	lsp-ivy
 	lsp-mode
 	lsp-python-ms
 	lsp-ui
@@ -62,7 +58,6 @@
 	smartparens
 	smooth-scrolling
 	super-save
-	swiper
 	tide
 	use-package
 	w3
@@ -179,10 +174,6 @@
   (setq lsp-ui-doc-enable nil
 	lsp-ui-doc-delay 0))
 
-(use-package lsp-ivy
-  :after (lsp-ui)
-  :bind (([remap lsp-ui-peek-find-workspace-symbol] . lsp-ivy-workspace-symbol)))
-
 (use-package lsp-python-ms
   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
 
@@ -203,53 +194,39 @@
 ;; when using ido, the confirmation is rather annoying...
  (setq confirm-nonexistent-file-or-buffer nil)
 
-;; amx for smart M-x
-(use-package amx
+(use-package selectrum
+  ;; completion-read enhancement.
   :config
-  (setq amx-backend 'ivy
-	amx-show-key-bindings t)
-  (amx-mode))
+  (selectrum-mode))
 
-(use-package ivy
-  :delight
-  :bind (([remap switch-to-buffer] . ivy-switch-buffer)
-	 ("C-c C-r" . ivy-resume)
-	 ("C-c v" . ivy-push-view)
-	 ("C-c V" . ivy-pop-view)
-	 :map ivy-mode-map
-	 ("C-'" . ivy-avy))
+(use-package prescient
+  ;; completion list filtering sorting enhancement.
+  :after selectrum
   :config
-  (ivy-mode 1)
-  ;; add ‘recentf-mode’ and bookmarks to ‘ivy-switch-buffer’.
-  (setq ivy-use-virtual-buffers t)
-  ;; number of result lines to display
-  (setq ivy-height 10)
-  ;; does not count candidates
-  ;; (setq ivy-count-format "")
-  ;; no regexp by default
-  (setq ivy-initial-inputs-alist nil)
-  ;; configure regexp engine.
-  (setq ivy-re-builders-alist
-	;; allow input not in order
-        '((t   . ivy--regex-ignore-order))))
+  (selectrum-prescient-mode)
+  (prescient-persist-mode))
 
-(use-package counsel
-  :bind (([remap find-file] . counsel-find-file)
-	 ([remap describe-function] . counsel-describe-function)
-	 ([remap describe-variable] . counsel-describe-variable)
-	 ([remap comint-history-isearch-backward-regexp] . counsel-shell-history)
+(use-package marginalia
+  :after selectrum
 
-	 :map minibuffer-local-map
-	 ("C-r"     . counsel-minibuffer-history)
+  ;; Enable richer annotations using the Marginalia package
+  :bind (:map minibuffer-local-map
+              ("C-M-a" . marginalia-cycle))
 
-	 :map shell-mode-map
-	 ("C-r" . counsel-shell-history)))
+  ;; The :init configuration is always executed (Not lazy!)
+  :init
 
-(use-package swiper
-  :bind (
-	 ;; There's no notion of forwards/backwards search with swiper.
-	 ([remap isearch-forward] . swiper)
-	 ([remap isearch-backward] . swiper)))
+  ;; Must be in the :init section of use-package such that the mode gets
+  ;; enabled right away. Note that this forces loading the package.
+  (marginalia-mode)
+
+  ;; When using Selectrum, ensure that Selectrum is refreshed when cycling annotations.
+  (advice-add #'marginalia-cycle :after
+              (lambda () (when (bound-and-true-p selectrum-mode) (selectrum-exhibit)))))
+
+(use-package ctrlf
+  :config
+  (ctrlf-mode))
 
 ;; Flyspell
 (use-package flyspell
@@ -377,7 +354,6 @@
 	  #'projectile-commander)
     (setq projectile-enable-caching t)
     (setq projectile-use-git-grep 1)
-    (setq projectile-completion-system 'ivy)
 
     (defun my/ad-projectile-project-root (orig-fun &optional dir)
       "This should disable projectile when visiting files with ftp tramp."
