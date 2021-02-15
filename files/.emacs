@@ -434,10 +434,10 @@
   (setq tramp-default-method "ssh")
 
   ;; Disable backups in tramp.
-  (add-hook 'find-file-hook
-            (lambda ()
-	      (when (file-remote-p default-directory)
-		(setq-local backup-inhibited t))))
+  (defun dan-backup-inhibit-on-tramp-hook ()
+      (when (file-remote-p default-directory)
+		(setq-local backup-inhibited t)))
+  (add-hook 'find-file-hook #'dan-backup-inhibit-on-tramp-hook)
 
   (setq remote-file-name-inhibit-cache nil)
   (setq vc-ignore-dir-regexp
