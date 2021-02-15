@@ -81,6 +81,10 @@
   (unless (package-installed-p package)
     (package-install package)))
 
+; auto install missing deps with use-package
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 ;; set fill column
 (setq-default fill-column 79)
 
