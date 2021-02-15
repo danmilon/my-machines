@@ -180,6 +180,7 @@
           - lshw
           - docker-compose
           - pipenv
+          - yubikey-manager
           - xsel # clipboard management from the console.
           # zsh notify plugin dependencies
           - wmctrl
