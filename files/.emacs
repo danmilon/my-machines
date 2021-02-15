@@ -576,6 +576,12 @@
   :config
   (customize-set-variable 'ediff-window-setup-function 'ediff-setup-windows-plain))
 
+
+(use-package xt-mouse
+  ;; It's builtin.
+  ;; The original xterm mouse functionality is achieved by holding Shift.
+  :config
+  (xterm-mouse-mode))
 ;; Especially useful for the shell commands history.
 (setq history-delete-duplicates t)
 (setq comint-input-ignoredups t)
