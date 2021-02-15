@@ -447,33 +447,7 @@
 
   ;; Disable auto-save backups.
   (add-to-list 'backup-directory-alist
-               (cons tramp-file-name-regexp nil))
-
-  ;; Advices to override test functions, but tramp already caches the results
-  ;; of those per-connection so it's not too bad.
-  ;; (defun psssh-tramp-get-remote-stat (&rest r)
-  ;;   "/usr/bin/stat")
-  ;; (advice-add 'tramp-get-remote-stat :override 'psssh-tramp-get-remote-stat)
-  ;; (defun psssh-tramp-get-remote-readlink (&rest r)
-  ;;   "/usr/bin/readlink")
-  ;; (advice-add 'tramp-get-remote-readlink :override 'psssh-tramp-get-remote-readlink)
-  ;; (defun psssh-tramp-get-test-command (&rest r)
-  ;;   "/usr/bin/test")
-  ;; (advice-add 'tramp-get-test-command :override 'psssh-tramp-get-test-command)
-  ;; (defun psssh-tramp-find-file-exists-command (&rest r)
-  ;;   "/usr/bin/test -e")
-  ;; (advice-add 'tramp-find-file-exists-command :override 'psssh-tramp-find-file-exists-command)
-  ;; (defun psssh-tramp-get-ls-command (&rest r)
-  ;;   "/bin/ls")
-  ;; (advice-add 'tramp-get-ls-command :override 'psssh-tramp-get-ls-command)
-  ;; (defun psssh-tramp-get-ls-command-with-quoting-style (&rest r)
-  ;;   t)
-  ;; (advice-add 'tramp-get-ls-command-with-quoting-style :override 'psssh-tramp-get-ls-command-with-quoting-style)
-  ;; (defun psssh-tramp-get-ls-command-with-dired (&rest r)
-  ;;   t)
-  ;; (advice-add 'tramp-get-ls-command-with-dired :override (lambda (t)))
-  ;; TODO: Possibly use tramp-connection-properties
-  )
+               (cons tramp-file-name-regexp nil)))
 
 (use-package auth-source
   :config
