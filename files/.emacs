@@ -5,76 +5,7 @@
   ("melpa"     . "http://melpa.org/packages/")))
 
 (package-initialize)
-
-;; set required packages
-(setq package-list
-      '(
-	ace-window
-	autopair
-	buffer-move
-	concurrent
-	ctable
-	dash
-	deferred
-	delight
-	dired-du
-	docker-tramp
-	dockerfile-mode
-	epc
-	epl
-	erlang
-	expand-region
-	flycheck
-	flycheck-rust
-	git-commit
-	gnuplot-mode
-	go-eldoc
-	go-mode
-	google-this
-	gruvbox-theme
-	jinja2-mode
-	json-reformat
-	lorem-ipsum
-	lsp-mode
-	lsp-python-ms
-	lsp-ui
-	lua-mode
-	magit
-	markdown-mode
-	multi-term
-	multiple-cursors
-	nix-mode
-	pipenv
-	pkg-info
-	pkgbuild-mode
-	popup
-	projectile
-	rainbow-delimiters
-	realgud
-	restclient
-	rust-mode
-	sass-mode
-	scad-mode
-	smartparens
-	smooth-scrolling
-	super-save
-	tide
-	use-package
-	w3
-	web-mode
-	which-key
-	yaml-mode
-	yasnippet
-	yasnippet-snippets
-	zenburn-theme
-	))
-
-; install the missing packages
-(unless package-archive-contents
-  (package-refresh-contents))
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+(package-install 'use-package)
 
 ; auto install missing deps with use-package
 (require 'use-package-ensure)
@@ -127,6 +58,29 @@
   :delight
   :config
   (gcmh-mode))
+
+(use-package yaml-mode)
+(use-package web-mode)
+(use-package w3)
+(use-package json-reformat)
+(use-package ace-window)
+(use-package delight)
+(use-package dired-du)
+(use-package dockerfile-mode)
+(use-package erlang)
+(use-package go-eldoc)
+(use-package go-mode)
+(use-package gruvbox-theme)
+(use-package rust-mode)
+
+(use-package smooth-scrolling
+  :config
+  (smooth-scrolling-mode))
+
+(use-package rainbow-delimiters
+  :ensure rainbow-delimeters-mode
+  :config
+  (rainbow-delimiters-mode))
 
 ;; save buffers frequently
 (use-package super-save
@@ -268,10 +222,13 @@
   :config
   (yas-global-mode 1)
   (yas-load-directory "~/.emacs.d/yasnippets"))
+(use-package yasnippet-snippets)
 
 (use-package flycheck
   :config
   (global-flycheck-mode))
+
+(use-package flycheck-rust)
 
 (use-package restclient
   :mode ("\\.http\\'" . restclient-mode))
@@ -405,7 +362,23 @@
 	 ("C-c C-t d o" . multi-term-dedicated-open)
 	 ("C-c C-t d c" . multi-term-dedicated-close)
 	 ("C-c C-t d t" . multi-term-dedicated-toggle)
-	 ("C-c C-t d s" . multi-term-dedicated-select)))
+	 ("C-c C-t d s" . multi-term-dedicated-select))
+
+  :config
+  (defun dan/multi-term-switch-buffer (term-buffer default-dir)
+    "If we are in `tramp-mode', switch to TERM-BUFFER based on DEFAULT-DIR."
+    (switch-to-buffer term-buffer)
+    ;; Just test tramp file when library `tramp' is loaded.
+    (when (and (featurep 'tramp)
+               (tramp-tramp-file-p default-dir))
+      (with-parsed-tramp-file-name default-dir path
+	(let ((method (cadr (assoc `tramp-login-program (assoc path-method tramp-methods)))))
+	  ;; Only change is this message call. but we're not using it? so how does it work now.
+	  (message "overcome bug with possibly latest emacs or native-comp which requires the variable 'path' to be used in the macro body otherwise it says the var is void.")
+          (term-send-raw-string (concat method " " (when path-user (concat path-user "@")) path-host "\C-m"))
+          (term-send-raw-string (concat "cd '" path-localname "'\C-m"))))))
+
+  (advice-add 'multi-term-switch-buffer :override #'dan/multi-term-switch-buffer))
 
 (use-package term
   ;; Also affecting multi-term.
@@ -487,8 +460,6 @@
 (auto-fill-mode 1)
 (electric-indent-mode)
 (column-number-mode)
-(rainbow-delimiters-mode)
-(smooth-scrolling-mode)
 
 ;; Comment Or Uncomment region.
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-region)
@@ -556,6 +527,14 @@
   ;; The original xterm mouse functionality is achieved by holding Shift.
   :config
   (xterm-mouse-mode))
+
+;; TODO: fix this, breaks emacs when running apply() it says not enough args supplied or something.
+;; (defun dan/magit-turn-on-auto-revert-mode-if-desired (orig-fun &rest args)
+;;   (unless (file-remote-p buffer-file-name)
+;;     (apply orig-fun args)))
+;; (advice-add 'magit-turn-on-auto-revert-mode-if-desired :before #'dan/magit-turn-on-auto-revert-mode-if-desired)
+
+
 ;; Especially useful for the shell commands history.
 (setq history-delete-duplicates t)
 (setq comint-input-ignoredups t)
@@ -566,3 +545,5 @@
 ;; TODO: Submit this as an MR (add BECOME to the initial regexp-opt)
 (setq comint-password-prompt-regexp
       (rx (or (regexp comint-password-prompt-regexp) "BECOME password:")))
+
+;; TODO: submit patch about process-kill-buffer-query-function prompt text being misleading.
