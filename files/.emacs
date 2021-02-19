@@ -448,7 +448,7 @@
 (setq text-scale-mode-step 1.05)
 
 ;; load  .emacs.d/*.el
-(setq load-files-list '("python" "tide" "hydra"))
+(setq load-files-list '("tide" "hydra"))
 (dolist (filename load-files-list)
   (load-file (concat "./.emacs.d/" filename ".el")))
 
