@@ -140,6 +140,7 @@ eval "$(pyenv virtualenv-init -)"
 
 # Platform.sh stuff:
 # Automatically added by the Platform.sh CLI
+export PATH="/home/danmilon/.magento-cloud/bin:$PATH"
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
 
