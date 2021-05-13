@@ -301,6 +301,10 @@
     :bind-keymap
     ("C-c p" . projectile-command-map)
     :config
+    (custom-set-variables
+     ;; Keep current project in the list cause out of habbit I always start
+     ;; with switch-project.
+     '(projectile-current-project-on-switch 'move-to-end))
     (setq projectile-globally-ignored-directories '(
        ".git"
        "venv"
