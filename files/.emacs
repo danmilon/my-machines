@@ -180,7 +180,8 @@
 
 (use-package ctrlf
   :config
-  (ctrlf-mode))
+  (ctrlf-mode)
+  (customize-set-variable 'ctrlf-default-search-style 'fuzzy))
 
 ;; Flyspell
 (use-package flyspell
