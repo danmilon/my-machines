@@ -305,17 +305,17 @@
     (custom-set-variables
      ;; Keep current project in the list cause out of habbit I always start
      ;; with switch-project.
-     '(projectile-current-project-on-switch 'move-to-end))
-    (setq projectile-globally-ignored-directories '(
+     '(projectile-current-project-on-switch 'move-to-end)
+     ;; When switching projects, show the commander instead of doing find-file.
+     '(projectile-switch-project-action #'projectile-commander)
+     ;; misc
+     '(projectile-enable-caching t)
+     '(projectile-use-git-grep 1)
+     '(projectile-globally-ignored-directories '(
        ".git"
        "venv"
        ".virtualenv"
-       ".tox"))
-    ;; When switching projects, show the commander instead of doing find-file.
-    (setq projectile-switch-project-action
-	  #'projectile-commander)
-    (setq projectile-enable-caching t)
-    (setq projectile-use-git-grep 1)
+       ".tox")))
 
     (defun my/ad-projectile-project-root (orig-fun &optional dir)
       "This should disable projectile when visiting files with ftp tramp."
