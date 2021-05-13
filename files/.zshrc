@@ -110,16 +110,13 @@ alias atc-from-home='(cd ~/atc-archive && vlc --rate=1.5 $(rsync -arv -e "ssh da
 
 function pytmp() {
     py_version=${1:-3}
-    echo $py_version
+    shift
     cd $(mktemp -d)
     virtualenv -p python$py_version venv
     . venv/bin/activate
-    for pkg in "$@"; do
 
-    done
-
-    if [ -n "$2" ]; then
-	pip install ipython $(echo $2)
+    if [ -n "$1" ]; then
+	pip install ipython $@
     fi
 
     venv/bin/ipython
