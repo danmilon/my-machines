@@ -422,6 +422,13 @@ keys = [
     EzKey("M-C-e", lazy.spawn("emacsclient -c")),
     EzKey("M-C-c", lazy.spawn("gnome-calculator")),
     EzKey("M-C-l", lazy.spawn("physlock -s")),
+    # KeyChords are available in 0.16. Fedora ATM has 0.14.
+    # KeyChord(["mod4"], "d", [
+    #     Key([], "u", lazy.spawn("idasen stand")),
+    #     Key([], "d", lazy.spawn("idasen sit")),
+    # ]),
+    EzKey("M-C-d", lazy.spawn("idasen sit")),
+    EzKey("M-C-u", lazy.spawn("idasen stand")),
 ]
 
 keys.extend(
