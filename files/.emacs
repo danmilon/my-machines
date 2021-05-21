@@ -47,6 +47,9 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
+;; Recenter screen on e.g. grep match visit.
+(customize-set-variable 'next-error-recenter '(4))
+
 ;; Performance
 ;; Commented out to test magit diffs.
 ;; (setq gc-cons-threshold (* 1000 1000 1000)   ;; 100MB
