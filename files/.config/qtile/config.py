@@ -539,7 +539,7 @@ def setup_screens(qtile):
             ),
             ProcessTrackerWidget2(
                 name="TLP",
-                cmd_status="systemctl status tlp",
+                cmd_status="systemctl is-active tlp",
                 cmd_start="gksu systemctl start tlp",
                 cmd_stop="gksu systemctl stop tlp",
                 update_interval=15,
