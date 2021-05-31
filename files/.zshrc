@@ -143,7 +143,18 @@ export PATH="/home/danmilon/.magento-cloud/bin:$PATH"
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
 
-alias platform-tb='PLATFORMSH_CLI_ACCOUNTS_API=http://testbed.plat.farm PLATFORMSH_CLI_API_URL= platform'
+alias platform-tb='\
+PLATFORMSH_CLI_OAUTH2_AUTH_URL=http://testbed.plat.farm/oauth2/authorize \
+PLATFORMSH_CLI_OAUTH2_TOKEN_URL=http://testbed.plat.farm/oauth2/token \
+PLATFORMSH_CLI_OAUTH2_REVOKE_URL=http://testbed.plat.farm/oauth2/revoke \
+PLATFORMSH_CLI_TOKEN=whatever \
+PLATFORMSH_CLI_ACCOUNTS_API=http://testbed.plat.farm \
+PLATFORMSH_CLI_API_URL= \
+PLATFORMSH_CLI_SKIP_SSL="1" \
+PLATFORMSH_CLI_CERTIFIER_URL= \
+PLATFORMSH_CLI_AUTO_LOAD_SSH_CERT=0 \
+platform'
+
 alias platform-staging='PLATFORMSH_CLI_SESSION_ID=staging \
 PLATFORMSH_CLI_API_URL=https://api.staging.plat.farm \
 PLATFORMSH_CLI_ACCOUNTS_API=https://accounts.staging.plat.farm/api/v1/ \
