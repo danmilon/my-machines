@@ -131,7 +131,9 @@ ${user_host} ${current_dir}%B${user_symbol}%b $ "
 RPS1=""
 
 # pyenv.
-export PATH="/home/danmilon/.pyenv/bin:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
