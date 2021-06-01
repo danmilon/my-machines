@@ -143,6 +143,11 @@ export PATH="/home/danmilon/.magento-cloud/bin:$PATH"
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
 . '/home/danmilon/.platformsh/shell-config.rc' 2>/dev/null
 
+# BEGIN SNIPPET: OVHcloud Web PaaS CLI configuration
+HOME=${HOME:-'/home/danmilon'}
+export PATH="$HOME/"'.webpaas-cli/bin':"$PATH"
+if [ -f "$HOME/"'.webpaas-cli/shell-config.rc' ]; then . "$HOME/"'.webpaas-cli/shell-config.rc'; fi # END SNIPPET
+
 alias platform-tb='\
 PLATFORMSH_CLI_OAUTH2_AUTH_URL=http://testbed.plat.farm/oauth2/authorize \
 PLATFORMSH_CLI_OAUTH2_TOKEN_URL=http://testbed.plat.farm/oauth2/token \
