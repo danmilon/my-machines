@@ -134,6 +134,10 @@
 (use-package lsp-python-ms
   :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
 
+(use-package poetry
+  :config
+  (poetry-tracking-mode))
+
 ;; uniquify: unique buffer names
 (use-package uniquify
   :config
