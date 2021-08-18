@@ -491,7 +491,7 @@ def autostart():
         services.append("slack")
 
     for service in services:
-        subprocess.call(["systemctl", "--user", "start", service])
+        subprocess.call(["systemctl", "--no-block", "--user", "start", service])
 
 
 def setup_screens(qtile):
