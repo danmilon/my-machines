@@ -18,6 +18,7 @@ parser.add_argument(
 )
 parser.add_argument("--host", help="IP of the phone.", required=True)
 parser.add_argument("--dest", help="Destination directory.", required=True)
+parser.add_argument("--source", help="Source directory", default="/storage/emulated/0/DCIM/Camera")
 
 args = parser.parse_args()
 
@@ -28,7 +29,7 @@ with tempfile.NamedTemporaryFile() as tmp:
             "-p",
             str(args.ssh_port),
             args.host,
-            f"find DCIM/Camera -ctime +{args.before_days}",
+            f"find {args.source} -ctime +{args.before_days}",
         ],
         stdout=subprocess.PIPE,
     )
