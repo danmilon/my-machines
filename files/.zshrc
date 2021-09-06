@@ -169,3 +169,9 @@ PLATFORMSH_CLI_OAUTH2_REVOKE_URL=https://auth.plat.farm/oauth2/revoke \
 PLATFORMSH_CLI_CERTIFIER_URL=https://ssh.auth.plat.farm \
 PLATFORMSH_CLI_SSH_DOMAIN_WILDCARD=*.plat.farm \
 platform'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/path.zsh.inc' ]; then . '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc'; fi
