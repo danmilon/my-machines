@@ -81,7 +81,6 @@
   (smooth-scrolling-mode))
 
 (use-package rainbow-delimiters
-  :ensure rainbow-delimeters-mode
   :config
   (rainbow-delimiters-mode))
 
