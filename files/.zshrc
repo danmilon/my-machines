@@ -161,18 +161,16 @@ PLATFORMSH_CLI_CERTIFIER_URL= \
 PLATFORMSH_CLI_AUTO_LOAD_SSH_CERT=0 \
 platform'
 
-alias platform-staging='PLATFORMSH_CLI_SESSION_ID=staging \
-PLATFORMSH_CLI_API_URL=https://api.staging.plat.farm \
-PLATFORMSH_CLI_ACCOUNTS_API=https://accounts.staging.plat.farm/api/v1/ \
-PLATFORMSH_CLI_OAUTH2_AUTH_URL=https://auth.plat.farm/oauth2/authorize \
-PLATFORMSH_CLI_OAUTH2_TOKEN_URL=https://auth.plat.farm/oauth2/token \
-PLATFORMSH_CLI_OAUTH2_REVOKE_URL=https://auth.plat.farm/oauth2/revoke \
-PLATFORMSH_CLI_CERTIFIER_URL=https://ssh.auth.plat.farm \
-PLATFORMSH_CLI_SSH_DOMAIN_WILDCARD=*.plat.farm \
-platform'
-
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/path.zsh.inc' ]; then . '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc'; fi
+
+ # The next line enables shell command completion for gcloud.
+ if [ -f '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc' ]; then . '~/Documents/dev/google-cloud-sdk/google-cloud-sdk/completion.zsh.inc'; fi
+
+# BEGIN SNIPPET: Platform.sh CLI (Staging) configuration
+HOME=${HOME:-'/home/danmilon'}
+export PATH="$HOME/"'.platformsh-stg/bin':"$PATH"
+if [ -f "$HOME/"'.platformsh-stg/shell-config.rc' ]; then . "$HOME/"'.platformsh-stg/shell-config.rc'; fi # END SNIPPET
