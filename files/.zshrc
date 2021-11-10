@@ -91,6 +91,7 @@ PATH=$GOPATH/bin:$PATH
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$HOME/bin
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
+PATH=$PATH:$HOME/.poetry/bin
 export PATH
 
 PYMACS_PYTHON=python2
