@@ -264,6 +264,10 @@
 (use-package markdown-mode
   :mode "\\.md\\'")
 
+(use-package plantuml-mode
+  :config
+  (customize-set-variable 'plantuml-default-exec-mode 'jar))
+
 (use-package org
   :bind (("C-c l" . org-store-link)
 	 ("C-c a" . org-agenda))
