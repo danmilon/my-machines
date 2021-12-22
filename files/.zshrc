@@ -139,6 +139,9 @@ eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # Platform.sh stuff:
+export PATH="$PATH:$HOME/Documents/dev/platform.sh/infra/awssamlcli"
+export PATH="$PATH:$HOME/Documents/dev/platform.sh/infra/go-ops"
+
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.magento-cloud/bin:$PATH"
 export PATH="/home/danmilon/.platformsh/bin:$PATH"
