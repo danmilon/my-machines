@@ -15,19 +15,6 @@
       pacman: update_cache=yes
       become: true
       when: pacman.changed and ansible_distribution == "Archlinux"
-    - name: add yum repositories
-      tags:
-        - packages
-      yum_repository:
-        name: slack
-        description: Slack
-        baseurl: "https://packagecloud.io/slacktechnologies/slack/fedora/21/$basearch"
-        gpgcheck: true
-        gpgkey: "https://slack.com/gpg/slack_pubkey.gpg"
-        metadata_expire: "300"
-        sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
-      become: true
-      when: ansible_distribution == "Fedora"
     - name: install external yum repos
       command: |
         dnf config-manager
@@ -38,8 +25,6 @@
         warn: false
       become: true
       with_items:
-        - repo_url: https://copr.fedorainfracloud.org/coprs/tofik/autorandr/repo/fedora-30/tofik-autorandr-fedora-30.repo
-          file_name: _copr:copr.fedorainfracloud.org:jdoss:slack-repo.repo
         - repo_url: https://download.docker.com/linux/fedora/docker-ce.repo
           file_name: docker-ce.repo
       when: ansible_distribution == "Fedora"
@@ -49,18 +34,6 @@
         warn: false
         creates: /etc/yum.repos.d/fedora-cisco-openh264.repo
       become: true
-      when: ansible_distribution == "Fedora"
-    - name: install rpmfusion repos
-      command: dnf -y install {{ item.repo_url }}
-      args:
-        warn: false
-        creates: "/etc/yum.repos.d/{{ item.file_name }}"
-      become: true
-      with_items:
-        - repo_url: https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-30.noarch.rpm
-          file_name: rpmfusion-free.repo
-        - repo_url: https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-30.noarch.rpm
-          file_name: rpmfusion-nonfree.repo
       when: ansible_distribution == "Fedora"
     - name: remove undesirable yum packages
       tags:
