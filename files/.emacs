@@ -266,7 +266,11 @@
 
 (use-package plantuml-mode
   :config
-  (customize-set-variable 'plantuml-default-exec-mode 'jar))
+  (custom-set-variables
+   '(plantuml-default-exec-mode 'executable)
+   '(plantuml 'plantuml-output-type "png")))
+
+(use-package flycheck-plantuml)
 
 (use-package org
   :bind (("C-c l" . org-store-link)
@@ -291,7 +295,7 @@
      (shell . t)))
 
   (setq org-plantuml-jar-path
-	"/usr/share/java/plantuml/plantuml.jar")
+	"/usr/share/java/plantuml.jar")
 
   ;; Enable org-export backends.
   (custom-set-variables
