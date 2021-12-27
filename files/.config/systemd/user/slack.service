@@ -2,7 +2,7 @@
 Description=Slack
 
 [Service]
-ExecStart=/usr/bin/slack
+ExecStart=/usr/bin/flatpak run com.slack.Slack
 
 [Install]
 WantedBy=default.target
