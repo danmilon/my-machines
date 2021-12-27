@@ -1,0 +1,8 @@
+[Unit]
+Description=xfce4 notify daemon
+
+[Service]
+ExecStart=/usr/lib64/xfce4/notifyd/xfce4-notifyd
+
+[Install]
+WantedBy=default.target

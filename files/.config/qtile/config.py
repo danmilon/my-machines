@@ -484,6 +484,7 @@ def autostart():
         "compton",
         "blueman-applet",
         "redshift-gtk",
+        "xfce4-notifyd",
     ]
 
     now = datetime.now()
