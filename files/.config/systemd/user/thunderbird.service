@@ -2,7 +2,7 @@
 Description=Thunderbird
 
 [Service]
-ExecStart=/usr/bin/thunderbird
+ExecStart=/usr/bin/flatpak run org.mozilla.Thunderbird
 
 [Install]
 WantedBy=default.target
