@@ -427,8 +427,8 @@ keys = [
     #     Key([], "u", lazy.spawn("idasen stand")),
     #     Key([], "d", lazy.spawn("idasen sit")),
     # ]),
-    EzKey("M-C-d", lazy.spawn("idasen sit")),
-    EzKey("M-C-u", lazy.spawn("idasen stand")),
+    EzKey("M-C-d", lazy.spawn("zsh -ic 'cd /home/danmilon/Documents/dev/github/newAM/idasen; poetry run idasen sit'")),
+    EzKey("M-C-u", lazy.spawn("zsh -ic 'cd /home/danmilon/Documents/dev/github/newAM/idasen; poetry run idasen stand'")),
 ]
 
 keys.extend(
