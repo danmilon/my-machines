@@ -289,7 +289,7 @@
         - systemd-timesyncd.service
     - name: put me in user groups
       become: true
-      user: name=danmilon groups=wheel,users,kvm,wireshark,docker
+      user: name=danmilon groups=wheel,users,kvm,wireshark,docker,dialout
     - name: put me in host-specific user groups
       become: true
       user:
