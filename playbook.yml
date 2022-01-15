@@ -313,3 +313,8 @@
         key: "/org/gnome/desktop/input-sources/xkb-options"
         value: "['caps:ctrl_modifier']"
         state: present
+    - name: Input source switch keybind
+      community.general.dconf:
+        key: "/org/gnome/desktop/wm/keybindings/switch-input-source"
+        value: "['<Alt>Shift_L']"
+        state: present
