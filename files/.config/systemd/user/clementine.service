@@ -1,8 +1,10 @@
 [Unit]
 Description=Clementine
+PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/clementine
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target

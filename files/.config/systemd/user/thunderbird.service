@@ -1,8 +1,10 @@
 [Unit]
 Description=Thunderbird
+PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/flatpak run org.mozilla.Thunderbird
+ExecStart=/usr/bin/sh -c 'flatpak run $([ "$XDG_SESSION_TYPE" = "wayland" ] && echo --env=MOZ_WAYLAND_ENABLE=1) org.mozilla.Thunderbird'
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target

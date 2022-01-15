@@ -1,8 +1,0 @@
-[Unit]
-Description=Redshift GTK
-
-[Service]
-ExecStart=/usr/bin/redshift-gtk
-
-[Install]
-WantedBy=default.target

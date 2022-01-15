@@ -2,9 +2,11 @@
 Description=Emacs client frame
 Requires=emacs.service
 After=emacs.service
+PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/emacsclient -c
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target

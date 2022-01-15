@@ -1,8 +1,11 @@
 [Unit]
 Description=Firefox
+PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/firefox
+Environment="MOZ_ENABLE_WAYLAND=1"
+ExecStart=/usr/bin/sh -c 'if [[ "$XDG_SESSION_TYPE" -eq "wayland" ]]; then export MOZ_WAYLAND_ENABLE=1; fi; /usr/bin/firefox'
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target

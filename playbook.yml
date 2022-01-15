@@ -49,7 +49,6 @@
         - packages
       package:
         name:
-          - qtile
           - zsh
           - pass
           - zsh-syntax-highlighting
@@ -127,7 +126,6 @@
           - gpaste
           - ImageMagick
           - libjpeg-turbo-utils
-          - redshift-gtk
           - trash-cli
           - git-annex
           - pwgen
@@ -158,7 +156,6 @@
           # zsh notify plugin dependencies
           - wmctrl
           - xdotool
-          - python3-pulsectl # used by the qtile config
           # ------------
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
@@ -281,7 +278,6 @@
         enabled: true
       become: true
       with_items:
-        - screenlock@danmilon.service
         - sshd.service
         - tlp.service
         - avahi-daemon.service
@@ -289,12 +285,8 @@
         - thermald.service
         - docker.service
         - dnscrypt-proxy.socket
-        - bluetooth.service
         - gdm.service
         - systemd-timesyncd.service
-    - name: enable ntp
-      command: timedatectl set-ntp true
-      become: true
     - name: put me in user groups
       become: true
       user: name=danmilon groups=wheel,users,kvm,wireshark,docker
@@ -311,3 +303,13 @@
         line: "initrd /intel-ucode.img"
         insertbefore: "^initrd /initramfs-linux.img$"
       when: ansible_distribution == "Archlinux"
+    - name: Configure available keyboard layouts in Gnome
+      community.general.dconf:
+        key: "/org/gnome/desktop/input-sources/sources"
+        value: "[('xkb', 'us'), ('xkb', 'gr')]"
+        state: present
+    - name: Tell gnome Caps lock is control
+      community.general.dconf:
+        key: "/org/gnome/desktop/input-sources/xkb-options"
+        value: "['caps:ctrl_modifier']"
+        state: present

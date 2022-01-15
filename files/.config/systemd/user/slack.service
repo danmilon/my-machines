@@ -1,8 +1,11 @@
 [Unit]
 Description=Slack
+PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
+ExecCondition=/usr/bin/python -c 'import datetime, sys; now = datetime.datetime.now(); is_at_work = (now.weekday() < 5 and now.hour < 19 and now.hour > 8); sys.exit(0 if is_at_work else 1)'
 ExecStart=/usr/bin/flatpak run com.slack.Slack
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
