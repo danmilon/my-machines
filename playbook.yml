@@ -103,7 +103,6 @@
           - beets-plugins # fedora-only?
           - python3-pyudev
           - lsof
-          - compton
           - ntfs-3g
           - dnscrypt-proxy
           - httpie
