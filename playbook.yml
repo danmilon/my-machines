@@ -71,7 +71,6 @@
           - wireshark
           - xterm
           - xfce4-terminal
-          - xorg-x11-server-Xephyr
           - youtube-dl
           - strace
           - file-roller
