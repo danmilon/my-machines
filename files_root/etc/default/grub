@@ -3,6 +3,6 @@ GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
 GRUB_DEFAULT=saved
 GRUB_DISABLE_SUBMENU=true
 GRUB_TERMINAL_OUTPUT="console"
-GRUB_CMDLINE_LINUX="rd.lvm.lv=jumbo/root rd.luks.uuid=luks-c36bbda9-e21c-42e6-be83-793527cccdac rhgb quiet systemd.unified_cgroup_hierarchy=0"
+GRUB_CMDLINE_LINUX="i915.enable_guc=2 rd.lvm.lv=jumbo/root rd.luks.uuid=luks-c36bbda9-e21c-42e6-be83-793527cccdac rhgb quiet systemd.unified_cgroup_hierarchy=0"
 GRUB_DISABLE_RECOVERY="true"
 GRUB_ENABLE_BLSCFG=true
