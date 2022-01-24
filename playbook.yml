@@ -150,6 +150,7 @@
           - docker-compose
           - pipenv
           - yubikey-manager
+          - alacritty
           - xsel # clipboard management from the console.
           # zsh notify plugin dependencies
           - wmctrl
