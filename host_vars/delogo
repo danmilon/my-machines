@@ -2,10 +2,4 @@ tlp:
   sata_powersave: true
 disk_devices:
   - nvme0n1p1
-packages:
-  - nvidia
-  - bumblebee
-  - lib32-nvidia-utils
-  - libvdpau
-  - nvidia-utils
-  - bcm20703a1-firmware
+packages: []
