@@ -14,6 +14,9 @@
 ;; set fill column
 (setq-default fill-column 79)
 
+;; Title bar gets in the way when WM is tiling style.
+(setq default-frame-alist '((undecorated . t)))
+
 (defun frame-config (frame)
   "Custom behaviour for new frames"
   (when (display-graphic-p frame)
