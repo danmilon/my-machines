@@ -13,10 +13,6 @@ plugins=(
     sudo
     python
     pass
-
-    # notify when a long running command finishes.
-    # https://github.com/marzocchi/zsh-notify
-    notify
 )
 
 kubectl() {

@@ -107,7 +107,6 @@
           - httpie
           - fuse-sshfs
           - recode
-          - xfce4-notifyd
           - entr
           - rlwrap
           - light
@@ -151,10 +150,6 @@
           - pipenv
           - yubikey-manager
           - alacritty
-          - xsel # clipboard management from the console.
-          # zsh notify plugin dependencies
-          - wmctrl
-          - xdotool
           # ------------
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
