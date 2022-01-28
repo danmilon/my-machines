@@ -141,6 +141,7 @@
 
 ;; uniquify: unique buffer names
 (use-package uniquify
+  :ensure f ;; it's in the standard distribution.
   :config
   (setq
    uniquify-buffer-name-style 'post-forward
@@ -251,6 +252,7 @@
   (sp-use-smartparens-bindings))
 
 (use-package lilypond-mode
+  :ensure f ;; it's in the standard distribution.
   :mode ("\\.ly\\'" . lilypond-mode))
 
 (use-package go-eldoc
