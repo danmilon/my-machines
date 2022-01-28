@@ -5,6 +5,8 @@
 [Unit]
 Description=Emacs text editor
 Documentation=info:emacs man:emacs(1) https://gnu.org/software/emacs/
+PartOf=graphical-session.target
+After=graphical-session.target
 
 [Service]
 Type=notify
@@ -18,4 +20,4 @@ ExecStop=/usr/bin/emacsclient --eval "(kill-emacs)"
 Restart=on-failure
 
 [Install]
-WantedBy=default.target
+WantedBy=graphical-session.target
