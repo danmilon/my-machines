@@ -71,7 +71,6 @@
 (use-package json-reformat)
 (use-package ace-window)
 (use-package delight)
-(use-package dired-du)
 (use-package dockerfile-mode)
 (use-package erlang)
 (use-package go-eldoc)
