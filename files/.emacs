@@ -50,6 +50,9 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
+;; No bell.
+(customize-set-variable 'ring-bell-function 'ignore)
+
 ;; Recenter screen on e.g. grep match visit.
 (customize-set-variable 'next-error-recenter '(4))
 
