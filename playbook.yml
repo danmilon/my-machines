@@ -262,10 +262,7 @@
     - name: do templates
       template: src=templates/{{ item.path }}.j2 dest=/{{ item.path }} mode={{ item.mode|default('0644') }}
       become: true
-      with_items:
-        - { path: 'usr/local/bin/monitor-set-initial-mode', mode: '0755' }
-        - { path: 'usr/local/bin/monitor-only-external', mode: '0755'}
-        - { path: 'etc/default/tlp' }
+      with_items: []
     - name: enable systemd services
       systemd:
         name: "{{ item}}"
