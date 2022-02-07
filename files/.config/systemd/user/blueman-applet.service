@@ -1,8 +1,0 @@
-[Unit]
-Description=Blueman Applet
-
-[Service]
-ExecStart=/usr/bin/blueman-applet
-
-[Install]
-WantedBy=default.target
