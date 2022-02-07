@@ -5,6 +5,9 @@ After=graphical-session.target
 
 [Service]
 ExecStart=/usr/bin/sh -c 'flatpak run $([ "$XDG_SESSION_TYPE" = "wayland" ] && echo --env=MOZ_WAYLAND_ENABLE=1) org.mozilla.Thunderbird'
+# Workaround cause flatpak messes with cgroup namespaces so systemd loses track
+# of the processes.
+ExecStop=/usr/bin/flatpak kill org.mozilla.Thunderbird
 
 [Install]
 WantedBy=graphical-session.target
