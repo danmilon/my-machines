@@ -207,6 +207,7 @@
 (use-package lorem-ipsum)
 
 (use-package dired
+  :ensure f ;; it's in the standard distribution.
   :config
   ;; always delete and copy recursively
   (setq dired-recursive-deletes 'always)
