@@ -114,6 +114,8 @@
   :commands (lsp lsp-deferred)
   :hook ((python-mode . lsp)
 	 (go-mode . lsp)
+	 (c-mode . lsp)
+	 (c++-mode . lsp)
 	 ;; which-key makes it easy to learn the long lsp keybinds.
 	 (lsp-mode . lsp-enable-which-key-integration))
   :after (which-key)
