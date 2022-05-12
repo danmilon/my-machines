@@ -20,6 +20,9 @@
 	status = true
 [branch]
 	autosetuprebase = always
+[safe]
+	# Disable repo owner checks.
+	directory = *
 [github]
 	user = danmilon
 [ghi]
