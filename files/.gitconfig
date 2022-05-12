@@ -11,6 +11,11 @@
 	default = simple
 	# Accompany tags on commits being pushed.
 	followTags = true
+[fetch]
+	# Prune branches deleted on the remote.
+	prune = true
+	# The same for tags.
+	pruneTags = true
 [pager]
 	status = true
 [branch]
