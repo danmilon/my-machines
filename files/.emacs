@@ -220,6 +220,9 @@
   (setq dired-omit-files "^\\...+$")
   (setq dired-omit-verbose nil)
 
+  ;; show human readable file sizes
+  (customize-set-variable 'dired-listing-switches "-alh")
+
   ;; enable some really cool extensions like C-x C-j(dired-jump)
   (require 'dired-x))
 
