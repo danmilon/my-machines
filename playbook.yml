@@ -1,20 +1,11 @@
 ---
-- hosts: delogo, makis
+- hosts: delogo, makis, 192.168.1.187
   tasks:
     - name: delete folders we dont like
       file: path=/home/danmilon/{{ item }} state=absent
       with_items:
         - Templates
         - Public
-    - name: copy pacman.conf
-      copy: src=files_root/etc/pacman.conf dest=/etc/pacman.conf
-      become: true
-      register: pacman
-      when: ansible_distribution == "Archlinux"
-    - name: sync pacman dbs
-      pacman: update_cache=yes
-      become: true
-      when: pacman.changed and ansible_distribution == "Archlinux"
     - name: install external yum repos
       command: |
         dnf config-manager
@@ -123,87 +114,26 @@
           - dash
           - mosh
       become: true
-    # Old Archlinux packages that we haven't found an alternative for Fedora.
-    - name: install archlinux packages
+    - name: install flatpak apps
       tags:
         - packages
-      package:
-        name:
-          - python
-          - python-pip # python3 builtin pip stripped?
-          - python-pyflakes # for emacs python flycheck
-          - bind-tools # for dig
-          - ack
-          - chromium
-          - unrar
-          - xorg-xprop
-          - vagrant
-          - docker
-          - virtualbox
-          - virtualbox-host-modules-arch
-          - dkms
-          - gtk-recordmydesktop
-          - smplayer
-          - flake8
-          - python2-flake8
-          - lib32-alsa-plugins
-          - mesa-vdpau
-          - lib32-sdl
-          - lib32-libtheora
-          - lib32-openal
-          - dhclient
-          - cpupower
-          - gst-plugins-ugly
-          - gst-libav
-          - gksu
-          - android-udev
-          - keybase
-          - python-requests # dep of beets
-          - xf86-input-libinput
-          - firefox-ublock-origin
-          - markdown
-          - intel-ucode
-          - libva-intel-driver
+      community.general.flatpak:
+        name: "{{ item }}"
         state: present
-        force: yes
-      become: true
-      when: ansible_distribution == "Archlinux"
-    - name: install AUR packages
-      tags:
-        - packages
-      yaourt: name={{ item }} state=present
+        remote: flathub
+        method: system
       with_items:
-        - physlock
-        - chromium-pepper-flash
-        - gcolor3
-        - tor-browser-en
-        - z
-        - virtualbox-ext-oracle
-        - google-talkplugin
-        - screen
-        - go-mtpfs-git
-        - android-sdk-platform-tools
-        - android-bash-completion
-        - firefox-extension-https-everywhere
-        # the 1.0 extension itself is only as part of a -git package, which is
-        # not signed. install extension via addons.firefox.org
-        - passff-host
-        - undistract-me-git
-        ###################
-        # emacs golang deps
-        - godef-git
-        - gocode-git
-        ###################
-      when: ansible_distribution == "Archlinux"
-    - name: install pip packages not available via packages
-      tags:
-        - packages
-      pip:
-        name:
-          - pulsectl
-          - virtualenv
-          - black
-      become: true
+          - com.dropbox.Client
+          - com.slack.Slack
+          - com.transmissionbt.Transmission
+          - org.chromium.Chromium
+          - org.clementine_player.Clementine
+          - org.gimp.GIMP
+          - org.mozilla.Thunderbird
+          - org.onlyoffice.desktopeditors
+          - org.videolan.VLC
+          - org.wireshark.Wireshark
+          - us.zoom.Zoom
     # Not made compatible with fedora.
     # - name: install host specific packages
     #   package:
