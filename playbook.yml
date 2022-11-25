@@ -257,8 +257,6 @@
       with_items:
         - { src: '/home/danmilon/Documents/Dropbox/crutial/gpg/card/pubring.gpg', dest: '/home/danmilon/.gnupg/pubring.gpg' }
         - { src: '/home/danmilon/Documents/Dropbox/crutial/gpg/card/secring.gpg', dest: '/home/danmilon/.gnupg/secring.gpg' }
-        - { src: 'hangman_r.jpg', dest: '/home/danmilon/Pictures/wallpaper1'}
-        - { src: 'podilato_r.jpg', dest: '/home/danmilon/Pictures/wallpaper2'}
     - name: do templates
       template: src=templates/{{ item.path }}.j2 dest=/{{ item.path }} mode={{ item.mode|default('0644') }}
       become: true
