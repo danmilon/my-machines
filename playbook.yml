@@ -106,6 +106,8 @@
           - docker-compose
           - yubikey-manager
           - alacritty
+          - fzf
+          - emacs
           # ------------
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
