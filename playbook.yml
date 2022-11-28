@@ -1,5 +1,5 @@
 ---
-- hosts: delogo, makis, 192.168.1.187
+- hosts: delogo, makis
   tasks:
     - name: delete folders we dont like
       file: path=/home/danmilon/{{ item }} state=absent
