@@ -116,6 +116,13 @@
           - dash
           - mosh
       become: true
+    - name: install pyenv dependencies
+      tags:
+        - packages
+      package:
+        name:
+          - zlib-devel
+          - readline
     - name: install flatpak apps
       tags:
         - packages
