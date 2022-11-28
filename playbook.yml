@@ -130,6 +130,7 @@
           - com.transmissionbt.Transmission
           - org.chromium.Chromium
           - org.clementine_player.Clementine
+          - org.gnome.Extensions
           - org.gimp.GIMP
           - org.mozilla.Thunderbird
           - org.onlyoffice.desktopeditors
