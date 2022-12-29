@@ -565,7 +565,7 @@
 (setq comint-input-ignoredups t)
 
 ;; Default 100 is too low.
-(customize-set-variable 'history-length 500)
+(customize-set-variable 'history-length 1000)
 
 ;; TODO: Submit this as an MR (add BECOME to the initial regexp-opt)
 (setq comint-password-prompt-regexp
