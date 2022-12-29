@@ -63,7 +63,6 @@
           - strace
           - squashfs-tools
           - ethtool
-          - tlp
           - parallel
           - ipcalc
           - whois
@@ -173,7 +172,6 @@
       become: true
       with_items:
         - sshd.service
-        - tlp.service
         - avahi-daemon.service
         - cups.service
         - thermald.service
