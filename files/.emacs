@@ -137,8 +137,11 @@
   (setq lsp-ui-doc-enable nil
 	lsp-ui-doc-delay 0))
 
-(use-package lsp-python-ms
-  :hook (python-mode . (lambda () (require 'lsp-python-ms) (lsp))))
+(use-package lsp-pyright
+  :ensure t
+  :hook (python-mode . (lambda ()
+                          (require 'lsp-pyright)
+                          (lsp))))
 
 (use-package poetry
   :config
