@@ -441,6 +441,8 @@
 
   (setq tramp-default-method "ssh")
 
+(use-package docker-tramp)
+
   ;; Disable backups and lock files in tramp.
   (add-to-list 'backup-directory-alist
                (cons tramp-file-name-regexp nil))
