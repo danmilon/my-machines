@@ -108,6 +108,7 @@
           - alacritty
           - fzf
           - emacs
+          - npm
           # ------------
           - glibc-static # fedora-only?
           - openssl-devel # fedora-only
