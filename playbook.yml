@@ -59,7 +59,7 @@
           - qemu
           - xterm
           - xfce4-terminal
-          - youtube-dl
+          - yt-dlp
           - strace
           - squashfs-tools
           - ethtool
