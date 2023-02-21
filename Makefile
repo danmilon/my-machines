@@ -1,6 +1,6 @@
 install:
 	ANSIBLE_LIBRARY=./modules \
-		ansible-playbook \
+		poetry run ansible-playbook \
 		-K \
 		-i hosts \
 		--limit $(shell hostname) \
