@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: psh_print_cluster
+# key: pc
+# group: debug
+# --
+root.commands['print_cluster'].execute(c)
