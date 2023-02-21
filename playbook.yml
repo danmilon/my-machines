@@ -13,7 +13,6 @@
         {{ item.repo_url }}
       args:
         creates: "/etc/yum.repos.d/{{ item.file_name }}"
-        warn: false
       become: true
       with_items:
         - repo_url: https://download.docker.com/linux/fedora/docker-ce.repo
@@ -22,7 +21,6 @@
     - name: install h264 yum repo
       command: dnf config-manager --set-enabled fedora-cisco-openh264
       args:
-        warn: false
         creates: /etc/yum.repos.d/fedora-cisco-openh264.repo
       become: true
       when: ansible_distribution == "Fedora"
