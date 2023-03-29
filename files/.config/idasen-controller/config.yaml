@@ -1,2 +1,4 @@
 mac_address: EB:3A:0A:2E:31:C3
-favourites: {}
+favourites:
+  stand: 1270
+  sit: 779
