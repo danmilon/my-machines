@@ -119,6 +119,13 @@
 	 (lsp-mode . lsp-enable-which-key-integration))
   :after (which-key)
   :config
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.virtualenv\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.virtualenv3\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.eggs\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.gopath\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.tmp\\'")
+  (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\__pycache__\\'")
+
   (setq lsp-prefer-flymake nil
 	lsp-auto-guess-root t)
 
