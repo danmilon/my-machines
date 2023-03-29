@@ -57,9 +57,8 @@
 (customize-set-variable 'next-error-recenter '(4))
 
 ;; Performance
-;; Commented out to test magit diffs.
-;; (setq gc-cons-threshold (* 1000 1000 1000)   ;; 100MB
-;;       read-process-output-max (* 1024 1024)) ;; 1MB
+(setq gc-cons-threshold (* 1000 1000 1000)   ;; 100MB
+      read-process-output-max (* 1024 1024)) ;; 1MB
 
 (use-package gcmh
   ;; GC Magit Hack.
