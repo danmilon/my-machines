@@ -64,7 +64,7 @@
           - parallel
           - ipcalc
           - whois
-          - awscli
+          - awscli2
           - gdb
           - nmap-ncat
           - tcpdump
