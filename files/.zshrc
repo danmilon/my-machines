@@ -134,6 +134,10 @@ eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# goenv.
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+
 # Platform.sh stuff:
 export PATH="$PATH:$HOME/Documents/dev/platform.sh/infra/awssamlcli"
 export PATH="$PATH:$HOME/Documents/dev/platform.sh/infra/go-ops"
