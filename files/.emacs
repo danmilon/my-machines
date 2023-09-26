@@ -115,6 +115,7 @@
 	 (go-mode . lsp)
 	 (c-mode . lsp)
 	 (c++-mode . lsp)
+	 (rust-mode . lsp)
 	 ;; which-key makes it easy to learn the long lsp keybinds.
 	 (lsp-mode . lsp-enable-which-key-integration))
   :after (which-key)
@@ -148,6 +149,8 @@
   :hook (python-mode . (lambda ()
                           (require 'lsp-pyright)
                           (lsp))))
+
+(use-package rustic)
 
 (use-package poetry
   :config
