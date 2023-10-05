@@ -252,12 +252,6 @@
 (use-package jinja2-mode
   :mode "\\.j2.*\\'")
 
-(use-package yasnippet
-  :config
-  (yas-global-mode 1)
-  (yas-load-directory "~/.emacs.d/yasnippets"))
-(use-package yasnippet-snippets)
-
 (use-package flycheck
   :config
   (global-flycheck-mode))
