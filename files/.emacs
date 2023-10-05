@@ -110,6 +110,8 @@
   (which-key-mode))
 
 (use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-M-l")
   :commands (lsp lsp-deferred)
   :hook ((python-mode . lsp)
 	 (go-mode . lsp)
@@ -119,6 +121,7 @@
 	 ;; which-key makes it easy to learn the long lsp keybinds.
 	 (lsp-mode . lsp-enable-which-key-integration))
   :after (which-key)
+  :bind-keymap ("C-M-l" . lsp-command-map)
   :config
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.virtualenv\\'")
   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]\\.virtualenv3\\'")
