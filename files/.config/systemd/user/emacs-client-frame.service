@@ -6,7 +6,7 @@ PartOf=graphical-session.target
 After=graphical-session.target
 
 [Service]
-ExecStart=/usr/bin/emacsclient -c
+ExecStart=/usr/bin/zsh -i -c 'emacsclient -c'
 
 [Install]
 WantedBy=graphical-session.target
