@@ -71,7 +71,6 @@
 (use-package web-mode)
 (use-package w3)
 (use-package json-reformat)
-(use-package ace-window)
 (use-package delight)
 (use-package dockerfile-mode)
 (use-package erlang)
@@ -92,8 +91,6 @@
 (use-package super-save
   :delight
   :config
-  ;; add integration with ace-window
-  (add-to-list 'super-save-triggers 'ace-window)
   (super-save-mode))
 
 (use-package savehist
@@ -240,12 +237,6 @@
 
   ;; enable some really cool extensions like C-x C-j(dired-jump)
   (require 'dired-x))
-
-(use-package ace-window
-  :bind (([remap other-window] . 'ace-window)
-	 ([remap delete-window] . 'ace-delete-window))
-  :config
-  (setq aw-scope 'frame))
 
 ;; j2 is a common jinja 2 extension
 ;; it might be followed by further extensions
