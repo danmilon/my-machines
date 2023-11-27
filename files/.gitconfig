@@ -27,6 +27,8 @@
 	user = danmilon
 [ghi]
 	token = c5a616e0c82d0b26a415bc772d1f7be2f67deda8
+[diff]
+	algorithm = histogram
 
 [gitlab "lab.plat.farm/api/v4"]
 	user = danmilon
