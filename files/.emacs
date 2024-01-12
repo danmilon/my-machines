@@ -50,6 +50,9 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)            ;; enable y/n answers to yes/no
 
+;; Near infinite history length.
+(customize-set-variable 'history-length 10000)
+
 ;; No bell.
 (customize-set-variable 'ring-bell-function 'ignore)
 
