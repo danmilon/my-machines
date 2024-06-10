@@ -142,6 +142,7 @@ export PATH="$GOENV_ROOT/bin:$PATH"
 export PATH="$PATH:$HOME/Documents/dev/platform.sh/infra/awssamlcli"
 export PATH="$PATH:$HOME/Documents/dev/platform.sh/infra/go-ops"
 export PATH="$PATH:$HOME/Documents/dev/platform.sh/foundation/marefs/.bin"
+export PATH="$PATH:$HOME/Documents/dev/platform.sh/foundation/cicerone/.bin"
 
 # Automatically added by the Platform.sh CLI
 export PATH="/home/danmilon/.magento-cloud/bin:$PATH"
