@@ -150,6 +150,10 @@
   (setq lsp-ui-doc-enable nil
 	lsp-ui-doc-delay 0))
 
+(use-package flycheck-golangci-lint
+  :ensure t
+  :hook (go-mode . flycheck-golangci-lint-setup))
+
 (use-package lsp-pyright
   :ensure t
   :hook (python-mode . (lambda ()
