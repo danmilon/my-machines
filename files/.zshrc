@@ -13,6 +13,7 @@ plugins=(
     sudo
     python
     pass
+    direnv
 )
 
 kubectl() {
