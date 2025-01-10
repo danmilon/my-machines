@@ -138,7 +138,10 @@
     (add-hook 'before-save-hook #'lsp-format-buffer t t)
     (add-hook 'before-save-hook #'lsp-organize-imports t t))
   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-  (setq lsp-gopls-server-path "~/.go/bin/gopls"))
+  (setq lsp-gopls-server-path "~/.go/bin/gopls")
+  ;; file watchers makes gopls requests timeout.
+  ;; See https://github.com/golang/go/issues/38032#issuecomment-602769254.
+  (setq lsp-enable-file-watchers nil))
 
 (use-package lsp-ui
   :hook (lsp-mode . lsp-ui-mode)
