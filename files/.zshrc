@@ -107,10 +107,8 @@ alias atc-from-home='(cd ~/atc-archive && vlc --rate=1.5 $(rsync -arv -e "ssh da
 
 
 function pytmp() {
-    py_version=${1:-3}
-    shift
     cd $(mktemp -d)
-    virtualenv -p python$py_version venv
+    python -m venv venv
     . venv/bin/activate
 
     if [ -n "$1" ]; then
