@@ -95,7 +95,7 @@ PYMACS_PYTHON=python2
 # autoload emacs daemon with emacsclient
 export ALTERNATE_EDITOR=""
 
-source ~/.zsh/z.sh
+eval "$(zoxide init zsh)"
 
 alias grep='grep $GREP_OPTIONS'
 unset GREP_OPTIONS
