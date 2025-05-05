@@ -72,7 +72,6 @@
 
 (use-package yaml-mode)
 (use-package web-mode)
-(use-package w3)
 (use-package json-reformat)
 (use-package delight)
 (use-package dockerfile-mode)
