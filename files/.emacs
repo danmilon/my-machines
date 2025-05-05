@@ -102,8 +102,6 @@
 (use-package eldoc
   :delight)
 
-(use-package pass)
-
 (use-package which-key
   :config
   (which-key-mode))
