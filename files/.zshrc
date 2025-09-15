@@ -83,6 +83,7 @@ export HISTFILESIZE=100000
 
 setopt appendhistory
 
+export GOPRIVATE=go.platform.sh
 export GOPATH=~/.go
 PATH=$GOPATH/bin:$PATH
 PATH=$PATH:$HOME/.local/bin
