@@ -86,7 +86,7 @@ setopt appendhistory
 export GOPATH=~/.go
 PATH=$GOPATH/bin:$PATH
 PATH=$PATH:$HOME/.local/bin
-PATH=$PATH:$HOME/bin
+PATH=$HOME/bin:$PATH
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 PATH=$PATH:$HOME/.poetry/bin
 export PATH
