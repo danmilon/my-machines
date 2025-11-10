@@ -90,6 +90,7 @@ PATH=$PATH:$HOME/.local/bin
 PATH=$HOME/bin:$PATH
 PATH=$PATH:$HOME/.gem/ruby/2.2.0/bin
 PATH=$PATH:$HOME/.poetry/bin
+PATH=$PATH:$HOME/.npm-global/bin
 export PATH
 
 PYMACS_PYTHON=python2
