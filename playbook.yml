@@ -101,7 +101,7 @@
           - lshw
           - docker-compose
           - yubikey-manager
-          - alacritty
+          - ghostty
           - fzf
           - emacs
           - npm
