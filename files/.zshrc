@@ -25,7 +25,6 @@ kubectl() {
     $0 "$@"
 }
 
-ENABLE_CORRECTION="true"
 COMPLETION_WAITING_DOTS="true"
 
 if [ "$ZSH" = "~/.oh-my-zsh" ]; then
