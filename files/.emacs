@@ -456,8 +456,6 @@
 		vc-ignore-dir-regexp
 		tramp-file-name-regexp)))
 
-(use-package docker-tramp)
-
 (use-package auth-source
   :config
   (setq auth-sources '((:source "~/.authinfo.gpg"))
